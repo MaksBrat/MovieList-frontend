@@ -1,0 +1,47 @@
+
+.dialog{
+    background-color: #2A2C31;
+    padding: 20px;
+    color: #CAE962;
+    width: 800px;
+    height: 500px;
+}
+.form__container{
+    display: flex;
+}
+.form__item{
+    display: flex;
+}
+.form__label{
+    width: 140px;
+    margin: 10px 0;
+}
+input{
+    width: 250px;
+    height: 40px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+
+/* Anime type */
+.anime__type{
+    width: 100px;
+    height: 20px;
+    margin-top: 10px;
+}
+
+input[type="file"]{
+    display: none;   
+}
+.btn{
+    width: 250px;
+    height: 40px;
+    text-align: center;
+    margin: 0 0 10px 140px;
+    padding: 0;
+}
+
+
+

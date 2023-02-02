@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "animelist",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -11,14 +11,23 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^15.0.0",
+    "@angular/cdk": "^15.0.4",
     "@angular/common": "^15.0.0",
     "@angular/compiler": "^15.0.0",
     "@angular/core": "^15.0.0",
     "@angular/forms": "^15.0.0",
+    "@angular/material": "^15.0.4",
     "@angular/platform-browser": "^15.0.0",
     "@angular/platform-browser-dynamic": "^15.0.0",
     "@angular/router": "^15.0.0",
+    "@auth0/angular-jwt": "^5.1.2",
+    "@fortawesome/angular-fontawesome": "^0.12.0",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.6.3",
+    "ng2-search-filter": "^0.5.1",
+    "ngx-slick-carousel": "^15.0.0",
     "rxjs": "~7.5.0",
+    "slick-carousel": "^1.8.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
   },
@@ -27,6 +36,7 @@
     "@angular/cli": "~15.0.2",
     "@angular/compiler-cli": "^15.0.0",
     "@types/jasmine": "~4.3.0",
+    "@types/jquery": "^3.5.16",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",

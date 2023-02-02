@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="user__container">
+        <div class="user__container__avatar">
+            <img [src]='imageService.createImageUrl(profileResponse.avatar)'>
+            <div class="avatar__container">
+                <label>            
+                    <input class="user__avatar" type="file" (change)="ChangeAvatar($event)"  name="avatar"/>    
+                    <span class="user__avatar__label btn"> Change avatar </span>
+                </label>
+            </div> 
+        </div>      
+        <form (ngSubmit)="Edit()">           
+            <div>              
+                <input type="text" value={{profileResponse.name}} [(ngModel)]="name"   class="form-control mb-3 w-25" name="Name" placeholder="name">
+            </div>
+            <div>              
+                <input type="text" value={{profileResponse.age}}  [(ngModel)]="age" class="form-control mb-3 w-25" name="Age" placeholder="age">
+            </div>
+            <div>
+                <button type="submit" class="btn save_btn">Save</button>  
+            </div>                                  
+        </form>
+    </div>
+</div>   

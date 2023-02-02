@@ -1,1 +1,172 @@
-/* You can add global styles to this file, and also import other style files */
+*,*:before,*:after{
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+a{
+  text-decoration: none;
+}
+html, body { height: 100%}
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #202125;
+}
+
+.container{
+  margin-top: 100px;
+}
+
+.fa{
+  position: absolute;
+  margin: 10px 50%;
+  cursor: pointer;
+
+  left: 8%;
+  color:  #2A2C31;
+}
+
+.btn{
+  background-color: #CAE962;
+  padding: 20px 40px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.btn:hover{
+  background-color: #a2c62c;
+}
+
+/* Dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  border-radius: 10px;
+  position: absolute;
+  right: 0;
+  background-color: #4A4B51;
+  min-width: 150px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  text-align: start; 
+}
+.dropdown-content a {
+  color:#CAE962;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.dropdown-content a:hover {
+  background-color: #82848c;
+  border-radius: 5px;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Form */
+.container-form{
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  justify-content: space-between;
+}
+
+select{
+  background-color: #4A4B51;
+  color:#CAE962;
+  border-radius: 20px;
+}
+
+option{
+    background-color: #4A4B51;
+}
+option:hover{
+    background-color: #82848c;
+}
+p{
+  overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 15px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 0;
+  background: rgba(255,255,255,.4);
+}
+::-webkit-scrollbar-track {
+  border-radius: 0;
+  background: rgba(0,0,0,.2);
+}
+
+/* Genres */
+.genres__cover{
+  display: flex;
+  margin-left: 30px;
+  flex-direction: column;
+}
+.genres__container{
+  display: flex;
+  flex-wrap: wrap;
+
+}
+.genre__label{
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+.genre__name{
+  color: #CAE962;
+  font-size: 16px;
+}
+.genre__input{
+  display:none;
+}
+.genres{
+  padding: 10px 10px 10px 0;
+}
+.genre__name{
+  text-align: start;
+  border-radius: 3px;
+  padding: 5px;
+  position: relative;
+}
+.genre__name:hover{
+  background: rgb(90, 90, 90);
+}
+.genres input[type="checkbox"]:checked ~ .genre__name {
+  background-color: #4A4B51;
+}
+
+/* Anime poster shadow */
+.anime__item{
+  position:relative;
+  color:white;
+  background-color: #2A2C31;
+  transition-duration: 0.3s;
+  z-index: 1;
+}
+.anime__item img{
+    width: 100%;
+    height: 100%;
+}
+.anime__item:hover{
+  transform: scale(1.02);
+}
+.anime__poster{
+  box-shadow: 0px -64px 99px -6px rgba(0,0,0,0.75) inset;
+  -webkit-box-shadow: 0px -64px 99px -6px rgba(0,0,0,0.75) inset;
+  -moz-box-shadow: 0px -64px 99px -6px rgba(0,0,0,0.75) inset;
+  cursor: pointer;
+}
+.anime__item img{
+  position: relative;
+  border-radius: 3px;
+  z-index: -2;
+}

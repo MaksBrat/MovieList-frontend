@@ -1,0 +1,132 @@
+
+nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: transparent;
+    transition: background-color 0.5s ease;
+    margin-bottom: 80px;
+    z-index: 1000;
+}
+
+.container__nav{
+    display: flex;
+    padding: 15px 30px;
+    color: black; 
+}
+
+.logo a{
+    font-size: 24px;
+    font-weight: 800;
+    color: white;
+    text-decoration: none;
+}
+.anime{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
+}
+.anime a{
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
+}
+.search{
+    position: relative;
+    margin-left: 100px;
+}
+.search input{
+    background-color: white;
+    width: 360px;
+    padding: 10px 17px;
+    border-radius: 3px;
+}
+.buttons{
+    display: flex;
+    margin-left: auto;
+}
+.login__profile__btn{
+    padding: 10px 17px;
+}
+.admin{
+    margin-right: 20px;
+}
+.admin__btn{
+    width: 150px;
+    padding: 10px 0;
+}
+.mode-off{
+    background-color: rgb(224, 0, 0);
+}
+.mode-off:hover{
+    background-color: rgb(177, 1, 1);
+}
+.mode-on{
+    background-color: rgb(0, 177, 32);
+}
+.mode-on:hover{
+    background-color: rgb(1, 142, 27);
+}
+.anime a{
+    background-color: #00FFB7;
+    border-radius: 20px;
+    color:black;
+    padding: 8px 20px;
+}
+.results{
+    position: absolute;
+    width: 100%;
+    top: 40px;
+    border-radius: 5px;
+}
+.result__item{
+    position: relative;
+    display: flex;
+    height: 100%;
+    background-color: #414248;
+    padding: 5px;
+    border-bottom: 1px dashed #82848c;;
+    color: white;
+    font-weight: 500;
+}
+.result__item:last-child{
+    border: none;
+}
+.result__item:hover{
+    background-color: #82848c;
+    cursor: pointer;
+    color: #CAE962;
+}
+.result__poster{
+    height: 100px;
+}
+.poster{
+    height: 100%;
+}
+.description{
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+.genres{
+    display: flex;
+    flex-wrap: wrap;
+}
+.genres div{
+    padding-right: 5px;
+}
+.episodes{
+    display: inline-block;
+    text-align: center;
+    padding: 2px 4px;
+    height: 20px;
+    border-radius: 5px;
+    background-color: #7AF9F9;
+    color: black;
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    margin: 5px 5px 0 0 ;
+}

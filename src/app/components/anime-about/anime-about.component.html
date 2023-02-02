@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="about">
+        <div class="about__item">          
+            <div class="anime__poster">
+                <img class="avatar"  [src]="anime.posterUrl">
+            </div>              
+            <div class="anime__description">
+                <div class="title">
+                    <div class="name">Title:</div> 
+                    <span>{{anime.title}}</span>   
+                </div>
+                <div class="rating">
+                    <div class="name">Rating:</div> 
+                    <span>{{anime.rating}}</span> 
+                </div>
+                <div class="description">
+                    <div class="name">Description:</div> 
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore qui, reprehenderit repellendus illo et possimus nam fuga eveniet quod, quo veritatis reiciendis. Cum odio perferendis officiis odit accusamus, blanditiis reprehenderit, nesciunt rem unde alias dolore corporis iusto voluptatibus maxime eveniet. Perspiciatis repellendus hic totam ea, dolore expedita aspernatur vero dignissimos.
+                    </p>
+                </div>         
+                <div class="genres">
+                    <div class="name">Genres: </div>
+                    <div>
+                        <label *ngFor="let genre of anime.genres">                 
+                            <span class=""> {{ genre.genreName }} </span>            
+                        </label>
+                    </div>         
+                </div>  
+                <div class="trailer">
+                    <button class="btn" (click)="openTrailer()">Trailer</button>
+                </div>          
+            </div>      
+        </div>
+    </div>
+    <div class="buttons">
+        <div *ngIf="!animeService.isAnimeInList(anime.id)">
+            <button (click)="animeService.addAnimeToList(anime.id)" class="add__btn btn">Add to list</button> 
+        </div>
+        <div *ngIf="animeService.isAnimeInList(anime.id)">
+            <button (click)="animeService.deleteAnimeFromList(anime.id)" class="add__btn btn">Delete from list</button> 
+        </div>
+        <div *ngIf="accountService.isAdminMode" class="admintab">            
+            <button (click)="selectedAction = 'create'; openCreateDialog()" class="admin__btn btn">Create</button>
+            <button (click)="selectedAction = 'update'; openUpdateDialog()" class="admin__btn btn">Update</button>
+            <button (click)="selectedAction = 'delete'; openDeleteDialog()" class="admin__btn btn">Delete</button>     
+        </div>   
+    </div> 
+</div>
+

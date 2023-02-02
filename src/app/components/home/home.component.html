@@ -1,0 +1,111 @@
+  
+<ngx-slick-carousel class="carousel" 
+    #slickModal="slick-carousel" 
+    [config]="slideConfig" 
+    (init)="slickInit($event)"
+    (breakpoint)="breakpoint($event)">
+    <div ngxSlickItem *ngFor="let slide of slides; index as i" class="slider">
+        <div class="slider__poster">
+            <img src="{{ slide.img }}">
+        </div> 
+        <div class="slider__descriptions">
+            <div class="spotligth">
+                #{{i+1}} Spotligth
+            </div>
+            <div class="title">
+                <span>Bleach</span> 
+            </div>
+            <div class="rating">
+                Rating 10
+            </div>
+            <div class="about">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellendus ut nemo harum corrupti sit, iusto quasi. Fugit, corporis illo, modi non obcaecati maxime ad aliquam laborum ullam natus qui dolorem ex? Velit dolore magni animi porro est qui laborum? Unde adipisci pariatur autem dolore nobis mollitia tempore dolorum placeat vel quis, quasi, eligendi libero nihil possimus, praesentium voluptatem. Earum nesciunt optio voluptatem odit tenetur consequatur adipisci non qui, quaerat officiis at eius facilis eveniet excepturi velit repellat dolor aperiam modi aliquid atque! Aspernatur esse, quos veritatis quibusdam, odit deleniti incidunt beatae doloribus aut dolore illo reiciendis ratione amet dignissimos pariatur.</p>
+            </div>
+            <div class="buttons">
+                <div class="addToList">
+                    <button class="btn ">Add to list</button>
+                </div>
+                <div class="detail">
+                    <button class="btn">Detail</button>
+                </div>
+            </div>      
+        </div>
+    </div>
+</ngx-slick-carousel>
+
+<div class="wrapper">
+    <div class="container">
+        <div class="main">
+            <div class="title">News</div>
+            <div class="news__container item__container">
+                <div class="news__item item">
+                    <div class="news__title"></div>
+                    <div class="news__description"></div>
+                    <div class="author"></div>
+                    <div class="detail">
+                        <button class="btn">Detail</button>
+                    </div>
+                </div>
+                <div class="news__item item">
+                    <div class="news__title"></div>
+                    <div class="news__description"></div>
+                    <div class="author"></div>
+                    <div class="detail">
+                        <button class="btn">Detail</button>
+                    </div>
+                </div>
+                <div class="news__item item">
+                    <div class="news__title"></div>
+                    <div class="news__description"></div>
+                    <div class="author"></div>
+                    <div class="detail">
+                        <button class="btn">Detail</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar">
+            <div class="title">Announcements</div>
+            <div class="announcement__container item__container">
+                <div class="announcement__cover">
+                    <div class="announcement__item item anime__item">
+                        <div class="anime__poster">
+                            <img class="avatar" src="../../../assets/img/aot_poster.jpeg" alt="">
+                        </div>         
+                    </div>
+                    <div class="announcement__item item">
+                        <img src="../../../assets/img/aot_poster.jpeg" alt="">
+                    </div>
+                    <div class="announcement__item item">
+                        <img src="../../../assets/img/aot_poster.jpeg" alt="">
+                    </div>
+                </div>
+                <div class="announcement__cover">
+                    <div class="announcement__item item">
+                        <img src="../../../assets/img/aot_poster.jpeg" alt="">
+                    </div>
+                    <div class="announcement__item item">
+                        <img src="../../../assets/img/aot_poster.jpeg" alt="">
+                    </div>
+                    <div class="announcement__item item">
+                        <img src="../../../assets/img/aot_poster.jpeg" alt="">
+                    </div>
+                </div> 
+                <div class="announcement__cover">
+                    <div class="announcement__item item">
+                        <img src="../../../assets/img/aot_poster.jpeg" alt="">
+                    </div>
+                    <div class="announcement__item item">
+                        <img src="../../../assets/img/aot_poster.jpeg" alt="">
+                    </div>
+                    <div class="announcement__item item">
+                        <img src="../../../assets/img/aot_poster.jpeg" alt="">
+                    </div>
+                </div>          
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

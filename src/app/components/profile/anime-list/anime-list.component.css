@@ -1,0 +1,47 @@
+
+.anime__list__container{
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    padding: 0 20px;
+    color: white;
+}
+.anime__list__item{
+    display: flex;
+    align-items: center;
+    height: 40px;
+    justify-content: space-between;
+    background-color: #2A2C31;
+    padding: 0 20px;
+}
+.item__container{
+    display: flex;
+    position: relative;
+    width: 200px;
+}
+.item__input{
+    position: absolute;
+    top: 0;
+    left: 60px;
+    display: none;
+    width: 40px;
+    height: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+.episodes__input{
+    width: 50px;
+    left: 150px;
+}
+.item:hover .item__input{
+    display: block;
+}
+.item__title{
+    padding-right: 20px;
+}
+.anime__status{
+    padding: 3px 5px;
+}
+.delete__anime{
+    padding: 10px 15px;
+}

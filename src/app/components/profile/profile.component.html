@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="user__container">
+        <div class="user__container__avatar">
+            <img [src]='imageService.createImageUrl(profile.avatar)'>
+        </div>
+        <p class="user__container__info nickname">
+            {{profile.name}}
+        </p>
+        <p class="user__container__info" *ngIf="profile.age !== 100">Age {{profile.age}} / Registered at {{this.monthNames[this.data.getMonth()]}} {{ + data.getFullYear()}} </p>
+        <p class="user__container__info" *ngIf="profile.age === 100">Age - / Registered at {{this.monthNames[this.data.getMonth()]}} {{ + data.getFullYear()}} </p>
+    </div>
+    <div class="list">
+        <div class="dropdown">
+            <button class="anime__btn btn" routerLink="/animeList">Anime list</button>
+            <!-- <div class="dropdown-content">
+                <a href="#">Watched</a>
+                <a href="#">Watching</a>
+                <a href="#">WantToWatch</a>
+                <a href="#">Stalled</a>
+                <a href="#">Dropped</a>
+            </div> -->
+        </div>
+    </div> 
+</div>
+
+      

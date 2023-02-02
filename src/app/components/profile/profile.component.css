@@ -1,0 +1,49 @@
+.user__container{
+    text-align: center;
+}
+.user__container__info{
+    color: white;
+    margin: 0 0 5px 0;
+}
+.nickname{
+    color: #CAE962;
+    margin: 10px 0;
+    font-size: 24px;
+    font-weight: 600;
+}
+.user__container__avatar img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+.list{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+.dropdown-content a{
+    width: 250px;
+}
+.anime__btn{
+    width: 250px;
+}
+input{
+    width: 300px;
+    height: 40px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+  }
+input[type="file"]{
+    display: none;   
+}
+.avatar__container{
+    margin: 20px 0;
+}
+.user__avatar__label{
+    padding: 10px;
+}
+.save_btn{
+    padding: 10px 25px;
+}

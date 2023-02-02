@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="anime__list__container">
+        <div class="anime__list__item" *ngFor="let animeList of profileWithAnimeList.animeList; index as i">
+            <div class="item__container">
+                <span class="item__title">#{{i+1}}</span>
+                <span>{{animeList.anime.title}}</span>
+            </div> 
+            <div class="item__container"> 
+                <span class="item__title"> Rating:</span> 
+                <div class="item">
+                    <span *ngIf="animeList.userRating !== 0"> {{animeList.userRating}} </span>
+                    <span *ngIf="animeList.userRating === 0"> - </span>
+                    <input class="item__input" type="number" name="rating" [(ngModel)]="animeList.userRating"
+                    (focusout)="animeService.changeUserRating(animeList.id, $event)"> 
+                </div>                          
+            </div>
+            <div class="item__container"> 
+                <span class="item__title"> Watched episodes:</span> 
+                <div class="item">
+                    <span *ngIf="animeList.watchedEpisodes !== 0"> {{animeList.watchedEpisodes}} </span>
+                    <span *ngIf="animeList.watchedEpisodes === 0"> - </span>     
+                    <input class="item__input episodes__input" type="number" name="episodes" [(ngModel)]="animeList.watchedEpisodes"
+                    (focusout)="animeService.changeWatchedEpisodes(animeList.id, $event)"> 
+                    <span>/{{animeList.anime.episodes}}</span>  
+                </div> 
+                                       
+            </div>
+            <div class="item__container">
+                <label class="item__title">Status:</label>
+                <select class="anime__status" name="animeStatus" [(ngModel)]="animeList.animeStatus" (change)="animeService.changeAnimeStatus(animeList.id, $event)">
+                    <option *ngFor="let status of animeStatus" [value]="status.name">{{status.name}}</option>     
+                </select>
+            </div>
+            <button class="btn delete__anime" (click)="animeService.deleteAnimeFromList(animeList.anime.id)">Delete anime</button>              
+        </div>    
+    </div>
+</div>

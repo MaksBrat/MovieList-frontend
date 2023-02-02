@@ -1,0 +1,31 @@
+
+
+<div class="container">
+    <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+        <div class="container-form">
+            <div class="title">
+                <span>Sign up</span>
+            </div>
+            <div>
+                <input name="email" type="email" placeholder="Email" ngModel>
+            </div>
+            <div>              
+                <input [type]="type" name="password" type="text" placeholder="Password" ngModel>
+                <span  class="fa {{eyeIcon}} " (click)="hideShowPass()"></span>
+            </div>
+            <div>              
+                <input [type]="type" name="PasswordConfirm" type="text" placeholder="Confirm password" ngModel>
+                <span  class="fa {{eyeIcon}} " (click)="hideShowPass()"></span>
+            </div>
+            <div class="action">
+                <button type="submit">Sign up</button>  
+            </div>
+            <div class="account">                     
+                <div class="account__container">                     
+                    <span class="text-center">Already have account? </span>
+                    <a class="mx-1" routerLink="/login">Sign in</a> 
+                </div>                      
+            </div>         
+        </div>      
+    </form>
+</div>

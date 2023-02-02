@@ -1,0 +1,51 @@
+<nav id="navbar">
+    <div class="container__nav">
+        <div class="logo">
+            <a href="">AnimeList</a>
+        </div>      
+        <div class="search">
+            <input class="form-control" type="search" placeholder="Search anime..." 
+                (keyup)="animeService.getSearchQuery($event)"> 
+                <div class="results" *ngIf="filter.searchQuery.length > 0">
+                    <div class="result__item" *ngFor="let anime of animes" (click)="animeService.setSelectedAnime(anime); filter.searchQuery = ' ' " routerLink="/animeAbout">
+                        <div class="result__poster">
+                            <img class="poster"  [src]="anime.posterUrl">
+                        </div>
+                        <div class="description">
+                            <span class="title">{{anime.title}}</span>
+                            <div class="episodes__container">
+                                <span class="episodes"> Ep {{anime.episodes}}</span>  
+                                <span class="episodes"> {{anime.episodeDuration}}m</span> 
+                            </div>
+                            <div class="genres">
+                                <div *ngFor="let genre of anime.genres">{{genre.genreName}}</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                 </div>
+        </div>
+        <div class="anime">
+            <a routerLink="/anime">Anime</a>
+        </div>
+        <div class="buttons">
+            <div class="admin" *ngIf="accountService.isAdmin()">
+                <button *ngIf="!accountService.isAdminMode" (click)="accountService.switchAdminMode()" class="admin__btn btn mode-on">Admin mode ON</button>
+                <button *ngIf="accountService.isAdminMode" (click)="accountService.switchAdminMode()" class="admin__btn btn mode-off">Admin mode OFF</button>
+            </div> 
+            <div *ngIf="!accountService.isUserAuthenticated()"  class="login__profile">
+                <button class="login__profile__btn btn" routerLink="/login">Login</button> 
+            </div>
+            <div *ngIf="accountService.isUserAuthenticated()"  class="login__profile">
+                <div class="dropdown">
+                <button class="login__profile__btn btn" routerLink="/profile">Profile</button>                       
+                    <div class="dropdown-content">
+                        <a href="#" routerLink="/animeList">アニメ Anime list</a>
+                        <a routerLink="/editProfile">Edit profile</a>
+                        <a href="#" (click)="accountService.logOut()">Logout</a>
+                    </div>             
+                </div>   
+            </div>          
+        </div>   
+    </div>
+</nav>
