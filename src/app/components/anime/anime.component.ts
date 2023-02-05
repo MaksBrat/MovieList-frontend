@@ -1,14 +1,15 @@
 import { Component, OnInit} from '@angular/core';
 import { AnimeService} from './anime.service';
-import {Anime} from '../../../entity/Anime';
+import { Anime } from 'src/models/Anime';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { relative } from 'path';
 import { DomSanitizer } from '@angular/platform-browser';
 import { runInThisContext } from 'vm';
-import { Genre } from 'src/entity/Genre';
-import { Filter } from 'src/entity/RequestModels/Search/Filter';
-import { Sorting } from 'src/entity/RequestModels/Search/Sorting';
+import { Genre } from 'src/models/Genre';
+import { Filter } from 'src/models/RequestModels/Search/Filter';
+import { Sorting } from 'src/models/RequestModels/Search/Sorting';
 import { ImageService } from 'src/app/Services/ImageService';
+import { AnimeOptions } from 'src/models/AnimeOptions';
 
 @Component({
     selector: 'anime',
@@ -19,35 +20,16 @@ import { ImageService } from 'src/app/Services/ImageService';
 export class AnimeComponent implements OnInit{ 
     animes: Anime[] = [];
     showInfo = false;
+    
     filter = new Filter();
+    animeOptions = new AnimeOptions();
 
-    //checkboxes
-    genres = [
-        {id: 1, name: 'Romance',  checked: false},
-        {id: 2, name: 'Action',  checked: false},
-        {id: 3, name: 'Drama',  checked: false},
-        {id: 4, name: 'Military',  checked: false},
-        {id: 5, name: 'Magic',  checked: false},
-        {id: 6, name: 'Comedy',  checked: false},
-        {id: 7, name: 'History',  checked: false},
-        {id: 8, name: 'Psychological',  checked: false}
-      ];
+    genres = this.animeOptions.genres;  
+    animeTypes = this.animeOptions.animeTypes;
+    animeStatus = this.animeOptions.animeStatus;
+    orderBy =this.animeOptions.orderBy;
 
-    animeTypes = [
-        {name: 'Serial'},
-        {name: 'Film'},
-        {name: 'OVA'},
-        {name: 'ONA'},
-        {name: 'Special'},
-    ];
-
-    OrderBy = [
-        {name: 'ReleaseDate'},
-        {name: 'Title'},
-        {name: 'Rating'},
-    ]
-
-    constructor(public animeService: AnimeService, private router: Router){
+    constructor(public animeService: AnimeService){
         this.animeService.currentPage = "AnimePage"; 
         this.load(this.filter);
     }
@@ -59,10 +41,7 @@ export class AnimeComponent implements OnInit{
         }); 
     }
 
-    selectAnime(anime: Anime){
-        this.animeService.setSelectedAnime(anime);
-        this.router.navigate(['/animeAbout']);     
-    }  
+     
 
     load(filter: Filter){
         this.animeService.getAll(filter).subscribe(animes => 
@@ -82,7 +61,15 @@ export class AnimeComponent implements OnInit{
         });
         this.filter.genres = this.genres;
         this.load(this.filter);
-    }  
+    } 
+
+    displayInfo() {
+      this.showInfo = true;
+    }
+    
+    hideInfo() {
+      this.showInfo = false;
+    }
 }
 
 

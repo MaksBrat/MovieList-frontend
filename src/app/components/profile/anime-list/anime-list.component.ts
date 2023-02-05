@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ProfileWithAnimeList } from 'src/entity/ProfileWithAnimeList';
+import { ProfileWithAnimeList } from 'src/models/ProfileWithAnimeList';
 import { AnimeService } from '../../anime/anime.service';
 import { ProfileService } from '../profile.service';
 

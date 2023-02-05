@@ -4,19 +4,6 @@
     padding: 10px 20px;
     gap: 25px;
 }
-.anime__container{
-    width: 75%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-.anime__poster{
-    height: 220px;
-    width: 170px;
-}
-.anime__description{
-    padding: 10px;
-}
 /* Filtres */
 .filtres__container{
     width: 25%;
@@ -37,7 +24,9 @@
 .genres__cover{
     margin-left: 0;
 }
-
+.select__name{
+    width: 75px;
+}
 .orderBy{
     display: flex;
     flex-wrap: wrap;
@@ -48,3 +37,6 @@
     width: 25px;
     height: 15px;
 }
+
+
+

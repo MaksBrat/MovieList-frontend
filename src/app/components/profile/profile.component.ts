@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { ProfileService } from './profile.service';
-import { Profile } from 'src/entity/Profile';
+import { Profile } from 'src/models/Profile';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ImageService } from 'src/app/Services/ImageService';
 

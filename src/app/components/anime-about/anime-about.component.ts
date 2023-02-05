@@ -4,7 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { ImageService } from 'src/app/Services/ImageService';
-import { Anime } from 'src/entity/Anime';
+import { NotificationService } from 'src/app/Services/NotificationService';
+import { Anime } from 'src/models/Anime';
 import { AccountService } from '../account/account.Service';
 import { AdminTabComponent } from '../admin-tab/admin-tab.component';
 import { AnimeService } from '../anime/anime.service';
@@ -20,17 +21,19 @@ export class AnimeAboutComponent implements OnInit {
   selectedAction = '';
 
   constructor(public animeService: AnimeService, public accountService: AccountService, 
-    public dialog: MatDialog, private _sanitizer: DomSanitizer){
+    public dialog: MatDialog, private sanitizer: DomSanitizer){
       
-    }
+  }
 
   ngOnInit() {
     this.anime = this.animeService.getSelectedAnime();
   }
+  
+  
 
   openTrailer(){
     const dialogRef = this.dialog.open(TrailerComponent, {
-      data: {url: this._sanitizer.bypassSecurityTrustResourceUrl(this.anime.trailerUrl)
+      data: {url: this.sanitizer.bypassSecurityTrustResourceUrl(this.anime.trailerUrl)
     }});
   }
 

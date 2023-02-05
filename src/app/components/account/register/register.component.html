@@ -9,12 +9,12 @@
             <div>
                 <input name="email" type="email" placeholder="Email" ngModel>
             </div>
-            <div>              
-                <input [type]="type" name="password" type="text" placeholder="Password" ngModel>
+            <div class="password">              
+                <input  [type]="type" name="password" type="text" placeholder="Password" ngModel>
                 <span  class="fa {{eyeIcon}} " (click)="hideShowPass()"></span>
             </div>
-            <div>              
-                <input [type]="type" name="PasswordConfirm" type="text" placeholder="Confirm password" ngModel>
+            <div class="password">              
+                <input  [type]="type" name="PasswordConfirm" type="text" placeholder="Confirm password" ngModel>
                 <span  class="fa {{eyeIcon}} " (click)="hideShowPass()"></span>
             </div>
             <div class="action">

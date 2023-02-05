@@ -42,13 +42,19 @@
                     <option *ngFor="let type of animeTypes" [value]="type.name">{{type.name}}</option>                       
                 </select> 
             </div>
+            <div class="form__item">
+                <label class="form__label" >Anime status</label>
+                <select class="anime__type" [(ngModel)]="anime.animeStatus" name="animeStatus">
+                    <option *ngFor="let status of animeStatus" [value]="status.name">{{status.name}}</option>                       
+                </select> 
+            </div>
         </div>
         <div class="genres__cover">
             <span class="genre__label">Genres</span>
             <div class="genres__container">         
                 <label class="genres" *ngFor="let genre of genres">
                     <input class="genre__input"type="checkbox" [checked]="isChecked(genre.id)" (change)="updateGenres(genre.id, $event)" [value]="genre.id"> 
-                    <span class="genre__name"> {{genre.genreName}} </span>            
+                    <span class="genre__name"> {{genre.name}} </span>            
                 </label> 
             </div>   
         </div>   

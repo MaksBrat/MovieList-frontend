@@ -1,40 +1,44 @@
   
 <ngx-slick-carousel class="carousel" 
     #slickModal="slick-carousel" 
-    [config]="slideConfig" 
-    (init)="slickInit($event)"
-    (breakpoint)="breakpoint($event)">
-    <div ngxSlickItem *ngFor="let slide of slides; index as i" class="slider">
+    [config]="slideConfig">
+    <div ngxSlickItem  class="slider" *ngFor="let anime of ongoingAnime ; index as i">     
         <div class="slider__poster">
-            <img src="{{ slide.img }}">
+            <img [src]="slides[i].img">
         </div> 
         <div class="slider__descriptions">
             <div class="spotligth">
                 #{{i+1}} Spotligth
             </div>
-            <div class="title">
-                <span>Bleach</span> 
+            <div class="slider__title">
+                <p>{{anime.title}}</p> 
             </div>
             <div class="rating">
-                Rating 10
+                Rating {{anime.rating}}
             </div>
             <div class="about">
                 <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellendus ut nemo harum corrupti sit, iusto quasi. Fugit, corporis illo, modi non obcaecati maxime ad aliquam laborum ullam natus qui dolorem ex? Velit dolore magni animi porro est qui laborum? Unde adipisci pariatur autem dolore nobis mollitia tempore dolorum placeat vel quis, quasi, eligendi libero nihil possimus, praesentium voluptatem. Earum nesciunt optio voluptatem odit tenetur consequatur adipisci non qui, quaerat officiis at eius facilis eveniet excepturi velit repellat dolor aperiam modi aliquid atque! Aspernatur esse, quos veritatis quibusdam, odit deleniti incidunt beatae doloribus aut dolore illo reiciendis ratione amet dignissimos pariatur.</p>
             </div>
             <div class="buttons">
                 <div class="addToList">
-                    <button class="btn ">Add to list</button>
+                    <div *ngIf="!animeService.isAnimeInList(anime.id)">
+                        <button class="btn"(click)="animeService.addAnimeToList(anime.id)" >Add to list</button> 
+                    </div>
+                    <div *ngIf="animeService.isAnimeInList(anime.id)">
+                        <button class="btn" (click)="animeService.deleteAnimeFromList(anime.id)" >Delete from list</button> 
+                    </div>
                 </div>
                 <div class="detail">
-                    <button class="btn">Detail</button>
+                    <button class="btn" (click)="animeService.selectAnime(anime)">Detail</button>
                 </div>
             </div>      
-        </div>
+        </div>           
     </div>
 </ngx-slick-carousel>
 
 <div class="wrapper">
     <div class="container">
+        <img class="gif__chika" src="https://media.tenor.com/lVhFnY9tc94AAAAi/anime-dance.gif" alt="">
         <div class="main">
             <div class="title">News</div>
             <div class="news__container item__container">
@@ -43,7 +47,7 @@
                     <div class="news__description"></div>
                     <div class="author"></div>
                     <div class="detail">
-                        <button class="btn">Detail</button>
+                        <button class="btn">Coming soon...</button>
                     </div>
                 </div>
                 <div class="news__item item">
@@ -51,7 +55,7 @@
                     <div class="news__description"></div>
                     <div class="author"></div>
                     <div class="detail">
-                        <button class="btn">Detail</button>
+                        <button class="btn">Coming soon...</button>
                     </div>
                 </div>
                 <div class="news__item item">
@@ -59,49 +63,40 @@
                     <div class="news__description"></div>
                     <div class="author"></div>
                     <div class="detail">
-                        <button class="btn">Detail</button>
+                        <button class="btn">Coming soon...</button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="sidebar">
-            <div class="title">Announcements</div>
-            <div class="announcement__container item__container">
-                <div class="announcement__cover">
-                    <div class="announcement__item item anime__item">
-                        <div class="anime__poster">
-                            <img class="avatar" src="../../../assets/img/aot_poster.jpeg" alt="">
-                        </div>         
+            <div class="title">Upcoming</div>
+            <div class="anime__container">
+                <div class="anime__item" *ngFor="let anime of upcomingAnime" >          
+                    <div class="anime__poster" (click)="animeService.setSelectedAnime(anime) " routerLink="/animeAbout">
+                        <img class="poster" [src]="anime.posterUrl" alt="">
+                        <div class="overlay">
+                            <a  class="icon">
+                              <i class="fa fa-play"></i>
+                            </a>
+                        </div>
+                        <div class="episodes__container">
+                            <span class="episodes"> Ep {{anime.episodes}}</span>  
+                            <span class="episodes minutes"> {{anime.episodeDuration}}m</span> 
+                        </div>
+                    </div>           
+                    <div class="anime__description">
+                        <div class="anime__title">
+                            <span>
+                                {{anime.title}}
+                            </span>
+                        </div>
+                        <div class="anime__type">
+                            <span>
+                                {{anime.animeType}}
+                            </span>
+                        </div>
                     </div>
-                    <div class="announcement__item item">
-                        <img src="../../../assets/img/aot_poster.jpeg" alt="">
-                    </div>
-                    <div class="announcement__item item">
-                        <img src="../../../assets/img/aot_poster.jpeg" alt="">
-                    </div>
-                </div>
-                <div class="announcement__cover">
-                    <div class="announcement__item item">
-                        <img src="../../../assets/img/aot_poster.jpeg" alt="">
-                    </div>
-                    <div class="announcement__item item">
-                        <img src="../../../assets/img/aot_poster.jpeg" alt="">
-                    </div>
-                    <div class="announcement__item item">
-                        <img src="../../../assets/img/aot_poster.jpeg" alt="">
-                    </div>
-                </div> 
-                <div class="announcement__cover">
-                    <div class="announcement__item item">
-                        <img src="../../../assets/img/aot_poster.jpeg" alt="">
-                    </div>
-                    <div class="announcement__item item">
-                        <img src="../../../assets/img/aot_poster.jpeg" alt="">
-                    </div>
-                    <div class="announcement__item item">
-                        <img src="../../../assets/img/aot_poster.jpeg" alt="">
-                    </div>
-                </div>          
+                </div>            
             </div>
         </div>
     </div>

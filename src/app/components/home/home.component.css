@@ -32,8 +32,10 @@ slick-slider {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgb(32,33,37);
-    background: linear-gradient(0deg, rgba(32,33,37,0.9445938409543505) 9%, rgba(32,33,37,0.6952941210663953) 26%, rgba(32,33,37,0) 51%, rgba(32,33,37,0.784929975408132) 95%);
+    background: #202125;
+    background: -moz-linear-gradient(90deg,#202125 0,rgba(32,33,37,.6) 40%,rgba(32,33,37,0) 60%,rgba(32,33,37,0) 80%,#202125 100%);
+    background: -webkit-linear-gradient(90deg,#202125 0,rgba(32,33,37,.6) 40%,rgba(32,33,37,0) 60%,rgba(32,33,37,0) 80%,#202125 100%);
+    background: linear-gradient(90deg,#202125 0,rgba(32,33,37,.6) 40%,rgba(32,33,37,0) 60%,rgba(32,33,37,0) 80%,#202125 100%);
   }
   
   .slider__poster::after{
@@ -45,8 +47,10 @@ slick-slider {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgb(32,33,37);
-    background: linear-gradient(90deg, rgba(32,33,37,0.9473949614025298) 6%, rgba(32,33,37,0.1630812359123337) 70%, rgba(32,33,37,0.8633613479571516) 95%);
+    background: #202125;
+    background: -moz-linear-gradient(0deg,#202125 0,rgba(32,33,37,0) 50%,#202125 100%);
+    background: -webkit-linear-gradient(0deg,#202125 0,rgba(32,33,37,0) 50%,#202125 100%);
+    background: linear-gradient(0deg,#202125 0,rgba(32,33,37,0) 50%,#202125 100%);
 }
 
 .slider__descriptions{
@@ -60,7 +64,7 @@ slick-slider {
     color:#CAE962;
     font-size: 20px;
 }
-.title{
+.slider__title{
     font-size: 60px;
     font-weight: 500;
 }
@@ -72,6 +76,12 @@ slick-slider {
 .about{
     width: 750px;
     height: 50px;
+}
+.slider__title{
+    width: 750px;
+}
+.slider__title p{
+    -webkit-line-clamp: 1;
 }
 .btn{
     border-radius: 25px;
@@ -94,6 +104,7 @@ slick-slider {
 }
 
 .container{
+    position: relative;
     display: flex;
     margin: 50px 20px;
     gap: 20px;
@@ -127,24 +138,23 @@ slick-slider {
     padding: 20px;
 }
 
-/* Announcements */
-.announcement__cover{
-    display: flex;
-    gap: 20px;
+/* Upcomins */
+.anime__container{
     width: 100%;
-    
 }
-.announcement__item{   
-    flex: 1 1 33.33%;
+.anime__item{   
+    width:calc(33% - 5px);
 }
-.announcement__item img {
-    max-width: 100%;
-    height: 100%;
-    border-radius: 3px;
-    cursor: pointer;
-    transition-duration: 0.3s;
-}
-.announcement__item img:hover {
-    transform: scale(1.02);
+.anime__poster{
+    width: 100%;
 }
 
+/* Gif */
+.gif__chika{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: -30px;
+    left: 800px;
+    z-index: -1;
+}

@@ -4,26 +4,26 @@
             <a href="">AnimeList</a>
         </div>      
         <div class="search">
-            <input class="form-control" type="search" placeholder="Search anime..." 
+            <input [(ngModel)]="value" (focusout)="closeSearch()" type="search" placeholder="Search anime..." 
                 (keyup)="animeService.getSearchQuery($event)"> 
-                <div class="results" *ngIf="filter.searchQuery.length > 0">
-                    <div class="result__item" *ngFor="let anime of animes" (click)="animeService.setSelectedAnime(anime); filter.searchQuery = ' ' " routerLink="/animeAbout">
-                        <div class="result__poster">
-                            <img class="poster"  [src]="anime.posterUrl">
-                        </div>
-                        <div class="description">
-                            <span class="title">{{anime.title}}</span>
-                            <div class="episodes__container">
-                                <span class="episodes"> Ep {{anime.episodes}}</span>  
-                                <span class="episodes"> {{anime.episodeDuration}}m</span> 
-                            </div>
-                            <div class="genres">
-                                <div *ngFor="let genre of anime.genres">{{genre.genreName}}</div>
-                            </div>
-                        </div>
-                        
+            <div class="results" *ngIf="searchFormVisible" >
+                <div class="result__item" *ngFor="let anime of animes | slice:0:displayCount" (click)="animeService.setSelectedAnime(anime); filter.searchQuery = '' " routerLink="/animeAbout">
+                    <div class="result__poster">
+                        <img  [src]="anime.posterUrl">
                     </div>
-                 </div>
+                    <div class="description">
+                        <span class="title">{{anime.title}}</span>
+                        <div class="episodes__container">
+                            <span class="episodes"> Ep {{anime.episodes}}</span>  
+                            <span class="episodes minutes"> {{anime.episodeDuration}}m</span> 
+                        </div>
+                        <div class="genres">
+                            <div *ngFor="let genre of anime.genres">{{genre.name}}</div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
         </div>
         <div class="anime">
             <a routerLink="/anime">Anime</a>

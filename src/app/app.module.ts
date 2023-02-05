@@ -32,6 +32,7 @@ import { AnimeListComponent } from './components/profile/anime-list/anime-list.c
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { HomeComponent } from './components/home/home.component';
 import { TrailerComponent } from './components/anime-about/trailer/trailer.component';
+import { NotificationComponent } from './components/notification/notification.component';
 
 export function tokenGetter(){
   return localStorage.getItem("jwt");
@@ -99,6 +100,7 @@ const appRoutes: Routes =[
     AnimeListComponent,
     HomeComponent,
     TrailerComponent,
+    NotificationComponent,
   ],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },

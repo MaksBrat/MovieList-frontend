@@ -1,4 +1,5 @@
 <div class="container">
+    <app-notification></app-notification>
     <div class="anime__list__container">
         <div class="anime__list__item" *ngFor="let animeList of profileWithAnimeList.animeList; index as i">
             <div class="item__container">
@@ -22,8 +23,7 @@
                     <input class="item__input episodes__input" type="number" name="episodes" [(ngModel)]="animeList.watchedEpisodes"
                     (focusout)="animeService.changeWatchedEpisodes(animeList.id, $event)"> 
                     <span>/{{animeList.anime.episodes}}</span>  
-                </div> 
-                                       
+                </div>                             
             </div>
             <div class="item__container">
                 <label class="item__title">Status:</label>

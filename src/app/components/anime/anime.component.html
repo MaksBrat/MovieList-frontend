@@ -1,8 +1,17 @@
 <div class="container">
     <div class="anime__container">
-        <div class="anime__item" *ngFor="let anime of animes">        
-            <div class="anime__poster" (click)="selectAnime(anime)">
-                <img class="avatar"  [src]="anime.posterUrl">
+        <div class="anime__item" *ngFor="let anime of animes" >          
+            <div class="anime__poster" (click)="animeService.selectAnime(anime)">
+                <img class="poster"  [src]="anime.posterUrl">
+                <div class="overlay">
+                    <a  class="icon">
+                      <i class="fa fa-play"></i>
+                    </a>
+                </div>
+                <div class="episodes__container">
+                    <span class="episodes"> Ep {{anime.episodes}}</span>  
+                    <span class="episodes minutes"> {{anime.episodeDuration}}m</span> 
+                </div>
             </div>           
             <div class="anime__description">
                 <div class="title">
@@ -10,9 +19,9 @@
                         {{anime.title}}
                     </span>
                 </div>
-                <div class="rating">
+                <div class="anime__type">
                     <span>
-                       Rating: {{anime.rating}}
+                        {{anime.animeType}}
                     </span>
                 </div>
             </div>
@@ -33,21 +42,29 @@
         <div class="filter__item__container">
             <label class="filter__title">Anime type</label>
             <div class="anime__type">
-                <select [(ngModel)]="filter.animeType" name="animeType" (change)="load(filter)">
+                <select class="select__name" [(ngModel)]="filter.animeType" name="animeType" (change)="load(filter)">
                     <option *ngFor="let type of animeTypes" [value]="type.name">{{type.name}}</option>     
                 </select> 
             </div>
-        </div>    
+        </div>
+        <div class="filter__item__container">
+            <label class="filter__title">Anime Status</label>
+            <div class="anime__type">
+                <select class="select__name" [(ngModel)]="filter.animeStatus" name="animeStatus" (change)="load(filter)">
+                    <option *ngFor="let status of animeStatus" [value]="status.name">{{status.name}}</option>     
+                </select> 
+            </div>
+        </div>  
         <div class="filter__item__container">
             <label class="filter__title">Sorting</label>
             <div class="sorting">         
-                <select [(ngModel)]="filter.ascOrDesc" (change)="load(filter)">
+                <select class="select__name" [(ngModel)]="filter.ascOrDesc" (change)="load(filter)">
                     <option value="ASC">Ascending</option>
                     <option value="DESC">Descending</option>
                 </select>
                 <div class="orderBy">
-                    <div *ngFor="let sort of OrderBy">
-                        <input class="orderBy__input" type="radio" [(ngModel)]="filter.OrderBy" name="OrderBy" [value]="sort.name" (change)="load(filter)"> {{sort.name}} 
+                    <div *ngFor="let sort of orderBy">
+                        <input class="orderBy__input" type="radio" [(ngModel)]="filter.orderBy" name="orderBy" [value]="sort.name" (change)="load(filter)"> {{sort.name}} 
                     </div>
                 </div>           
             </div>

@@ -16,6 +16,9 @@
     width: 140px;
     margin: 10px 0;
 }
+.anime__type{
+    color: #CAE962;  
+}
 input{
     width: 250px;
     height: 40px;

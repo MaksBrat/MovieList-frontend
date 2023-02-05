@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
-import {Profile} from '../../../entity/Profile';
-import { ProfileWithAnimeList } from 'src/entity/ProfileWithAnimeList';
+import {Profile} from '../../../models/Profile';
+import { ProfileWithAnimeList } from 'src/models/ProfileWithAnimeList';
 
 @Injectable()
 export class ProfileService{

@@ -23,7 +23,6 @@ export class AccountService{
     register = (form : NgForm) => {
         if (form.valid) {
             const credentials = JSON.stringify(form.value);
-            console.log(credentials);
             this.http.post("https://localhost:7003/api/Account/register", credentials,{
                 headers: new HttpHeaders({ "Content-Type": "application/json"}),
                 responseType: 'text'
@@ -32,7 +31,6 @@ export class AccountService{
                 next: () => {
                 this.invalidRegister = false; 
                 
-                console.log("Register successful")
                 this.router.navigate(["/login"]);
                 },
                 error: error => console.log(error)

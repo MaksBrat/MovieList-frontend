@@ -4,9 +4,17 @@
 .about__item{
     display: flex;
 }
-.anime__poster img{
+.anime__poster{
     width: 400px;
     height: 500px;
+}
+.anime__poster img{
+    width: 100%;
+    height: 100%;
+}
+.anime__poster:after{
+    background: none;
+    
 }
 .anime__description{
     display: flex;

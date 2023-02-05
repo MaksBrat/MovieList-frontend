@@ -12,6 +12,7 @@
     font-weight: 600;
 }
 .user__container__avatar img{
+    object-fit: cover;
     width: 200px;
     height: 200px;
     border-radius: 50%;

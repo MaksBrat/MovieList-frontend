@@ -1,9 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 
-import {Anime} from '../../../entity/Anime';
-import { Subject } from 'rxjs';
-import { Filter } from 'src/entity/RequestModels/Search/Filter';
+import {Anime} from '../../../models/Anime';
+import { catchError, of, Subject, tap } from 'rxjs';
+import { Filter } from 'src/models/RequestModels/Search/Filter';
+import { NotificationService } from 'src/app/Services/NotificationService';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -19,10 +21,15 @@ export class AnimeService{
 
     private animeUrl = 'https://localhost:7003/api/Anime';
     private profileUrl = 'https://localhost:7003/api/Profile';
-    constructor(private http: HttpClient){
+    constructor(private http: HttpClient, private notificationService: NotificationService,
+        private router: Router){
         
     }
     
+    getSearchQuery($event){
+        this.invokeEvent.next($event.target.value);
+    }
+
     getAll(filter: Filter){
         let params = new HttpParams();
 
@@ -37,42 +44,84 @@ export class AnimeService{
               });
         }
         if(filter.animeType){
-            console.log(filter.animeType);
             params = params.append(`animeType`, filter.animeType);
         }
-        if(filter.OrderBy){
-            params = params.append(`OrderBy`, filter.OrderBy);
+        if(filter.animeStatus){
+            params = params.append(`animeStatus`, filter.animeStatus);
+        }
+        if(filter.orderBy){
+            params = params.append(`OrderBy`, filter.orderBy);
             params = params.append(`ascOrDesc`, filter.ascOrDesc);
         }
+
+        params = params.append('take',filter.take);
 
         return this.http.get<Anime[]>(this.animeUrl + '/getAll/?' + params);
     } 
     
-    getSearchQuery($event){
-        this.invokeEvent.next($event.target.value);
-    }
-
     create(anime: FormData){
+        console.log("create")
         return this.http.post<Anime>(this.animeUrl + '/create', anime)
-            .subscribe(response =>{
-                console.log(response)
-            });
+            .pipe(
+                tap(response => {
+                    this.notificationService.addNotification({
+                        message: 'Anime created successfully!',
+                        type: 'success'
+                    });
+                }),
+                catchError(error => {
+                    this.notificationService.addNotification({
+                        message: 'Error creating anime',
+                        type: 'error'
+                    });
+                    return of(error);
+                })
+            ).subscribe();
     }
 
     update(anime: FormData){
         console.log(anime)
         return this.http.post<Anime>(this.animeUrl + '/edit', anime)
-            .subscribe(response =>{
-                console.log(response)
-            });
+        .pipe(
+            tap(response => {
+                this.notificationService.addNotification({
+                    message: 'Anime updated successfully!',
+                    type: 'success'
+                });
+            }),
+            catchError(error => {
+                this.notificationService.addNotification({
+                    message: 'Error updating anime',
+                    type: 'error'
+                });
+                return of(error);
+            })
+        ).subscribe();
     }
 
     delete(id: number){
         return this.http.delete(this.animeUrl + '/delete/' + id)
-            .subscribe(response =>{
-                console.log(response)
-            });
+        .pipe(
+            tap(response => {
+                this.notificationService.addNotification({
+                    message: 'Anime delete successfully!',
+                    type: 'success'
+                });
+            }),
+            catchError(error => {
+                this.notificationService.addNotification({
+                    message: 'Error delete anime',
+                    type: 'error'
+                });
+                return of(error);
+            })
+        ).subscribe();
     }
+
+    selectAnime(anime: Anime){
+        this.setSelectedAnime(anime);
+        this.router.navigate(['/animeAbout']);     
+    } 
 
     setSelectedAnime(anime: Anime){
         this.anime = anime;
@@ -101,6 +150,10 @@ export class AnimeService{
         
         return this.http.get(this.profileUrl + '/addAnimeToList/' + animeId)
             .subscribe(response =>{
+                this.notificationService.addNotification({
+                    message: 'Anime added successfully!',
+                    type: 'success'
+                });
                 console.log(response)
             });
     }
@@ -112,6 +165,10 @@ export class AnimeService{
 
         return this.http.delete(this.profileUrl + '/deleteAnimeFromList/' + animeId)
             .subscribe(response =>{
+                this.notificationService.addNotification({
+                    message: 'Anime delete successfully!',
+                    type: 'success'
+                });
                 console.log(response)
             });
     }

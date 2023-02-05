@@ -1,9 +1,10 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { throws } from 'assert';
-import { Anime } from 'src/entity/Anime';
-import { Genre } from 'src/entity/Genre';
+import { NotificationService } from 'src/app/Services/NotificationService';
+import { Anime } from 'src/models/Anime';
+import { AnimeOptions } from 'src/models/AnimeOptions';
 import { AccountService } from '../account/account.Service';
 import { AnimeService } from '../anime/anime.service';
 
@@ -19,28 +20,13 @@ export class AdminTabComponent {
   anime: Anime;
   idToDelete: number;   
 
-  //dropdown list 
-  animeTypes = [
-    {name: 'Serial'},
-    {name: 'Film'},
-    {name: 'OVA'},
-    {name: 'ONA'},
-    {name: 'Special'},
-];
+  animeOptions = new AnimeOptions();
 
-  //checkboxes
-  genres = [
-      new Genre(1,"Romance"),
-      new Genre(2,"Action"),
-      new Genre(3,"Drama"),
-      new Genre(4,"Military"),
-      new Genre(5,"Magic"),
-      new Genre(6,"Comedy"),
-      new Genre(7,"History"),
-      new Genre(8,"Psychological"),
-  ];
+  genres = this.animeOptions.genres;  
+  animeTypes = this.animeOptions.animeTypes;
+  animeStatus = this.animeOptions.animeStatus;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, 
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<AdminTabComponent>, 
     private animeService: AnimeService, public accountService: AccountService){
       this.selectedAction = data.selectedAction;
       if(data.selectedAction === 'create'){
@@ -59,14 +45,16 @@ export class AdminTabComponent {
   }
 
   onSubmit() {
+    this.dialogRef.close();
     if (this.selectedAction !== 'delete') {
       this.formData.append('id', this.anime.id.toString());  
       this.formData.append('title', this.anime.title);
       this.formData.append('episodes', this.anime.episodes.toString());
       this.formData.append('episodeDuration', this.anime.episodeDuration.toString());
       this.formData.append('animeType', this.anime.animeType);
-      this.formData.append('realizeDate', this.anime.releaseDate.toString());
-
+      this.formData.append('animeStatus', this.anime.animeStatus);
+      this.formData.append('releaseDate', this.anime.releaseDate.toString());
+      
       if(this.anime.posterUrl){
         this.formData.append('posterUrl', this.anime.posterUrl);
       }
@@ -76,11 +64,11 @@ export class AdminTabComponent {
 
       this.anime.genres.forEach((genre, i) => {
           this.formData.append(`genres[${i}].id`, genre.id.toString());
-          this.formData.append(`genres[${i}].genreName`, genre.genreName);
+          this.formData.append(`genres[${i}].name`, genre.name);
       });
 
       if(this.selectedAction === 'create'){
-        this.animeService.create(this.formData);
+        var result = this.animeService.create(this.formData);
       }
       else{
         this.animeService.update(this.formData);

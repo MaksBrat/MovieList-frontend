@@ -7,17 +7,13 @@
             <div>
                 <input name="email" type="email" placeholder="Email" ngModel>
             </div>
-            <div>              
+            <div class="password">              
                 <input [type]="type" name="password" type="text" placeholder="Password" ngModel>
-                <span  class="fa {{eyeIcon}} " (click)="hideShowPass()"></span>
-            </div>
-            <div class="forgot">
-                <a routerLink="/changePassword">Forgot password?</a>           
+                <span  class="fa {{eyeIcon}}" (click)="hideShowPass()"></span>
             </div>
             <div class="action">
                 <button type="submit">Sign in</button>  
             </div>
-    
             <div class="account">                     
                 <div class="account__container">                     
                     <span>Don't have account? </span>

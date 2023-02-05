@@ -1,11 +1,11 @@
 import { Component, OnInit} from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Profile } from 'src/entity/Profile';
+import { Profile } from 'src/models/Profile';
 import { ProfileService } from '../profile.service';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { ProfileRequestModel } from 'src/entity/RequestModels/ProfileRequestModel';
-import { ProfileResponseModel } from 'src/entity/DTO/ResponseModels/ProfileResponseModel';
+import { ProfileRequestModel } from 'src/models/RequestModels/ProfileRequestModel';
+import { ProfileResponseModel } from 'src/models/DTO/ResponseModels/ProfileResponseModel';
 import { NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';

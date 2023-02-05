@@ -1,6 +1,7 @@
 <div class="container">
+    <app-notification></app-notification>
     <div class="about">
-        <div class="about__item">          
+        <div class="about__item">         
             <div class="anime__poster">
                 <img class="avatar"  [src]="anime.posterUrl">
             </div>              
@@ -23,7 +24,7 @@
                     <div class="name">Genres: </div>
                     <div>
                         <label *ngFor="let genre of anime.genres">                 
-                            <span class=""> {{ genre.genreName }} </span>            
+                            <span class=""> {{ genre.name }} </span>            
                         </label>
                     </div>         
                 </div>  
