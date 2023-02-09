@@ -1,15 +1,12 @@
-import { Component, OnInit} from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Profile } from 'src/models/Profile';
+import { Component} from '@angular/core';
 import { ProfileService } from '../profile.service';
-import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { ProfileRequestModel } from 'src/models/RequestModels/ProfileRequestModel';
+import { HttpClient } from '@angular/common/http';
 import { ProfileResponseModel } from 'src/models/DTO/ResponseModels/ProfileResponseModel';
-import { NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DomSanitizer } from '@angular/platform-browser';
 import { ImageService } from 'src/app/Services/ImageService';
+import { catchError, of, tap } from 'rxjs';
+import { NotificationService } from 'src/app/Services/NotificationService';
+
 @Component({
     selector: 'profileEdit',
     templateUrl: './profileEdit.component.html',
@@ -18,7 +15,6 @@ import { ImageService } from 'src/app/Services/ImageService';
     providers: [ProfileService]
 })
 export class ProfileEditComponent{
-    //received profile
     public profileResponse: ProfileResponseModel;
 
     public avatar: File;
@@ -31,9 +27,8 @@ export class ProfileEditComponent{
     constructor(
         private profileService: ProfileService, 
         private http: HttpClient,
-        private router: Router,
-        public imageService: ImageService){
-
+        public imageService: ImageService,
+        public notificationService: NotificationService){
     }
 
     ngOnInit(){       
@@ -70,9 +65,20 @@ export class ProfileEditComponent{
         formData.append("Age", this.age.toString());
 
         this.http.post<any>("https://localhost:7003/api/Profile/edit", formData)
-            .subscribe(response => { console.log(response) });   
-
-        // this.router.navigate(["/profile"]);
-        window.location.href="http://localhost:4200/profile"
+        .pipe(
+            tap(response => {
+                this.notificationService.addNotification({
+                    message: 'Profile update successfully!',
+                    type: 'success'
+                });
+            }),
+            catchError(error => {
+                this.notificationService.addNotification({
+                    message: 'Error update profile',
+                    type: 'error'
+                });
+                return of(error);
+            })
+        ).subscribe();            
     }
 }

@@ -1,7 +1,7 @@
 <div class="container">
     <div class="anime__container">
         <div class="anime__item" *ngFor="let anime of animes" >          
-            <div class="anime__poster" (click)="animeService.selectAnime(anime)">
+            <div class="anime__poster" (click)="animeService.setSelectedAnime(anime)" routerLink="/animeAbout">
                 <img class="poster"  [src]="anime.posterUrl">
                 <div class="overlay">
                     <a  class="icon">

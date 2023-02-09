@@ -22,7 +22,7 @@
                     <span *ngIf="animeList.watchedEpisodes === 0"> - </span>     
                     <input class="item__input episodes__input" type="number" name="episodes" [(ngModel)]="animeList.watchedEpisodes"
                     (focusout)="animeService.changeWatchedEpisodes(animeList.id, $event)"> 
-                    <span>/{{animeList.anime.episodes}}</span>  
+                    <span>/ {{animeList.anime.episodes}}</span>  
                 </div>                             
             </div>
             <div class="item__container">

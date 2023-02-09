@@ -1,0 +1,50 @@
+.container{
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+}
+.title{
+    color:#CAE962;
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+.form__container, .rules{
+    background-color: #2A2C31;
+    padding: 20px;
+}
+.form{
+    flex: 1 1 70%;
+}
+.form__container{
+    flex-direction: column;
+}
+.form__item{
+    margin-bottom:20px;
+}
+.rules__container
+{
+    flex: 1 1 30%;
+    height: 100%;
+}
+.rules{
+    position: relative;
+    color: white;
+}
+input, textarea{
+    padding: 10px;
+}
+
+textarea{
+    width: 50%;
+    height: 300px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 15px;
+}
+.btn{
+    margin-top: 10px;
+}
+
+.girl{
+    position: absolute;
+}

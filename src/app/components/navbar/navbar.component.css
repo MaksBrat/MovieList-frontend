@@ -21,14 +21,19 @@ nav{
 }
 .anime{
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
     margin-left: 50px;
 }
 .anime a{
+    position: absolute;
+    top: 0;
+    left: -15px;
     font-size: 16px;
     color: white;
     text-decoration: none;
+    padding: 10px 17px;
 }
 .search{
     position: relative;
@@ -98,9 +103,11 @@ nav{
 }
 .result__poster{
     height: 100px;
+    width: 70px;
 }
 .result__poster img {
     height: 100%;
+    width: 100%;
 }
 .description{
     display: flex;

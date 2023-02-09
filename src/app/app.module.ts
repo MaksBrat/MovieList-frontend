@@ -18,10 +18,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { RegisterComponent } from './components/account/register/register.component';
 import { AuthGuard } from './components/account/authGuard.service';
-import { JwtHelperService, JWT_OPTIONS  ,JwtModule} from '@auth0/angular-jwt';
+import { JwtHelperService, JWT_OPTIONS} from '@auth0/angular-jwt';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProfileEditComponent } from './components/profile/profileEdit/profileEdit.component';
-import { environment } from './environments/environments';
 import { httpInterceptor } from './components/account/interseptor';
 import { AdminTabComponent } from './components/admin-tab/admin-tab.component';
 import { AnimeAboutComponent } from './components/anime-about/anime-about.component';
@@ -33,6 +32,9 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { HomeComponent } from './components/home/home.component';
 import { TrailerComponent } from './components/anime-about/trailer/trailer.component';
 import { NotificationComponent } from './components/notification/notification.component';
+import { CreatenewsComponent } from './components/news/createNews/createNews.component';
+import { NewsAboutComponent } from './components/news/news-about/news-about.component';
+import { CommentComponent } from './components/comment/comment.component';
 
 export function tokenGetter(){
   return localStorage.getItem("jwt");
@@ -40,32 +42,20 @@ export function tokenGetter(){
 
 const appRoutes: Routes =[
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  {
-    path: 'home', component: HomeComponent
-  },
-  { 
-    path: 'anime', component: AnimeComponent,
-  },
-  { path: 'register', component: RegisterComponent},
-  { path: 'login', component: LoginComponent},
+  { path: 'home', component: HomeComponent },
+  { path: 'anime', component: AnimeComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
   { 
     path: 'profile', component: ProfileComponent,
     canActivate: [AuthGuard]
   },
-  {
-    path: 'editProfile', component : ProfileEditComponent
-  },
-  {
-    path: "adminTab", component: AdminTabComponent
-  },
-  {
-    path: "animeAbout", component: AnimeAboutComponent
-  },
-  {
-    path: "animeList", component: AnimeListComponent
-  }
-
-  
+  { path: 'editProfile', component : ProfileEditComponent },
+  { path: "adminTab", component: AdminTabComponent },
+  { path: "animeAbout", component: AnimeAboutComponent },
+  { path: "animeList", component: AnimeListComponent },
+  { path: "createNews", component: CreatenewsComponent },
+  { path: "newsAbout", component: NewsAboutComponent }
 ];
 
 @NgModule({
@@ -101,6 +91,9 @@ const appRoutes: Routes =[
     HomeComponent,
     TrailerComponent,
     NotificationComponent,
+    CreatenewsComponent,
+    NewsAboutComponent,
+    CommentComponent,
   ],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },

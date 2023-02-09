@@ -1,0 +1,30 @@
+<div class="comment__container">
+    <app-notification></app-notification>
+    <div class="add__comment">
+        <textarea placeholder="Write comment" maxlength="3000" [(ngModel)]="userComment.content"></textarea>
+        <div class="send">
+            <button class="btn" (click)="addComment()">Send</button>
+        </div>
+    </div>
+    <div class="comment__item" *ngFor="let comment of comments">
+        <div class="comment__author">
+            <div class="author">
+                <div class="author__avatar">
+                    <img [src]="imageService.createImageUrl(comment.authorAvatar)" alt="">
+                </div>            
+                <div class="author__name">
+                    <div class="div">{{comment.author}}</div>
+                </div>
+            </div>
+            <div class="delete" *ngIf="comment.authorId.toString() === currentUserId">
+                <button class="delete__btn btn" (click)="deleteComment(comment.id)">Delete</button>
+            </div>    
+        </div>
+        <div class="comment__content">
+            <div>{{comment.content}}</div>
+        </div>
+        <div class="comment_date">
+            <div class="date">{{comment.dateCreated}}</div>
+        </div>
+    </div>
+</div>

@@ -28,8 +28,6 @@ export class AnimeAboutComponent implements OnInit {
   ngOnInit() {
     this.anime = this.animeService.getSelectedAnime();
   }
-  
-  
 
   openTrailer(){
     const dialogRef = this.dialog.open(TrailerComponent, {

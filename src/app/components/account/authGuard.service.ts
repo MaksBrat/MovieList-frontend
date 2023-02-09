@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
-import { JwtHelperService, JWT_OPTIONS  ,JwtModule} from '@auth0/angular-jwt';
+import { JwtHelperService} from '@auth0/angular-jwt';
 import { AuthenticatedResponse } from "src/app/interfaces/AuthenticatedResponse";
 
 @Injectable({
@@ -11,7 +11,6 @@ export class AuthGuard implements CanActivate{
   constructor(private router:Router, 
               private jwtHelper: JwtHelperService, 
               private http: HttpClient){
-
   }
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){
@@ -27,6 +26,22 @@ export class AuthGuard implements CanActivate{
       }
 
       return isRefreshSuccess;
+  }
+
+  private intervalId: any;
+
+  async startTokenRefresh() {
+    const refreshInterval = 300000; // 5 minutes
+    const token = localStorage.getItem("jwt") || '{}';
+    
+    this.intervalId = setInterval(() => {
+      this.tryRefreshingTokens(token)
+        .then(isRefreshSuccess => {
+          if (!isRefreshSuccess) {
+            this.router.navigate(["login"]);
+          }
+        });
+    }, refreshInterval);
   }
 
   private async tryRefreshingTokens(token: string): Promise<boolean> {

@@ -3,8 +3,8 @@
         <div class="admin__item">          
             <form (ngSubmit)="onSubmit()"> 
                 <div class="form_container" *ngIf="selectedAction !== 'delete'; then createUpdate; else delete"></div>   
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
+                <button type="submit" class="btn">Submit</button>
+            </form>
         </div>
     </div> 
 </div>

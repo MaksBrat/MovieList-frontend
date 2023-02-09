@@ -17,7 +17,7 @@ export class AdminTabComponent {
   formData = new FormData();
   selectedAction = '';
 
-  anime: Anime;
+  anime = new Anime();
   idToDelete: number;   
 
   animeOptions = new AnimeOptions();
@@ -30,53 +30,27 @@ export class AdminTabComponent {
     private animeService: AnimeService, public accountService: AccountService){
       this.selectedAction = data.selectedAction;
       if(data.selectedAction === 'create'){
-        this.anime = new Anime();
-        this.anime.id = 0;
-        this.anime.genres = [];
-        this.anime.posterUrl = null;
-        this.anime.trailerUrl = null;         
+        this.anime.genres = [];       
       }
-      else if(data.anime != undefined){ // update
+      else if(data.selectedAction === 'update'){ 
         this.anime = data.anime;
       }
-      else if(data.id != undefined){ // delete
+      else if(data.selectedAction === 'delete'){ 
         this.idToDelete = data.id
       }
   }
 
   onSubmit() {
     this.dialogRef.close();
-    if (this.selectedAction !== 'delete') {
-      this.formData.append('id', this.anime.id.toString());  
-      this.formData.append('title', this.anime.title);
-      this.formData.append('episodes', this.anime.episodes.toString());
-      this.formData.append('episodeDuration', this.anime.episodeDuration.toString());
-      this.formData.append('animeType', this.anime.animeType);
-      this.formData.append('animeStatus', this.anime.animeStatus);
-      this.formData.append('releaseDate', this.anime.releaseDate.toString());
-      
-      if(this.anime.posterUrl){
-        this.formData.append('posterUrl', this.anime.posterUrl);
-      }
-      if(this.anime.trailerUrl){
-        this.formData.append('trailerUrl', this.anime.trailerUrl);
-      }
-
-      this.anime.genres.forEach((genre, i) => {
-          this.formData.append(`genres[${i}].id`, genre.id.toString());
-          this.formData.append(`genres[${i}].name`, genre.name);
-      });
-
-      if(this.selectedAction === 'create'){
-        var result = this.animeService.create(this.formData);
-      }
-      else{
-        this.animeService.update(this.formData);
-      } 
-    } 
-    else { 
-      this.animeService.delete(this.idToDelete);
+    if (this.selectedAction === 'create' ) {
+      this.animeService.create(this.anime);
     }
+    else if(this.selectedAction === 'update'){
+        this.animeService.update(this.anime);
+    }
+    else{    
+      this.animeService.delete(this.idToDelete);
+    } 
   }
   
   isChecked(genreId: number) {

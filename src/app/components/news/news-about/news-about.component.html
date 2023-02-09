@@ -1,0 +1,34 @@
+<div class="container">
+    <app-notification></app-notification>
+    <div class="cover">
+        <div class="news__container">  
+            <div class="news__item">
+                <div class="top">
+                    <div class="news__title">
+                        <div>{{news.title}}</div>                  
+                    </div>
+                    <div class="delete" *ngIf="news.authorId.toString() === currentUserId">
+                        <button class="delete_btn btn" (click)="deleteNews()">Delete</button>
+                    </div>
+                </div>           
+                <div class="news__content">
+                    <p>
+                        {{news.content}}
+                    </p>
+                </div>
+                <div class="details">
+                    <div class="date">
+                        <div class="date_created">{{news.dateCreated}}</div>
+                    </div>
+                    <div class="author">
+                         <div class="author__name"> Author: {{news.author}} </div> 
+                         <div class="author__avatar"> 
+                            <img [src]="imageService.createImageUrl(news.authorAvatar)" alt=""> 
+                        </div>
+                    </div>                  
+                </div>
+            </div> 
+        </div>
+        <app-comment [newsId]="news.id"></app-comment>
+    </div>  
+</div>

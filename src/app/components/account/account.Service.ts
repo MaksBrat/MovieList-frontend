@@ -49,8 +49,12 @@ export class AccountService{
                 next: (response: AuthenticatedResponse) => {
                     const token = response.token;
                     const refreshToken = response.refreshToken;
+                    const userId = response.userId;
+
                     localStorage.setItem("jwt", token); 
                     localStorage.setItem("refreshToken", refreshToken);
+                    localStorage.setItem("userId", userId.toString());
+
                     this.invalidLogin = false; 
                     this.router.navigate(["/"]);
                 },
@@ -61,8 +65,7 @@ export class AccountService{
 
     logOut = () => {
         this.http.post("https://localhost:7003/api/Account/revoke",null);
-        localStorage.removeItem("jwt");
-        localStorage.removeItem("refreshToken");
+        localStorage.clear();
         this.router.navigate(["/"]);
         window.location.reload();
       }

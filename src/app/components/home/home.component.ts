@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Anime } from 'src/models/Anime';
 import { AnimeOptions } from 'src/models/AnimeOptions';
-import { Filter } from 'src/models/RequestModels/Search/Filter';
+import { AnimeFilter } from 'src/models/Filter/AnimeFilter';
+import { BaseFilter } from 'src/models/Filter/Base/BaseFilter';
+import { NewsFilter } from 'src/models/Filter/NewsFilter';
+import { News } from 'src/models/News';
 import { AnimeService } from '../anime/anime.service';
+import { NewsService } from '../news/news.service';
 
 @Component({
   selector: 'app-home',
@@ -10,10 +14,12 @@ import { AnimeService } from '../anime/anime.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  filter = new Filter();
   animeOptions = new AnimeOptions();
+
   ongoingAnime: Anime[];
   upcomingAnime: Anime[];
+  topAnime: Anime[];
+  news: News[];
 
   //Just for example slides
   slides = [
@@ -36,30 +42,63 @@ export class HomeComponent implements OnInit {
     waitForAnimate: false,
   };
 
-  constructor(public animeService: AnimeService) {}
+  constructor(public animeService: AnimeService, public newsService: NewsService) {}
 
   ngOnInit(): void {
     this.getOngoingAnime();
     this.getUpcomingAnime();
+    this.getTopAnime();
+    this.getNews();
   }
 
   getOngoingAnime(){
-    this.filter.animeStatus = 'Ongoing';
-    this.filter.orderBy = "ReleaseDate";
-    this.filter.ascOrDesc = "DESC"
-    this.filter.take = '6';
-    this.animeService.getAll(this.filter).subscribe(result => {
+    var filter = new AnimeFilter();
+
+    filter.animeStatus = 'Ongoing';
+    filter.orderBy = "ReleaseDate";
+    filter.ascOrDesc = "DESC"
+    filter.take = '6';
+
+    this.animeService.getAll(filter).subscribe(result => {
       this.ongoingAnime = result;
     });
   }
 
+  getTopAnime(){
+    var filter = new AnimeFilter();
+
+    filter.animeStatus = 'Finished';
+    filter.orderBy = "Rating";
+    filter.ascOrDesc = "DESC"
+    filter.take = '5';
+
+    this.animeService.getAll(filter).subscribe(result => {
+      this.topAnime = result;
+    });
+  }
+
   getUpcomingAnime(){
-    this.filter.animeStatus = 'Upcoming';
-    this.filter.orderBy = "ReleaseDate";
-    this.filter.ascOrDesc = "DESC"
-    this.filter.take = '9';
-    this.animeService.getAll(this.filter).subscribe(result => {
+    var filter = new AnimeFilter();
+
+    filter.animeStatus = 'Upcoming';
+    filter.orderBy = "ReleaseDate";
+    filter.ascOrDesc = "DESC"
+    filter.take = '5';
+
+    this.animeService.getAll(filter).subscribe(result => {
       this.upcomingAnime = result;
+    });
+  }
+
+  getNews(){
+    var filter = new NewsFilter()
+
+    filter.orderBy = "DateCreated";
+    filter.ascOrDesc = "DESC"
+    filter.take = '10';
+
+    this.newsService.getAll(filter).subscribe(result => {
+      this.news = result;
     });
   }
 }

@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-
 import {Anime} from '../../../models/Anime';
 import { catchError, of, Subject, tap } from 'rxjs';
-import { Filter } from 'src/models/RequestModels/Search/Filter';
 import { NotificationService } from 'src/app/Services/NotificationService';
 import { Router } from '@angular/router';
+import { AnimeFilter } from 'src/models/Filter/AnimeFilter';
 
 @Injectable({
     providedIn: 'root'
@@ -30,7 +29,7 @@ export class AnimeService{
         this.invokeEvent.next($event.target.value);
     }
 
-    getAll(filter: Filter){
+    getAll(filter: AnimeFilter){
         let params = new HttpParams();
 
         if (filter.searchQuery) {
@@ -59,8 +58,7 @@ export class AnimeService{
         return this.http.get<Anime[]>(this.animeUrl + '/getAll/?' + params);
     } 
     
-    create(anime: FormData){
-        console.log("create")
+    create(anime: Anime){
         return this.http.post<Anime>(this.animeUrl + '/create', anime)
             .pipe(
                 tap(response => {
@@ -79,8 +77,7 @@ export class AnimeService{
             ).subscribe();
     }
 
-    update(anime: FormData){
-        console.log(anime)
+    update(anime: Anime){
         return this.http.post<Anime>(this.animeUrl + '/edit', anime)
         .pipe(
             tap(response => {
@@ -118,18 +115,18 @@ export class AnimeService{
         ).subscribe();
     }
 
-    selectAnime(anime: Anime){
-        this.setSelectedAnime(anime);
-        this.router.navigate(['/animeAbout']);     
-    } 
+    //#region SelectedAnime 
+    // for anime-about.component
 
     setSelectedAnime(anime: Anime){
-        this.anime = anime;
+        localStorage.setItem('selectedAnime', JSON.stringify(anime));
     }
 
     getSelectedAnime(){
-        return this.anime;
+        return JSON.parse(localStorage.getItem('selectedAnime'));
     } 
+
+    //#endregion
 
     //#region Anime list
 

@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AccountService } from '../account.Service';
+import { AuthGuard } from '../authGuard.service';
 import { LoginService } from './login.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class LoginComponent {
     isText: boolean = false;
     eyeIcon: string = "fa-eye-slash";
 
-    constructor(public accountService : AccountService){
+    constructor(public accountService : AccountService, public authGuardService: AuthGuard){
 
     }
 
@@ -25,6 +26,7 @@ export class LoginComponent {
 
     login(form : NgForm){
       this.accountService.login(form);
+      this.authGuardService.startTokenRefresh();
     }    
 }
 
