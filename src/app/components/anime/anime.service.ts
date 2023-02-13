@@ -29,6 +29,10 @@ export class AnimeService{
         this.invokeEvent.next($event.target.value);
     }
 
+    get(id: number){
+        return this.http.get(this.animeUrl + '/get/' + id);
+    }
+
     getAll(filter: AnimeFilter){
         let params = new HttpParams();
 
@@ -114,19 +118,6 @@ export class AnimeService{
             })
         ).subscribe();
     }
-
-    //#region SelectedAnime 
-    // for anime-about.component
-
-    setSelectedAnime(anime: Anime){
-        localStorage.setItem('selectedAnime', JSON.stringify(anime));
-    }
-
-    getSelectedAnime(){
-        return JSON.parse(localStorage.getItem('selectedAnime'));
-    } 
-
-    //#endregion
 
     //#region Anime list
 

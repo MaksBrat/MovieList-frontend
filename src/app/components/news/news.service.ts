@@ -18,6 +18,10 @@ export class NewsService{
         
     }
     
+    get(id: number){
+        return this.http.get(this.newsUrl + '/get/' + id);
+    }
+
     getAll(filter: NewsFilter){
         let params = new HttpParams();
 
@@ -32,17 +36,6 @@ export class NewsService{
         params = params.append('take',filter.take);
 
         return this.http.get<Anime[]>(this.newsUrl + '/getAll/?' + params);
-    } 
-    
-    //#region SelectedNews
-    //for news-about.component
-
-    setSelectedNews(news: News){
-        localStorage.setItem('selectedNews', JSON.stringify(news));
-    }
-
-    getSelectedNews(){
-        return JSON.parse(localStorage.getItem('selectedNews'));
     } 
 
     //#endregion

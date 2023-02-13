@@ -22,7 +22,6 @@ export class CommentComponent implements OnInit{
   ngOnInit(): void {
     this.commentService.getAll(this.newsId).subscribe(response =>{
       this.comments = response;
-      console.log(response);
     });
     this.userComment.newsId = this.newsId;
   }

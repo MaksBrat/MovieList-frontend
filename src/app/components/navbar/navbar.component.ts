@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild} from '@angular/core';
+import { Component, Directive, ElementRef, HostListener, OnInit, Renderer2, ViewChild} from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { Anime } from 'src/models/Anime';
 import { AnimeFilter } from 'src/models/Filter/AnimeFilter';
@@ -9,18 +9,19 @@ import { AnimeService } from '../anime/anime.service';
     selector: 'navigation',
     templateUrl: './navbar.component.html',
     styleUrls: ["./navbar.component.css"],
-    
 })
 export class NavBarComponent implements OnInit {
   animes: Anime[] = [];
   filter = new AnimeFilter();
 
+  @ViewChild('searchContainer', { static: false }) searchContainer: ElementRef;
+
   displayCount = 5;
-  searchFormVisible = false;
+  resultVisible = false;
   value = "";
 
   constructor(public accountService: AccountService, public animeService: AnimeService, 
-    private renderer: Renderer2,private router: Router){
+    private renderer: Renderer2){
     this.animeService.currentPage = "CurrentPage";
     this.filter.searchQuery = "";
 
@@ -28,21 +29,30 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit(){
     this.animeService.invokeEvent.subscribe(value =>{
-      if(this.animeService.currentPage != "AnimePage"){
+      if(this.animeService.currentPage != "AnimePage"){ 
         this.filter.searchQuery = value;
+
         this.animeService.getAll(this.filter).subscribe(animes => 
           {this.animes = animes, console.log(animes)}); 
-          this.searchFormVisible = true;  
+          this.resultVisible = true;  
       }    
     }); 
+  }
 
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationStart) {
-        this.value = ""; // for reset search input value
-      }
+  ngAfterViewInit() {
+    this.renderer.listen('document', 'click', (event) => {
+        if (!this.searchContainer.nativeElement.contains(event.target)) {
+            this.resultVisible = false;
+        }
     });
   }
 
+  closeSearch(){
+    this.resultVisible = false;
+    this.value = ""; // for reset search input value
+  } 
+
+  //change navbar background   
   @HostListener('window:scroll', [])
   onWindowScroll() {
     const navbar = document.getElementById("navbar");
@@ -52,9 +62,5 @@ export class NavBarComponent implements OnInit {
         this.renderer.setStyle(navbar, 'background-color', 'transparent');
     }
   }
-
-  closeSearch(){
-    this.searchFormVisible = false;
-  }
-
 }
+

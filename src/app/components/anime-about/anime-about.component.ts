@@ -21,12 +21,17 @@ export class AnimeAboutComponent implements OnInit {
   selectedAction = '';
 
   constructor(public animeService: AnimeService, public accountService: AccountService, 
-    public dialog: MatDialog, private sanitizer: DomSanitizer){
+    public dialog: MatDialog, private sanitizer: DomSanitizer, private route: ActivatedRoute){
       
   }
 
   ngOnInit() {
-    this.anime = this.animeService.getSelectedAnime();
+    this.route.params.subscribe(params => {
+      const id = params['id'];
+      this.animeService.get(id).subscribe(response =>{
+        this.anime = response;
+      });
+    });
   }
 
   openTrailer(){

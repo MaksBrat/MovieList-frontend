@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="detail">
-                    <button class="btn" (click)="animeService.setSelectedAnime(anime)" routerLink="/animeAbout">Detail</button>
+                    <button class="btn" [routerLink]="['/anime', anime.id]">Detail</button>
                 </div>
             </div>      
         </div>           
@@ -42,8 +42,8 @@
             <div class="title">Top anime</div>
             <div class="anime__container">
                 <div class="anime__item" *ngFor="let anime of topAnime" >          
-                    <div class="anime__poster" (click)="animeService.setSelectedAnime(anime) " routerLink="/animeAbout">
-                        <img class="poster" [src]="anime.posterUrl" alt="">
+                    <div class="anime__poster" [routerLink]="['/anime', anime.id]">
+                        <img class="poster" [src]="anime.posterUrl">
                         <div class="overlay">
                             <a  class="icon">
                               <i class="fa fa-play"></i>
@@ -78,7 +78,7 @@
                     <div class="news__description"> <p>{{_news.content}}</p></div>
                     <div class="details">
                         <div class="date_created">{{_news.dateCreated}}</div>
-                        <button class="read" class="btn" (click)="newsService.setSelectedNews(_news)" routerLink="/newsAbout">Read...</button>
+                        <button class="read" class="btn" [routerLink]="['/news', _news.id]">Read...</button>
                     </div>
                 </div>               
             </div>
@@ -87,7 +87,7 @@
             <div class="title">Upcoming</div>
             <div class="anime__container">
                 <div class="anime__item" *ngFor="let anime of upcomingAnime" >          
-                    <div class="anime__poster" (click)="animeService.setSelectedAnime(anime) " routerLink="/animeAbout">
+                    <div class="anime__poster" [routerLink]="['/anime', anime.id]">
                         <img class="poster" [src]="anime.posterUrl" alt="">
                         <div class="overlay">
                             <a  class="icon">
@@ -115,6 +115,26 @@
             </div>
         </div>
     </div>
+    <div class="container column"> 
+        <div class="block">
+            <div class="main-2">
+                <div class="title">Online chat </div>
+                <div class="chat__container">
+                    <div class="chat">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="main-2">
+                <div class="title">Forum</div>
+                <div class="forum__container"></div>
+            </div>
+        </div>       
+        <footer>
+            
+        </footer>
+    </div>
+    
 </div>
 
 

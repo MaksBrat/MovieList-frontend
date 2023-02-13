@@ -131,7 +131,7 @@ slick-slider {
 }
 .news__item{
     width: 100%;
-    height: 200px;
+    height: 212px;
 }
 .news__title{
     font-size: 24px;
@@ -169,4 +169,34 @@ slick-slider {
     top: -30px;
     right: 50px;
     z-index: -1;
+}
+
+/* Chat */
+.block{
+    display: flex;
+    gap: 20px;
+}
+.column{
+    flex-direction: column;
+}
+.main-2{
+    width: 50%;
+}
+.chat__container, .forum__container{
+    background-color: #2A2C31;
+    padding: 20px;
+    height: 500px;
+}
+.chat__container{
+    
+}
+.chat{
+    width: 100%;
+}
+/* Footer */
+footer{
+    background-color: #2A2C31;
+    width: 100%;
+    padding: 20px;
+    height: 200px;
 }

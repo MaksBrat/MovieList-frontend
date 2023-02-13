@@ -37,6 +37,9 @@ p{
     overflow: visible;
     margin-bottom: 40px;
 }
+img{
+    object-fit: cover;
+}
 .author__avatar{
     width: 75px;
     height: 75px;

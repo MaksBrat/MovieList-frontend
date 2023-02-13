@@ -52,10 +52,10 @@ const appRoutes: Routes =[
   },
   { path: 'editProfile', component : ProfileEditComponent },
   { path: "adminTab", component: AdminTabComponent },
-  { path: "animeAbout", component: AnimeAboutComponent },
+  { path: "anime/:id", component: AnimeAboutComponent },
   { path: "animeList", component: AnimeListComponent },
   { path: "createNews", component: CreatenewsComponent },
-  { path: "newsAbout", component: NewsAboutComponent }
+  { path: "news/:id", component: NewsAboutComponent }
 ];
 
 @NgModule({
