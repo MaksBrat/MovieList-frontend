@@ -1,17 +1,17 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { catchError, of, tap } from 'rxjs';
-import { NotificationService } from 'src/app/Services/NotificationService';
+import { NotificationService } from 'src/app/services/NotificationService';
 import { Router } from '@angular/router';
 import { Comment } from 'src/models/Comment';
 
 @Injectable({
     providedIn: 'root'
-  })
+})
 export class CommentService{
     commentUrl = 'https://localhost:7003/api/Comment';
     currentUserId = localStorage.getItem("userId");
-    
+
     constructor(private http: HttpClient, private notificationService: NotificationService,
         private router: Router){
         

@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { throws } from 'assert';
-import { NotificationService } from 'src/app/Services/NotificationService';
+import { NotificationService } from 'src/app/services/NotificationService';
 import { Anime } from 'src/models/Anime';
 import { AnimeOptions } from 'src/models/AnimeOptions';
 import { AccountService } from '../account/account.Service';

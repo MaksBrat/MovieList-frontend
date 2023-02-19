@@ -17,7 +17,9 @@
     height: 20px;
     margin-top: 10px;
 }
-
+input{
+    padding: 10px;
+}
 input[type="file"]{
     display: none;   
 }

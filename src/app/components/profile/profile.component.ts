@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { ProfileService } from './profile.service';
 import { Profile } from 'src/models/Profile';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ImageService } from 'src/app/Services/ImageService';
+import { ImageService } from 'src/app/services/ImageService';
 
 @Component({
     selector: 'profile',
@@ -23,8 +23,9 @@ export class ProfileComponent{
     constructor(private profileService: ProfileService, public imageService: ImageService){
         this.profileService.get().subscribe(profile => 
             {
-                this.profile = profile, 
-                this.data = new Date(this.profile.registratedAt)
+                this.profile = profile;
+                console.log(this.profile);
+                this.data = new Date(this.profile.registratedAt);
             });     
         }  
 }

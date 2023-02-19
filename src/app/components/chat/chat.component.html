@@ -1,0 +1,38 @@
+<div class="chat__block">
+    <app-notification></app-notification>
+    <div class="messages__block" #messagesBlock>
+        <div class="messages__item" [ngClass]="{'self': message.authorId.toString()== currectUserId, 
+                                                'other': message.authorId.toString() != currectUserId}" 
+                                                *ngFor="let message of messages.reverse()" >
+            <div class="author">
+                <div class="author__avatar">
+                    <img [src]="imageService.createImageUrl(message.avatarUrl)" alt="">
+                </div>
+                <div class="info">
+                    <div class="author__name">
+                        <div class="div">{{message.author}}</div>
+                    </div>
+                    <div class="date edit">
+                        <span>{{message.dateCreated}}</span> 
+                        <div class="fa-icon" *ngIf="message.authorId.toString()== currectUserId">
+                            <div class="dropdown">
+                                <i class="fa fa-edit"></i>                      
+                                <div class="dropdown-content">
+                                    <a (click)="deleteMessage(message.id)">Delete</a>                  
+                                </div>             
+                            </div>  
+                        </div>
+                    </div>
+                    
+                </div>       
+            </div>
+            <div class="text">
+                <p>{{message.text}}</p>      
+            </div>
+        </div>
+    </div>
+    <div class="input__message">
+        <textarea maxlength="200" placeholder="Write message..." [(ngModel)]="message.text"></textarea>
+        <div class="send__btn btn" (click)="sendMessage()">Send</div>
+    </div>
+</div>

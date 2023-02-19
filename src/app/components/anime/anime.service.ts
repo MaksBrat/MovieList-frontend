@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Anime} from '../../../models/Anime';
 import { catchError, of, Subject, tap } from 'rxjs';
-import { NotificationService } from 'src/app/Services/NotificationService';
+import { NotificationService } from 'src/app/services/NotificationService';
 import { Router } from '@angular/router';
 import { AnimeFilter } from 'src/models/Filter/AnimeFilter';
 

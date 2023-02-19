@@ -35,6 +35,9 @@ import { NotificationComponent } from './components/notification/notification.co
 import { CreatenewsComponent } from './components/news/createNews/createNews.component';
 import { NewsAboutComponent } from './components/news/news-about/news-about.component';
 import { CommentComponent } from './components/comment/comment.component';
+import { ChatComponent } from './components/chat/chat.component';
+import { NgOptimizedImage } from '@angular/common'
+
 
 export function tokenGetter(){
   return localStorage.getItem("jwt");
@@ -76,6 +79,7 @@ const appRoutes: Routes =[
     FontAwesomeModule,
     Ng2SearchPipeModule,
     SlickCarouselModule,
+    NgOptimizedImage
   ],
   declarations: [ 
     AppComponent, 
@@ -94,6 +98,7 @@ const appRoutes: Routes =[
     CreatenewsComponent,
     NewsAboutComponent,
     CommentComponent,
+    ChatComponent,
   ],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },

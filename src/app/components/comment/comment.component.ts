@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommentService } from './comment.service';
 import { Comment } from 'src/models/Comment';
 import { News } from 'src/models/News';
-import { ImageService } from 'src/app/Services/ImageService';
+import { ImageService } from 'src/app/services/ImageService';
 
 @Component({
   selector: 'app-comment',

@@ -5,10 +5,11 @@ import {Injectable} from '@angular/core';
     providedIn: 'root'
   })
 export class ImageService{
-    constructor(private sanitizer: DomSanitizer){
+    URL = 'https://localhost:7003';
+    constructor(){
 
     }
-    createImageUrl(image: any) {
-        return this.sanitizer.bypassSecurityTrustUrl('data:image/png;base64,' + image);
+    createImageUrl(imageUrl: any) {
+        return this.URL + imageUrl;
     } 
 }

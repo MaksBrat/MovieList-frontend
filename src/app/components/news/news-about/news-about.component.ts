@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ImageService } from 'src/app/Services/ImageService';
+import { ImageService } from 'src/app/services/ImageService';
 import { News } from 'src/models/News';
 import { CommentService } from '../../comment/comment.service';
 import { NewsService } from '../news.service';

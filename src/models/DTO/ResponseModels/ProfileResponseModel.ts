@@ -1,6 +1,6 @@
 export class ProfileResponseModel{
     constructor(
-        public avatar: any[],
+        public avatarUrl: string,
         public name: string,
         public age: number      
     ){}

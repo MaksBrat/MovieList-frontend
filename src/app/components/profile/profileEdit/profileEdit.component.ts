@@ -3,9 +3,9 @@ import { ProfileService } from '../profile.service';
 import { HttpClient } from '@angular/common/http';
 import { ProfileResponseModel } from 'src/models/DTO/ResponseModels/ProfileResponseModel';
 import { Router } from '@angular/router';
-import { ImageService } from 'src/app/Services/ImageService';
+import { ImageService } from 'src/app/services/ImageService';
 import { catchError, of, tap } from 'rxjs';
-import { NotificationService } from 'src/app/Services/NotificationService';
+import { NotificationService } from 'src/app/services/NotificationService';
 
 @Component({
     selector: 'profileEdit',
