@@ -157,7 +157,7 @@ p{
 }
 
 
-/* Anime poster shadow */
+/* Anime */
 .anime__item{
   position:relative;
   color:white;
@@ -297,4 +297,24 @@ i{
   margin-bottom: 0;
 }
 
-/* Comment and message */
+/* Valid error */
+.valid-error{
+  position: absolute;
+  top: 50px;
+}
+
+/* Unauthenticated user */
+.unauthenticated{
+  display: flex;
+  background-color: #CAE962;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  border-radius: 3px;
+}
+.unauthenticated a{
+  color: #414248;
+  font-weight: bold;
+}

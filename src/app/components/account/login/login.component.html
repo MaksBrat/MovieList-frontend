@@ -5,11 +5,18 @@
                 <span>Sign in</span>
             </div>
             <div>
-                <input name="email" type="email" placeholder="Email" ngModel>
+                <input name="email" type="email" placeholder="Email" 
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required #email="ngModel" ngModel>
+                <div [hidden]="email.valid || email.untouched" class="invalid-error">
+                    Invalid email
+                </div>
             </div>
             <div class="password">              
-                <input [type]="type" name="password" type="text" placeholder="Password" ngModel>
-                <span  class="fa {{eyeIcon}}" (click)="hideShowPass()"></span>
+                <input  [type]="accountService.type" name="password" type="text" placeholder="Password" required ngModel>              
+                <span  class="fa {{accountService.eyeIcon}} " (click)="accountService.hideShowPass()"></span>
+                <div class="invalid-error" *ngIf="invalidLogin">
+                    Incorrect password
+                </div>
             </div>
             <div class="action">
                 <button type="submit">Sign in</button>  

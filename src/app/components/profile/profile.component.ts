@@ -24,9 +24,14 @@ export class ProfileComponent{
         this.profileService.get().subscribe(profile => 
             {
                 this.profile = profile;
-                console.log(this.profile);
+                console.log(profile);
                 this.data = new Date(this.profile.registratedAt);
             });     
-        }  
+    }  
+
+    getRegisteredDate(){
+        return this.monthNames[this.data.getMonth()] + this.data.getFullYear()
+    }
+
 }
 

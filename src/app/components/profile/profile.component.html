@@ -6,8 +6,8 @@
         <p class="user__container__info nickname">
             {{profile.name}}
         </p>
-        <p class="user__container__info" *ngIf="profile.age !== 100">Age {{profile.age}} / Registered at {{this.monthNames[this.data.getMonth()]}} {{ + data.getFullYear()}} </p>
-        <p class="user__container__info" *ngIf="profile.age === 100">Age - / Registered at {{this.monthNames[this.data.getMonth()]}} {{ + data.getFullYear()}} </p>
+        <p class="user__container__info" *ngIf="profile.age != 0 && profile.age != null">Age {{profile.age}} / Registered at {{getRegisteredDate()}} </p>
+        <p class="user__container__info" *ngIf="profile.age == 0 || profile.age == null">Age - / Registered at &nbsp; {{getRegisteredDate()}} </p> 
     </div>
     <div class="list">
         <div class="dropdown">

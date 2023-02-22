@@ -169,6 +169,7 @@ export class AnimeService{
     }
 
     changeWatchedEpisodes(id: number, $event: any){
+        console.log($event.target.value);
         return this.http.post(this.profileUrl + '/changeWatchedEpisides/' + id + '/' + $event.target.value, null)
             .subscribe(response =>{
                 console.log(response)

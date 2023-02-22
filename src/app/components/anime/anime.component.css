@@ -4,6 +4,9 @@
     padding: 10px 20px;
     gap: 25px;
 }
+.anime__item{
+    width: 170px;
+}
 /* Filtres */
 .filtres__container{
     width: 25%;
@@ -38,5 +41,10 @@
     height: 15px;
 }
 
+.title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 
 

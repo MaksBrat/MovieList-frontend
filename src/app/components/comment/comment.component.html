@@ -1,16 +1,21 @@
 <div class="comment__container">
     <app-notification></app-notification>
     <div class="add__comment">
-        <textarea placeholder="Write comment" maxlength="3000" [(ngModel)]="userComment.content"></textarea>
-        <div class="send">
-            <button class="btn" (click)="addComment()">Send</button>
+        <div class="text__input" *ngIf="currentUserId != null">
+            <textarea placeholder="Write comment" maxlength="3000" [(ngModel)]="userComment.content"></textarea>
+            <div class="send">
+                <button class="btn" (click)="addComment()">Send</button>
+            </div>
+        </div>   
+        <div *ngIf="currentUserId == null" class="unauthenticated">
+            <a routerLink="/login">Login </a><span>&nbsp;to write the comment</span>    
         </div>
     </div>
     <div class="comment__item" *ngFor="let comment of comments">
         <div class="comment__author">
             <div class="author">
                 <div class="author__avatar">
-                    <img [src]="imageService.createImageUrl(comment.authorAvatar)" alt="">
+                    <img [src]="imageService.createImageUrl(comment.avatarUrl)" alt="">
                 </div>            
                 <div class="author__name">
                     <div class="div">{{comment.author}}</div>

@@ -38,7 +38,7 @@ export class CommentService{
     }
 
     getAll(newsId: number){
-        return this.http.get<any>(this.commentUrl + '/getAll/'+ newsId);
+        return this.http.get<Comment[]>(this.commentUrl + '/getAll/'+ newsId);
     }
 
     update(comment: Comment){

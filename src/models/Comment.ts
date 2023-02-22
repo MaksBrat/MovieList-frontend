@@ -4,7 +4,7 @@ export class Comment{
         public content?: number,
         public author?: string,
         public authorId?: number,
-        public authorAvatar?: any,
+        public avatarUrl?: string,
         public newsId?: number,
         public dateCreated?: string
     ){} 

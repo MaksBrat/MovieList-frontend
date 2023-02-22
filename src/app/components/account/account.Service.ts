@@ -9,8 +9,9 @@ import { AuthenticatedResponse } from "src/app/interfaces/AuthenticatedResponse"
     providedIn: 'root'
 })
 export class AccountService{
-    invalidLogin?: boolean;
-    invalidRegister?: boolean;
+    type: string = "password";
+    isText: boolean = false;
+    eyeIcon: string = "fa-eye-slash";
 
     isAdminMode = JSON.parse(localStorage.getItem('isAdminMode')!) || false;
 
@@ -20,47 +21,24 @@ export class AccountService{
 
     }
 
-    register = (form : NgForm) => {
-        if (form.valid) {
-            const credentials = JSON.stringify(form.value);
-            this.http.post("https://localhost:7003/api/Account/register", credentials,{
-                headers: new HttpHeaders({ "Content-Type": "application/json"}),
-                responseType: 'text'
-            })
-            .subscribe({
-                next: () => {
-                this.invalidRegister = false; 
-                
-                this.router.navigate(["/login"]);
-                },
-                error: error => console.log(error)
-                
-            })
-        }
+    hideShowPass(){
+        this.isText = !this.isText;
+        this.isText ? this.eyeIcon = "fa-eye" : this.eyeIcon = "fa-eye-slash";
+        this.isText ? this.type = "text" : this.type = "password";
     }
 
-    login = ( form: NgForm) => {
-        if (form.valid) {
-            const credentials = JSON.stringify(form.value);
-            this.http.post<AuthenticatedResponse>("https://localhost:7003/api/Account/login", credentials, {
-                headers: new HttpHeaders({ "Content-Type": "application/json"}),           
-            })
-            .subscribe({
-                next: (response: AuthenticatedResponse) => {
-                    const token = response.token;
-                    const refreshToken = response.refreshToken;
-                    const userId = response.userId;
+    register(form : NgForm){       
+        const credentials = JSON.stringify(form.value);
+        return this.http.post("https://localhost:7003/api/Account/register", credentials,{
+            headers: new HttpHeaders({ "Content-Type": "application/json"})       
+        })      
+    }
 
-                    localStorage.setItem("jwt", token); 
-                    localStorage.setItem("refreshToken", refreshToken);
-                    localStorage.setItem("userId", userId.toString());
-
-                    this.invalidLogin = false; 
-                    this.router.navigate(["/"]);
-                },
-                error: (err: HttpErrorResponse) => this.invalidLogin = true
-            })
-        }
+    login(form: NgForm){      
+        const credentials = JSON.stringify(form.value);
+        return this.http.post<AuthenticatedResponse>("https://localhost:7003/api/Account/login", credentials, {
+            headers: new HttpHeaders({ "Content-Type": "application/json"}),           
+        })      
     }
 
     logOut = () => {

@@ -28,15 +28,26 @@
     align-self: flex-start;
 }
 .input__message{
+    display: flex;
+    position: relative;
     height: 20%;
 }
 .input__message textarea{
     width: 100%;
     border-radius: 3px;
-    padding: 10px;
+    padding: 10px 85px 10px 10px;
     height: 100%;
 }
-
+.input__message .input{
+    width: 100%;
+}
+.input__message .btn{
+    position: absolute;
+    padding: 30px 20px;
+    height: 100%;
+    bottom: 0;
+    right: 0;
+}
 .author{
     display: flex;
 }
@@ -47,7 +58,6 @@
 }
 .author__avatar img{
     width: 100%;
-    height: 100%;
     object-fit: cover;
     border-radius: 50%;
 }

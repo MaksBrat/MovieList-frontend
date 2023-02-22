@@ -107,7 +107,7 @@ nav{
 }
 .result__poster img {
     height: 100%;
-    width: 100%;
+    width: 70px;
 }
 .description{
     display: flex;

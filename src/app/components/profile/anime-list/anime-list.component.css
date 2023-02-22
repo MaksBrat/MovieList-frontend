@@ -48,3 +48,14 @@
 .delete__anime{
     padding: 10px 15px;
 }
+
+/* Empty list */
+.empty{
+    position: relative;
+    top: 200px;
+    margin: 0 auto;
+    
+    color: #666b78;
+    font-size: 46px;
+    font-weight: bold;    
+}

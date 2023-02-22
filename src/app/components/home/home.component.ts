@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
     infinite: true,
     autoplay: true,
     autoplaySpeed: 4000,
-    waitForAnimate: false,
+    waitForAnimate: true,
   };
 
   constructor(public animeService: AnimeService, public newsService: NewsService) {}

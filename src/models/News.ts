@@ -6,7 +6,7 @@ export class News{
         public title?: string,
         public author?: string,
         public authorId?: number,
-        public authorAvatar?: string,
+        public avatarUrl?: string,
         public content?: string,
         public dateCreated?: string,
         public comments?: Comment[]

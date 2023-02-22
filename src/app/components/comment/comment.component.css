@@ -45,6 +45,8 @@
     display: flex;
     margin: 0 auto;
     position: relative;
+    height: 100px;
+    width: 100%;
 }
 .delete__btn{
     padding: 10px 15px;
@@ -60,4 +62,8 @@ textarea{
     padding: 10px 20px;
     margin-left:10px;
     bottom: 0;
+}
+.text__input{
+    display: flex;
+    margin: 0 auto;
 }

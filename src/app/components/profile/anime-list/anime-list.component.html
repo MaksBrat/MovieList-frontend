@@ -1,6 +1,9 @@
 <div class="container">
     <app-notification></app-notification>
     <div class="anime__list__container">
+        <div class="empty" *ngIf="isEmpty">
+            Your list is empty...
+        </div>
         <div class="anime__list__item" *ngFor="let animeList of profileWithAnimeList.animeList; index as i">
             <div class="item__container">
                 <span class="item__title">#{{i+1}}</span>
@@ -9,19 +12,19 @@
             <div class="item__container"> 
                 <span class="item__title"> Rating:</span> 
                 <div class="item">
-                    <span *ngIf="animeList.userRating !== 0"> {{animeList.userRating}} </span>
-                    <span *ngIf="animeList.userRating === 0"> - </span>
-                    <input class="item__input" type="number" name="rating" [(ngModel)]="animeList.userRating"
-                    (focusout)="animeService.changeUserRating(animeList.id, $event)"> 
+                    <span *ngIf="animeList.userRating != 0 && animeList.userRating != null"> {{animeList.userRating}} </span>
+                    <span *ngIf="animeList.userRating == 0 || animeList.userRating == null"> - </span>
+                    <input class="item__input" type="number" name="rating" [(ngModel)]="animeList.userRating" (input)="onInput($event)"
+                    (focusout)="animeService.changeUserRating(animeList.id, $event)" min="1" max="10">
                 </div>                          
             </div>
             <div class="item__container"> 
                 <span class="item__title"> Watched episodes:</span> 
                 <div class="item">
-                    <span *ngIf="animeList.watchedEpisodes !== 0"> {{animeList.watchedEpisodes}} </span>
-                    <span *ngIf="animeList.watchedEpisodes === 0"> - </span>     
-                    <input class="item__input episodes__input" type="number" name="episodes" [(ngModel)]="animeList.watchedEpisodes"
-                    (focusout)="animeService.changeWatchedEpisodes(animeList.id, $event)"> 
+                    <span *ngIf="animeList.watchedEpisodes != 0 && animeList.watchedEpisodes != null"> {{animeList.watchedEpisodes}} </span>
+                    <span *ngIf="animeList.watchedEpisodes == 0 || animeList.watchedEpisodes == null"> - </span>     
+                    <input class="item__input episodes__input" type="number" name="episodes" [(ngModel)]="animeList.watchedEpisodes" (input)="onInput($event)"
+                    (focusout)="animeService.changeWatchedEpisodes(animeList.id, $event)" min="1" max="{{animeList.anime.episodes}}"> 
                     <span>/ {{animeList.anime.episodes}}</span>  
                 </div>                             
             </div>

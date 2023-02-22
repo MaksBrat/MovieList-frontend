@@ -35,11 +35,11 @@
         </div>
     </div>
     <div class="buttons">
-        <div *ngIf="!animeService.isAnimeInList(anime.id)">
-            <button (click)="animeService.addAnimeToList(anime.id)" class="add__btn btn">Add to list</button> 
+        <div *ngIf="!isAnimeInList(anime.id)">
+            <button (click)="addAnimeToList(anime.id)" class="add__btn btn">Add to list</button> 
         </div>
-        <div *ngIf="animeService.isAnimeInList(anime.id)">
-            <button (click)="animeService.deleteAnimeFromList(anime.id)" class="add__btn btn">Delete from list</button> 
+        <div *ngIf="isAnimeInList(anime.id)">
+            <button (click)="deleteAnimeFromList(anime.id)" class="add__btn btn">Delete from list</button> 
         </div>
         <div *ngIf="accountService.isAdminMode" class="admintab">            
             <button (click)="selectedAction = 'create'; openCreateDialog()" class="admin__btn btn">Create</button>

@@ -1,8 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component} from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthenticatedResponse } from 'src/app/interfaces/AuthenticatedResponse';
 import { AccountService } from '../account.Service';
 import { AuthGuard } from '../authGuard.service';
-import { LoginService } from './login.service';
 
 @Component({
     selector: 'login',
@@ -10,23 +12,35 @@ import { LoginService } from './login.service';
     styleUrls: ["../account.component.css"]
 })
 export class LoginComponent {
-    type: string = "password";
-    isText: boolean = false;
-    eyeIcon: string = "fa-eye-slash";
+    invalidLogin = false;
 
-    constructor(public accountService : AccountService, public authGuardService: AuthGuard){
+    constructor(public accountService : AccountService, 
+                public authGuardService: AuthGuard,
+                private router: Router){
 
-    }
-
-    hideShowPass(){
-        this.isText = !this.isText;
-        this.isText ? this.eyeIcon = "fa-eye" : this.eyeIcon = "fa-eye-slash";
-        this.isText ? this.type = "text" : this.type = "password";
     }
 
     login(form : NgForm){
-      this.accountService.login(form);
-      this.authGuardService.startTokenRefresh();
+        if(form.valid){
+            this.accountService.login(form).subscribe({
+                next: (response: AuthenticatedResponse) => {
+                    const token = response.token;
+                    const refreshToken = response.refreshToken;
+                    const userId = response.userId;
+    
+                    localStorage.setItem("jwt", token); 
+                    localStorage.setItem("refreshToken", refreshToken);
+                    localStorage.setItem("userId", userId.toString());
+    
+                    this.invalidLogin = false; 
+                    this.router.navigate(["/"]);
+                },
+                error: (err: HttpErrorResponse) => {
+                    this.invalidLogin = true;  
+                    console.log(this.invalidLogin);            
+                }
+            })
+        }    
     }    
 }
 

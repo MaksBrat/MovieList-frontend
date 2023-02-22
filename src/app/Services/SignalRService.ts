@@ -11,7 +11,6 @@ import { NotificationService } from "./NotificationService";
   })
 export class SignalRService{
   public hubConnection: signalR.HubConnection;
-  private messageSubject = new Subject<MessageResponseModel>();
   
   private readonly chatUrl = 'https://localhost:7003/api/Chat';
   
@@ -24,37 +23,6 @@ export class SignalRService{
               .withAutomaticReconnect()
               .build();
 
-    this.hubConnection.on('ReceiveMessage', (message: MessageResponseModel) => {
-      this.messageSubject.next(message);
-    });
-    
     this.hubConnection.start().catch(err => console.error(err.toString()));
   }
-
-  public sendMessage(message: MessageRequestModel): void {
-    this.http.post(this.chatUrl + '/send', message).subscribe();
-  }
-
-  deleteMessage(id){
-    return this.http.delete(this.chatUrl + '/delete/' + id)
-    .pipe(
-        tap(response => {
-            this.notificationService.addNotification({
-                message: 'Message deleted successfully!',
-                type: 'success'
-            });
-        }),
-        catchError(error => {
-            this.notificationService.addNotification({
-                message: 'Error delete anime',
-                type: 'error'
-            });
-            return of(error);
-        })
-    ).subscribe();;
-}
-
-  public getMessageSubject(): Subject<MessageResponseModel> {
-    return this.messageSubject;
-  } 
 }

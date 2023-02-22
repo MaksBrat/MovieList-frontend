@@ -7,15 +7,35 @@
                 <span>Sign up</span>
             </div>
             <div>
-                <input name="email" type="email" placeholder="Email" ngModel>
+                <input name="email" type="email" placeholder="Email" 
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required #email="ngModel" ngModel>
+                <div [hidden]="email.valid || email.untouched" class="invalid-error">
+                    Invalid email
+                </div>
             </div>
             <div class="password">              
-                <input  [type]="type" name="password" type="text" placeholder="Password" ngModel>
-                <span  class="fa {{eyeIcon}} " (click)="hideShowPass()"></span>
+                <input  [type]="accountService.type" name="password" type="text" placeholder="Password" 
+                    pattern="^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d_]{6,30}$" required #password="ngModel" ngModel>
+                    
+                <span  class="fa {{accountService.eyeIcon}} " (click)="accountService.hideShowPass()"></span>
+                <div [hidden]="password.valid || password.untouched" class="invalid-error">
+                    length(6-30), uppercase and digit must be
+                </div>
             </div>
             <div class="password">              
-                <input  [type]="type" name="PasswordConfirm" type="text" placeholder="Confirm password" ngModel>
-                <span  class="fa {{eyeIcon}} " (click)="hideShowPass()"></span>
+                <input [type]="accountService.type" name="ConfirmPassword" type="text" placeholder="Confirm password"  
+                    pattern="^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d_]{6,30}$" required  #confirmPassword="ngModel"  ngModel>
+
+                <span class="fa {{accountService.eyeIcon}} " (click)="accountService.hideShowPass()"></span>
+                <div [hidden]="confirmPassword.valid || confirmPassword.untouched" class="invalid-error">
+                    length(6-30), uppercase and digit must be
+                </div>
+                <div class="invalid-error" *ngIf="password.value != confirmPassword.value">
+                    Passwords do not match                  
+                </div>
+                <div class="invalid-error" *ngIf="invalidRegister">
+                    Failed to register, try again
+                </div>
             </div>
             <div class="action">
                 <button type="submit">Sign up</button>  
@@ -23,7 +43,7 @@
             <div class="account">                     
                 <div class="account__container">                     
                     <span class="text-center">Already have account? </span>
-                    <a class="mx-1" routerLink="/login">Sign in</a> 
+                    <a routerLink="/login">Sign in</a> 
                 </div>                      
             </div>         
         </div>      

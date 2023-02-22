@@ -13,6 +13,8 @@ import { ProfileService } from '../profile.service';
 export class AnimeListComponent {
   public profileWithAnimeList: ProfileWithAnimeList;
 
+  isEmpty = false;
+
   animeStatus = [
     {name: 'Watched'},
     {name: 'Watching'},
@@ -24,7 +26,16 @@ export class AnimeListComponent {
   constructor(public profileService: ProfileService, public animeService: AnimeService){
     profileService.getProfileWithAnimeList().subscribe(result =>{
       this.profileWithAnimeList = result;
-      console.log(this.profileWithAnimeList);
+      if(result.animeList.length == 0){
+        this.isEmpty = true;
+        console.log(this.isEmpty)
+      }
     })
+  }
+
+  onInput(event: any) {
+    if (!event.target.value) {
+      event.target.value = null;
+    }
   }
 }

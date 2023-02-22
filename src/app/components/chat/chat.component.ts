@@ -16,7 +16,7 @@ export class ChatComponent implements OnInit, AfterViewInit  {
   message = new MessageRequestModel();
   messages: MessageResponseModel[] = [];
 
-  currectUserId = localStorage.getItem("userId");
+  currentUserId = localStorage.getItem("userId");
 
   pageIndex = 0;
   pageSize = 10;
@@ -24,23 +24,22 @@ export class ChatComponent implements OnInit, AfterViewInit  {
   @ViewChild('messagesBlock') messagesBlock: ElementRef;
 
   constructor(public signalRService: SignalRService, public chatService: ChatService, 
-    public imageService: ImageService, private renderer: Renderer2){
+    public imageService: ImageService){
+      this.signalRService.hubConnection.on('ReceiveMessage', (message: MessageResponseModel) => {
+        this.messages.unshift(message);
+        this.scrollToBottom();
+      });
       
       this.signalRService.hubConnection.on('MessageDeleted', (id:string) => {
         const index = this.messages.findIndex(m => m.id == id);
         if (index !== -1) {
-          
             this.messages.splice(index, 1);
         }
     });
   }
   
   ngOnInit(): void {
-    this.loadMessages();  
-    this.signalRService.getMessageSubject().subscribe((msg) => {
-      this.messages.unshift(msg);
-      this.scrollToBottom();
-    });      
+    this.loadMessages();      
   }
 
   ngAfterViewInit() { 
@@ -64,12 +63,14 @@ export class ChatComponent implements OnInit, AfterViewInit  {
   }
 
   sendMessage(): void {
-    this.signalRService.sendMessage(this.message);
-    this.message.text = '';
+    if (this.message.text && this.message.text.trim().length > 0) {
+      this.chatService.sendMessage(this.message);
+      this.message.text = '';
+    }    
   }
 
   deleteMessage(id: string){
-    this.signalRService.deleteMessage(id);
+    this.chatService.deleteMessage(id);
   }
 
   loadMessages(): void {
@@ -80,12 +81,16 @@ export class ChatComponent implements OnInit, AfterViewInit  {
   }
 
   loadMoreMessages(): void {
-      this.pageIndex++;
-      this.chatService.getChatMessages(this.pageIndex, this.pageSize)
-          .subscribe(messages => {
-              this.messages = [...this.messages, ...messages];
-          });
+    this.pageIndex++;
+    let prevHeight = this.messagesBlock.nativeElement.scrollHeight;
+    console.log(prevHeight)
+    this.chatService.getChatMessages(this.pageIndex, this.pageSize)
+      .subscribe(newMessages => {
+        this.messages = [...this.messages, ...newMessages];      
+      });
+      setTimeout(() => {
+        let currentHeight = this.messagesBlock.nativeElement.scrollHeight;
+        this.messagesBlock.nativeElement.scrollTop = currentHeight - prevHeight;
+      }, 50);
   }
-
-  
 }

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ImageService } from 'src/app/services/ImageService';
 import { catchError, of, tap } from 'rxjs';
 import { NotificationService } from 'src/app/services/NotificationService';
+import { Profile } from 'src/models/Profile';
 
 @Component({
     selector: 'profileEdit',
@@ -47,7 +48,7 @@ export class ProfileEditComponent{
             const formData = new FormData();     
             formData.append("Avatar", this.avatar);
 
-            this.http.post<any>("https://localhost:7003/api/Profile/change-avatar", formData)
+            this.http.post<Profile>("https://localhost:7003/api/Profile/change-avatar", formData)
                 .subscribe(response => { 
                     console.log(response);
 
@@ -62,9 +63,11 @@ export class ProfileEditComponent{
         const formData = new FormData();
         
         formData.append("Name", this.name);
-        formData.append("Age", this.age.toString());
-
-        this.http.post<any>("https://localhost:7003/api/Profile/edit", formData)
+        if(this.age){
+            formData.append("Age", this.age.toString());
+        }
+        
+        this.http.post<Profile>("https://localhost:7003/api/Profile/edit", formData)
         .pipe(
             tap(response => {
                 this.notificationService.addNotification({

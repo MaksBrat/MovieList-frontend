@@ -17,6 +17,10 @@
                 <input type="text" placeholder="title" [(ngModel)]="anime.title" name="title">
             </div>
             <div class="form__item">
+                <label class="form__label">Rating</label>
+                <input type="number" step="0.01" min="1" max="10" placeholder="rating" [(ngModel)]="anime.rating" name="rating">
+            </div>
+            <div class="form__item">
                 <label class="form__label">Episodes</label>
                 <input type="number"  placeholder="episodes" [(ngModel)]="anime.episodes" name="episodes">
             </div>

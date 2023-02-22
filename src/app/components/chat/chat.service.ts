@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, of, tap } from 'rxjs';
 import { NotificationService } from 'src/app/services/NotificationService';
+import { MessageRequestModel } from 'src/models/DTO/RequestModels/MessageRequestModel';
 import { MessageResponseModel } from 'src/models/DTO/ResponseModels/MessageResponseModel';
 
 @Injectable({
@@ -11,9 +12,32 @@ export class ChatService {
     
     private readonly chatUrl = 'https://localhost:7003/api/Chat';
 
-    constructor(private http: HttpClient) { 
+    constructor(private http: HttpClient, public notificationService: NotificationService) { 
 
     }
+
+    public sendMessage(message: MessageRequestModel): void {
+        this.http.post(this.chatUrl + '/send', message).subscribe();
+      }
+    
+      deleteMessage(id){
+        return this.http.delete(this.chatUrl + '/delete/' + id)
+        .pipe(
+            tap(response => {
+                this.notificationService.addNotification({
+                    message: 'Message deleted successfully!',
+                    type: 'success'
+                });
+            }),
+            catchError(error => {
+                this.notificationService.addNotification({
+                    message: 'Error delete anime',
+                    type: 'error'
+                });
+                return of(error);
+            })
+        ).subscribe();;
+      }
 
     getChatMessages(pageIndex: number, pageSize: number){       
         const params = new HttpParams()
