@@ -5,7 +5,7 @@ import {Injectable} from '@angular/core';
     providedIn: 'root'
   })
 export class ImageService{
-    URL = 'https://localhost:7003';
+    URL = 'http://mbmaksbrat-001-site1.itempurl.com';
     constructor(){
 
     }

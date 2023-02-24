@@ -10,7 +10,7 @@
                 </label>
             </div> 
         </div>      
-        <form (ngSubmit)="Edit()">           
+        <form class="edit" (ngSubmit)="Edit()">           
             <div>              
                 <input type="text" value={{profileResponse.name}} [(ngModel)]="name"   class="form-control mb-3 w-25" name="Name" placeholder="name">
             </div>

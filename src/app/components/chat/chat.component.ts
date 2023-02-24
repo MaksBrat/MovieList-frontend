@@ -52,7 +52,7 @@ export class ChatComponent implements OnInit, AfterViewInit  {
   scrollToBottom() {
     setTimeout(() => {
       this.messagesBlock.nativeElement.scrollTop = this.messagesBlock.nativeElement.scrollHeight;
-    }, 1);
+    }, 100);
   }
   
   onMessagesBlockScroll() {

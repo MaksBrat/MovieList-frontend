@@ -2,7 +2,6 @@ import { Component} from '@angular/core';
 import { ProfileService } from '../profile.service';
 import { HttpClient } from '@angular/common/http';
 import { ProfileResponseModel } from 'src/models/DTO/ResponseModels/ProfileResponseModel';
-import { Router } from '@angular/router';
 import { ImageService } from 'src/app/services/ImageService';
 import { catchError, of, tap } from 'rxjs';
 import { NotificationService } from 'src/app/services/NotificationService';
@@ -48,7 +47,7 @@ export class ProfileEditComponent{
             const formData = new FormData();     
             formData.append("Avatar", this.avatar);
 
-            this.http.post<Profile>("https://localhost:7003/api/Profile/change-avatar", formData)
+            this.http.post<Profile>("http://mbmaksbrat-001-site1.itempurl.com/api/Profile/change-avatar", formData)
                 .subscribe(response => { 
                     console.log(response);
 
@@ -67,7 +66,7 @@ export class ProfileEditComponent{
             formData.append("Age", this.age.toString());
         }
         
-        this.http.post<Profile>("https://localhost:7003/api/Profile/edit", formData)
+        this.http.post<Profile>("http://mbmaksbrat-001-site1.itempurl.com//api/Profile/edit", formData)
         .pipe(
             tap(response => {
                 this.notificationService.addNotification({

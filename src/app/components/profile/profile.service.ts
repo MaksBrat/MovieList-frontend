@@ -13,7 +13,7 @@ export class ProfileService{
     constructor(private http: HttpClient, private notificationService: NotificationService){
 
     }
-    
+
     private profileUrl = 'http://mbmaksbrat-001-site1.itempurl.com/api/Profile';
 
     get(){

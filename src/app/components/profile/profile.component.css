@@ -11,9 +11,15 @@
     font-size: 24px;
     font-weight: 600;
 }
+.user__container__avatar{
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}
 .user__container__avatar img{
     object-fit: cover;
-    width: 200px;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
 }
 .list{
@@ -46,4 +52,7 @@ input[type="file"]{
 }
 .save_btn{
     padding: 10px 25px;
+}
+.edit{
+    margin-top: 70px;
 }
