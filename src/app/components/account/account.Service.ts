@@ -13,6 +13,8 @@ export class AccountService{
     isText: boolean = false;
     eyeIcon: string = "fa-eye-slash";
 
+    accountUrl = "http://mbmaksbrat-001-site1.itempurl.com/api/Account/"
+
     isAdminMode = JSON.parse(localStorage.getItem('isAdminMode')!) || false;
 
     constructor(private jwtHelper: JwtHelperService,
@@ -29,20 +31,20 @@ export class AccountService{
 
     register(form : NgForm){       
         const credentials = JSON.stringify(form.value);
-        return this.http.post("https://localhost:7003/api/Account/register", credentials,{
+        return this.http.post(this.accountUrl + "register", credentials,{
             headers: new HttpHeaders({ "Content-Type": "application/json"})       
         })      
     }
 
     login(form: NgForm){      
         const credentials = JSON.stringify(form.value);
-        return this.http.post<AuthenticatedResponse>("https://localhost:7003/api/Account/login", credentials, {
+        return this.http.post<AuthenticatedResponse>(this.accountUrl + "login", credentials, {
             headers: new HttpHeaders({ "Content-Type": "application/json"}),           
         })      
     }
 
     logOut = () => {
-        this.http.post("https://localhost:7003/api/Account/revoke",null);
+        this.http.post(this.accountUrl + "revoke",null);
         localStorage.clear();
         this.router.navigate(["/"]);
         window.location.reload();

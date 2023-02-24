@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ImageService } from 'src/app/services/ImageService';
-import { NotificationService } from 'src/app/services/NotificationService';
 import { Anime } from 'src/models/Anime';
 import { AccountService } from '../account/account.Service';
 import { AdminTabComponent } from '../admin-tab/admin-tab.component';
 import { AnimeService } from '../anime/anime.service';
+import { ProfileService } from '../profile/profile.service';
 import { TrailerComponent } from './trailer/trailer.component';
 
 @Component({
@@ -22,7 +20,7 @@ export class AnimeAboutComponent implements OnInit {
 
   constructor(public animeService: AnimeService, public accountService: AccountService, 
     public dialog: MatDialog, private sanitizer: DomSanitizer, private route: ActivatedRoute,
-    public router: Router){
+    public router: Router, private profileService: ProfileService ){
       
   }
 
@@ -60,13 +58,13 @@ export class AnimeAboutComponent implements OnInit {
   }
 
   isAnimeInList(animeId){
-    return this.animeService.isAnimeInList(animeId);
+    return this.profileService.isAnimeInList(animeId);
   }
 
   addAnimeToList(animeId){
     var isAuth = this.accountService.isUserAuthenticated();
     if(isAuth){
-      this.animeService.addAnimeToList(animeId)
+      this.profileService.addAnimeToList(animeId)
     }
     else{
       this.router.navigate(["/login"]);
@@ -76,7 +74,7 @@ export class AnimeAboutComponent implements OnInit {
   deleteAnimeFromList(animeId){
     var isAuth = this.accountService.isUserAuthenticated();
     if(isAuth){
-      this.animeService.deleteAnimeFromList(animeId)
+      this.profileService.deleteAnimeFromList(animeId)
     }
     else{
       this.router.navigate(["/login"]);

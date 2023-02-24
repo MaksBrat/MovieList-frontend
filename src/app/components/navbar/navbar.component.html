@@ -4,7 +4,7 @@
             <a href="">AnimeList</a>
         </div>      
         <div class="search" #searchContainer>
-            <input [(ngModel)]="value" type="search" placeholder="Search anime..." 
+            <input #inputValue [(ngModel)]="value" type="search" placeholder="Search anime..." 
               (keyup)="animeService.getSearchQuery($event)"> 
             <div class="results" *ngIf="resultVisible">
               <div class="result__item" *ngFor="let anime of animes | slice:0:displayCount" (click)="closeSearch()" [routerLink]="['/anime', anime.id]">
@@ -26,7 +26,7 @@
           </div>
           
         <div class="anime">
-            <a routerLink="/anime">Anime</a>
+            <a (click)="inputValue.value = ''" routerLink="/anime">Anime</a>
         </div>
         <div class="buttons">
             <div class="admin" *ngIf="accountService.isAdmin()">

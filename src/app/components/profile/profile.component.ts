@@ -24,7 +24,6 @@ export class ProfileComponent{
         this.profileService.get().subscribe(profile => 
             {
                 this.profile = profile;
-                console.log(profile);
                 this.data = new Date(this.profile.registratedAt);
             });     
     }  

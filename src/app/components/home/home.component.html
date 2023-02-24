@@ -21,11 +21,11 @@
             </div>
             <div class="buttons">
                 <div class="addToList">
-                    <div *ngIf="!animeService.isAnimeInList(anime.id)">
-                        <button class="btn"(click)="animeService.addAnimeToList(anime.id)" >Add to list</button> 
+                    <div *ngIf="!profileService.isAnimeInList(anime.id)">
+                        <button class="btn"(click)="profileService.addAnimeToList(anime.id)" >Add to list</button> 
                     </div>
-                    <div *ngIf="animeService.isAnimeInList(anime.id)">
-                        <button class="btn" (click)="animeService.deleteAnimeFromList(anime.id)" >Delete from list</button> 
+                    <div *ngIf="profileService.isAnimeInList(anime.id)">
+                        <button class="btn" (click)="profileService.deleteAnimeFromList(anime.id)" >Delete from list</button> 
                     </div>
                 </div>
                 <div class="detail">
@@ -73,12 +73,12 @@
             <img class="gif__chika" src="https://media.tenor.com/lVhFnY9tc94AAAAi/anime-dance.gif" alt="">
             <div class="title">News</div>
             <div class="news__container">
-                <div class="news__item" *ngFor="let _news of news">
-                    <div class="news__title">{{_news.title}}</div>
-                    <div class="news__description"> <p>{{_news.content}}</p></div>
+                <div class="news__item" *ngFor="let newsItem of news">
+                    <div class="news__title">{{newsItem.title}}</div>
+                    <div class="news__description"> <p>{{newsItem.content}}</p></div>
                     <div class="details">
-                        <div class="date_created">{{_news.dateCreated}}</div>
-                        <button class="read" class="btn" [routerLink]="['/news', _news.id]">Read...</button>
+                        <div class="date_created">{{newsItem.dateCreated}}</div>
+                        <button class="read" class="btn" [routerLink]="['/news', newsItem.id]">Read...</button>
                     </div>
                 </div>               
             </div>

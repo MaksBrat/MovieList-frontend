@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Anime} from '../../../models/Anime';
 import { catchError, of, Subject, tap } from 'rxjs';
 import { NotificationService } from 'src/app/services/NotificationService';
@@ -16,12 +16,8 @@ export class AnimeService{
 
     currentPage: string;
 
-    private readonly ANIME_MAP_KEY = 'animeMap';
-
-    private animeUrl = 'https://localhost:7003/api/Anime';
-    private profileUrl = 'https://localhost:7003/api/Profile';
-    constructor(private http: HttpClient, private notificationService: NotificationService,
-        private router: Router){
+    private animeUrl = 'http://mbmaksbrat-001-site1.itempurl.com/api/Anime';
+    constructor(private http: HttpClient, private notificationService: NotificationService){
         
     }
     
@@ -30,6 +26,7 @@ export class AnimeService{
     }
 
     get(id: number){
+        console.log("fdasfdasfd")
         return this.http.get(this.animeUrl + '/get/' + id);
     }
 
@@ -118,72 +115,4 @@ export class AnimeService{
             })
         ).subscribe();
     }
-
-    //#region Anime list
-
-    isAnimeInList(animeId: number): boolean{
-        let animeMap = JSON.parse(localStorage.getItem(this.ANIME_MAP_KEY)) || {};
-        if (animeMap[animeId]) {
-            return true;
-        } 
-        else {
-            return false;
-        }
-    }
-
-    addAnimeToList(animeId: number){
-        let animeMap = JSON.parse(localStorage.getItem(this.ANIME_MAP_KEY)) || {};
-        animeMap[animeId] = true;
-        localStorage.setItem(this.ANIME_MAP_KEY, JSON.stringify(animeMap));
-        
-        return this.http.get(this.profileUrl + '/addAnimeToList/' + animeId)
-            .subscribe(response =>{
-                this.notificationService.addNotification({
-                    message: 'Anime added successfully!',
-                    type: 'success'
-                });
-                console.log(response)
-            });
-    }
-
-    deleteAnimeFromList(animeId: number){
-        let animeMap = JSON.parse(localStorage.getItem(this.ANIME_MAP_KEY)) || {};
-        animeMap[animeId] = false;
-        localStorage.setItem(this.ANIME_MAP_KEY, JSON.stringify(animeMap));
-
-        return this.http.delete(this.profileUrl + '/deleteAnimeFromList/' + animeId)
-            .subscribe(response =>{
-                this.notificationService.addNotification({
-                    message: 'Anime delete successfully!',
-                    type: 'success'
-                });
-                console.log(response)
-            });
-    }
-
-    changeUserRating(id: number, $event: any){
-        return this.http.post(this.profileUrl + '/changeUserRating/' + id + '/' + $event.target.value, null)
-            .subscribe(response =>{
-                console.log(response)
-            });
-    }
-
-    changeWatchedEpisodes(id: number, $event: any){
-        console.log($event.target.value);
-        return this.http.post(this.profileUrl + '/changeWatchedEpisides/' + id + '/' + $event.target.value, null)
-            .subscribe(response =>{
-                console.log(response)
-            });
-    }
-
-    changeAnimeStatus(id: number, $event: any){
-        return this.http.post(this.profileUrl + '/changeAnimeStatus/' + id + '/' + $event.target.value, null)
-            .subscribe(response =>{
-                console.log(response)
-        });
-    }
-
-    //#endregion
-
-
 }

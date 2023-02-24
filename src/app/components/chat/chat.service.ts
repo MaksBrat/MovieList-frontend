@@ -10,7 +10,7 @@ import { MessageResponseModel } from 'src/models/DTO/ResponseModels/MessageRespo
 })
 export class ChatService {
     
-    private readonly chatUrl = 'https://localhost:7003/api/Chat';
+    private readonly chatUrl = 'http://mbmaksbrat-001-site1.itempurl.com/api/Chat';
 
     constructor(private http: HttpClient, public notificationService: NotificationService) { 
 

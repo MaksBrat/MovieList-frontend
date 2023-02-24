@@ -11,7 +11,7 @@ import { NewsFilter } from 'src/models/Filter/NewsFilter';
     providedIn: 'root'
   })
 export class NewsService{
-    private newsUrl = 'https://localhost:7003/api/News';
+    private newsUrl = 'http://mbmaksbrat-001-site1.itempurl.com/api/News';
 
     constructor(private http: HttpClient, private notificationService: NotificationService,
         private router: Router){

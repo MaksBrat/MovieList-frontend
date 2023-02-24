@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Anime } from 'src/models/Anime';
 import { AnimeOptions } from 'src/models/AnimeOptions';
 import { AnimeFilter } from 'src/models/Filter/AnimeFilter';
-import { BaseFilter } from 'src/models/Filter/Base/BaseFilter';
 import { NewsFilter } from 'src/models/Filter/NewsFilter';
 import { News } from 'src/models/News';
 import { AnimeService } from '../anime/anime.service';
 import { NewsService } from '../news/news.service';
+import { ProfileService } from '../profile/profile.service';
 
 @Component({
   selector: 'app-home',
@@ -42,7 +42,8 @@ export class HomeComponent implements OnInit {
     waitForAnimate: true,
   };
 
-  constructor(public animeService: AnimeService, public newsService: NewsService) {}
+  constructor(public animeService: AnimeService, public newsService: NewsService,
+              public profileService: ProfileService) {}
 
   ngOnInit(): void {
     this.getOngoingAnime();

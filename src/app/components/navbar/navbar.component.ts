@@ -49,7 +49,6 @@ export class NavBarComponent implements OnInit {
 
   closeSearch(){
     this.resultVisible = false;
-    this.value = ""; // for reset search input value
   } 
 
   //change navbar background   

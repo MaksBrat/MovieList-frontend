@@ -12,11 +12,11 @@ import { NotificationService } from "./NotificationService";
 export class SignalRService{
   public hubConnection: signalR.HubConnection;
   
-  private readonly chatUrl = 'https://localhost:7003/api/Chat';
+  private readonly chatUrl = 'http://mbmaksbrat-001-site1.itempurl.com/api/Chat';
   
   constructor(public http: HttpClient, public notificationService: NotificationService){
     this.hubConnection = new signalR.HubConnectionBuilder()
-              .withUrl('https://localhost:7003/chatHub', {
+              .withUrl('http://mbmaksbrat-001-site1.itempurl.com/chatHub', {
                 skipNegotiation: true,
                 transport: signalR.HttpTransportType.WebSockets
               })

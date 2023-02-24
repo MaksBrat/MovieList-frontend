@@ -8,16 +8,16 @@ export class httpInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, newRequest: HttpHandler): Observable<HttpEvent<any>> {
 
-    const token = localStorage.getItem('jwt')
-    if (token) {
-        request = request.clone({
-        setHeaders: {
-            Authorization: `Bearer ${token}`
-            
-            }
-        });
-    }
+        const token = localStorage.getItem('jwt')
+        if (token) {
+            request = request.clone({
+            setHeaders: {
+                Authorization: `Bearer ${token}`
+                
+                }
+            });
+        }
 
-    return newRequest.handle(request);
+        return newRequest.handle(request);
     }
 }

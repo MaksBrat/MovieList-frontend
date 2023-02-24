@@ -90,6 +90,7 @@ p{
 }
 .fa-edit{
     cursor: pointer;
+    margin-left: 5px;
 }
 .fa-edit:hover{
     color:#9b9da5;
