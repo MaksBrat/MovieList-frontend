@@ -4,6 +4,7 @@ import { NgForm } from "@angular/forms";
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { JwtHelperService, JWT_OPTIONS  ,JwtModule} from '@auth0/angular-jwt';
 import { AuthenticatedResponse } from "src/app/interfaces/AuthenticatedResponse";
+import { UrlOptions } from "src/models/UrlOptions";
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +14,7 @@ export class AccountService{
     isText: boolean = false;
     eyeIcon: string = "fa-eye-slash";
 
-    accountUrl = "http://mbmaksbrat-001-site1.itempurl.com/api/Account/"
+    accountUrl = UrlOptions.BaseUrl + 'api/Account/';
 
     isAdminMode = JSON.parse(localStorage.getItem('isAdminMode')!) || false;
 

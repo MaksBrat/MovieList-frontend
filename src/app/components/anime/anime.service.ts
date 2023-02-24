@@ -5,6 +5,7 @@ import { catchError, of, Subject, tap } from 'rxjs';
 import { NotificationService } from 'src/app/services/NotificationService';
 import { Router } from '@angular/router';
 import { AnimeFilter } from 'src/models/Filter/AnimeFilter';
+import { UrlOptions } from 'src/models/UrlOptions';
 
 @Injectable({
     providedIn: 'root'
@@ -16,7 +17,8 @@ export class AnimeService{
 
     currentPage: string;
 
-    private animeUrl = 'http://mbmaksbrat-001-site1.itempurl.com/api/Anime';
+    private animeUrl = UrlOptions.BaseUrl + 'api/Anime';
+    
     constructor(private http: HttpClient, private notificationService: NotificationService){
         
     }
@@ -26,7 +28,6 @@ export class AnimeService{
     }
 
     get(id: number){
-        console.log("fdasfdasfd")
         return this.http.get(this.animeUrl + '/get/' + id);
     }
 

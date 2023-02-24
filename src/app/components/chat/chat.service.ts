@@ -4,13 +4,14 @@ import { catchError, of, tap } from 'rxjs';
 import { NotificationService } from 'src/app/services/NotificationService';
 import { MessageRequestModel } from 'src/models/DTO/RequestModels/MessageRequestModel';
 import { MessageResponseModel } from 'src/models/DTO/ResponseModels/MessageResponseModel';
+import { UrlOptions } from 'src/models/UrlOptions';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ChatService {
     
-    private readonly chatUrl = 'http://mbmaksbrat-001-site1.itempurl.com/api/Chat';
+    private readonly chatUrl = UrlOptions.BaseUrl + 'api/Chat';
 
     constructor(private http: HttpClient, public notificationService: NotificationService) { 
 

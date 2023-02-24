@@ -4,12 +4,14 @@ import { catchError, of, tap } from 'rxjs';
 import { NotificationService } from 'src/app/services/NotificationService';
 import { Router } from '@angular/router';
 import { Comment } from 'src/models/Comment';
+import { UrlOptions } from 'src/models/UrlOptions';
 
 @Injectable({
     providedIn: 'root'
 })
 export class CommentService{
-    commentUrl = 'https://localhost:7003/api/Comment';
+    commentUrl = UrlOptions.BaseUrl + 'api/Comment';
+
     currentUserId = localStorage.getItem("userId");
 
     constructor(private http: HttpClient, private notificationService: NotificationService,
@@ -18,7 +20,6 @@ export class CommentService{
     }
         
     create(comment: Comment){
-        console.log(comment);
         return this.http.post<Comment>(this.commentUrl + '/create', comment)
             .pipe(
                 tap(response => {

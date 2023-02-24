@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Profile} from '../../../models/Profile';
 import { ProfileWithAnimeList } from 'src/models/ProfileWithAnimeList';
 import { NotificationService } from 'src/app/services/NotificationService';
+import { UrlOptions } from 'src/models/UrlOptions';
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +15,7 @@ export class ProfileService{
 
     }
 
-    private profileUrl = 'http://mbmaksbrat-001-site1.itempurl.com/api/Profile';
+    private profileUrl =  UrlOptions.BaseUrl + 'api/Profile';
 
     get(){
         return this.http.get<Profile>(this.profileUrl + '/get');

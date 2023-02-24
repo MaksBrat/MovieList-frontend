@@ -6,12 +6,13 @@ import { NotificationService } from 'src/app/services/NotificationService';
 import { Router } from '@angular/router';
 import { News } from 'src/models/News';
 import { NewsFilter } from 'src/models/Filter/NewsFilter';
+import { UrlOptions } from 'src/models/UrlOptions';
 
 @Injectable({
     providedIn: 'root'
   })
 export class NewsService{
-    private newsUrl = 'http://mbmaksbrat-001-site1.itempurl.com/api/News';
+    private newsUrl =  UrlOptions.BaseUrl + 'api/News';
 
     constructor(private http: HttpClient, private notificationService: NotificationService,
         private router: Router){
