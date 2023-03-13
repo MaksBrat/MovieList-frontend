@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommentService } from './comment.service';
 import { Comment } from 'src/models/Comment';
-import { News } from 'src/models/News';
-import { ImageService } from 'src/app/services/ImageService';
 
 @Component({
   selector: 'app-comment',
@@ -16,7 +14,7 @@ export class CommentComponent implements OnInit{
   userComment = new Comment(); //Comment to send
   currentUserId = localStorage.getItem("userId");
 
-  constructor(public commentService: CommentService,public imageService: ImageService){
+  constructor(public commentService: CommentService){
   }
 
   ngOnInit(): void {

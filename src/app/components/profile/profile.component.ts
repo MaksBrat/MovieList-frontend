@@ -1,8 +1,6 @@
-import { Component, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 import { ProfileService } from './profile.service';
 import { Profile } from 'src/models/Profile';
-import { DomSanitizer } from '@angular/platform-browser';
-import { ImageService } from 'src/app/services/ImageService';
 
 @Component({
     selector: 'profile',
@@ -20,7 +18,7 @@ export class ProfileComponent{
     "July", "August", "September", "October", "November", "December"
     ];
 
-    constructor(private profileService: ProfileService, public imageService: ImageService){
+    constructor(private profileService: ProfileService){
         this.profileService.get().subscribe(profile => 
             {
                 this.profile = profile;
@@ -29,7 +27,7 @@ export class ProfileComponent{
     }  
 
     getRegisteredDate(){
-        return this.monthNames[this.data.getMonth()] + this.data.getFullYear()
+        return this.monthNames[this.data.getMonth()] + ' ' + this.data.getFullYear()
     }
 
 }

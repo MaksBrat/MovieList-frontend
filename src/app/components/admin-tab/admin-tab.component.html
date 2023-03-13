@@ -22,11 +22,11 @@
             </div>
             <div class="form__item">
                 <label class="form__label">Episodes</label>
-                <input type="number"  placeholder="episodes" [(ngModel)]="anime.episodes" name="episodes">
+                <input type="number"  min="1"  placeholder="episodes" [(ngModel)]="anime.episodes" name="episodes">
             </div>
             <div class="form__item">
                 <label class="form__label">Episode duration</label>
-                <input type="number" placeholder="episode duration" [(ngModel)]="anime.episodeDuration" name="episodeDuration">
+                <input type="number" min="1" placeholder="episode duration" [(ngModel)]="anime.episodeDuration" name="episodeDuration">
             </div>
             <div class="form__item">
                 <label class="form__label">Realize date</label>

@@ -2,10 +2,10 @@ import { Component} from '@angular/core';
 import { ProfileService } from '../profile.service';
 import { HttpClient } from '@angular/common/http';
 import { ProfileResponseModel } from 'src/models/DTO/ResponseModels/ProfileResponseModel';
-import { ImageService } from 'src/app/services/ImageService';
 import { catchError, of, tap } from 'rxjs';
 import { NotificationService } from 'src/app/services/NotificationService';
 import { Profile } from 'src/models/Profile';
+import { UrlOptions } from 'src/models/UrlOptions';
 
 @Component({
     selector: 'profileEdit',
@@ -17,6 +17,8 @@ import { Profile } from 'src/models/Profile';
 export class ProfileEditComponent{
     public profileResponse: ProfileResponseModel;
 
+    private profileUrl =  UrlOptions.BaseUrl + 'api/Profile';
+
     public avatar: File;
     public age: number;
     public name: string;
@@ -27,7 +29,6 @@ export class ProfileEditComponent{
     constructor(
         private profileService: ProfileService, 
         private http: HttpClient,
-        public imageService: ImageService,
         public notificationService: NotificationService){
     }
 
@@ -45,12 +46,10 @@ export class ProfileEditComponent{
             this.avatar = event.target.files![0];
 
             const formData = new FormData();     
-            formData.append("Avatar", this.avatar);
+            formData.append("avatar", this.avatar);
 
-            this.http.post<Profile>("http://mbmaksbrat-001-site1.itempurl.com/api/Profile/change-avatar", formData)
+            this.http.post<Profile>(this.profileUrl + '/change-avatar', formData)
                 .subscribe(response => { 
-                    console.log(response);
-
                     window.location.reload();
                 });
             
@@ -66,7 +65,7 @@ export class ProfileEditComponent{
             formData.append("Age", this.age.toString());
         }
         
-        this.http.post<Profile>("http://mbmaksbrat-001-site1.itempurl.com//api/Profile/edit", formData)
+        this.http.post<Profile>(this.profileUrl + '/edit', formData)
         .pipe(
             tap(response => {
                 this.notificationService.addNotification({

@@ -1,0 +1,11 @@
+{
+    "/api/*": {
+      "target": "http://mbmaksbrat-001-site1.itempurl.com",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/api": "/api"
+      }
+    }
+  }
+  

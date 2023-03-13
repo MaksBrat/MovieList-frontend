@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http
 import { Injectable } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
-import { JwtHelperService, JWT_OPTIONS  ,JwtModule} from '@auth0/angular-jwt';
+import { JwtHelperService, JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt';
 import { AuthenticatedResponse } from "src/app/interfaces/AuthenticatedResponse";
 import { UrlOptions } from "src/models/UrlOptions";
 

@@ -20,8 +20,14 @@ export class NotificationComponent {
     this.notificationService.notification$.subscribe(notification => {
       this.notification = notification;
 
-      if(notification.type == "success") {this.success = true}
-      if(notification.type == "error") {this.error = true}
+      if(notification.type == "success") {
+        this.success = true;
+        this.error = false;
+      }
+      if(notification.type == "error") {
+        this.error = true;
+        this.success = false;
+      }
 
       setTimeout(() => {
         this.hideNotification = true;

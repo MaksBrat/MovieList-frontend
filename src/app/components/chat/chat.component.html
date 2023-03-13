@@ -1,13 +1,17 @@
 <div class="chat__block">
     <app-notification></app-notification>
-    <div class="messages__block" #messagesBlock>
-        
+    <div class="messages__block" 
+            #messagesBlock
+            infinite-scroll
+            [infiniteScrollThrottle]="200"
+            (scrolledUp)="onScrollUp()"
+            [scrollWindow]="false">
         <div class="messages__item" [ngClass]="{'self': message.authorId.toString()== currentUserId, 
                                                 'other': message.authorId.toString() != currentUserId}" 
-                                                *ngFor="let message of messages.reverse()" >
+                                                *ngFor="let message of messages.reverse()">
             <div class="author">
                 <div class="author__avatar">
-                    <img [src]="imageService.createImageUrl(message.avatarUrl)" alt="">
+                    <img [src]="message.avatarUrl" alt="">
                 </div>
                 <div class="info">
                     <div class="author__name">
@@ -36,8 +40,7 @@
         <div class="input" *ngIf="currentUserId != null">
             <textarea  maxlength="200" placeholder="Write message..." [(ngModel)]="message.text" required></textarea>
             <div class="send__btn btn" (click)="sendMessage()">Send</div>
-        </div>
-        
+        </div>    
         <div *ngIf="currentUserId == null" class="unauthenticated">
             <a routerLink="/login">Login </a><span>&nbsp;to use the chat</span>    
         </div>

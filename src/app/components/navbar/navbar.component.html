@@ -29,7 +29,7 @@
             <a (click)="inputValue.value = ''" routerLink="/anime">Anime</a>
         </div>
         <div class="buttons">
-            <div class="admin" *ngIf="accountService.isAdmin()">
+            <div class="admin" *ngIf="accountService.isAdmin() && accountService.isUserAuthenticated()">
                 <button *ngIf="!accountService.isAdminMode" (click)="accountService.switchAdminMode()" class="admin__btn btn mode-on">Admin mode ON</button>
                 <button *ngIf="accountService.isAdminMode" (click)="accountService.switchAdminMode()" class="admin__btn btn mode-off">Admin mode OFF</button>
             </div> 

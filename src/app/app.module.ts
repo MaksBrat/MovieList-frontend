@@ -37,7 +37,7 @@ import { NewsAboutComponent } from './components/news/news-about/news-about.comp
 import { CommentComponent } from './components/comment/comment.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { NgOptimizedImage } from '@angular/common'
-
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 export function tokenGetter(){
   return localStorage.getItem("jwt");
@@ -49,15 +49,12 @@ const appRoutes: Routes =[
   { path: 'anime', component: AnimeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { 
-    path: 'profile', component: ProfileComponent,
-    canActivate: [AuthGuard]
-  },
-  { path: 'editProfile', component : ProfileEditComponent },
-  { path: "adminTab", component: AdminTabComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'editProfile', component : ProfileEditComponent, canActivate: [AuthGuard] },
+  { path: "adminTab", component: AdminTabComponent, canActivate: [AuthGuard] },
   { path: "anime/:id", component: AnimeAboutComponent },
-  { path: "animeList", component: AnimeListComponent },
-  { path: "createNews", component: CreatenewsComponent },
+  { path: "animeList", component: AnimeListComponent, canActivate: [AuthGuard] },
+  { path: "createNews", component: CreatenewsComponent, canActivate: [AuthGuard] },
   { path: "news/:id", component: NewsAboutComponent }
 ];
 
@@ -79,7 +76,8 @@ const appRoutes: Routes =[
     FontAwesomeModule,
     Ng2SearchPipeModule,
     SlickCarouselModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    InfiniteScrollModule
   ],
   declarations: [ 
     AppComponent, 

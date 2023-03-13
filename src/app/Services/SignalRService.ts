@@ -10,9 +10,11 @@ import { NotificationService } from "./NotificationService";
 export class SignalRService{
   public hubConnection: signalR.HubConnection;
   
+  url = UrlOptions.BaseUrl + 'chatHub';
+
   constructor(public http: HttpClient, public notificationService: NotificationService){
     this.hubConnection = new signalR.HubConnectionBuilder()
-              .withUrl('https://animelist20230224223617.azurewebsites.net//chatHub', {
+              .withUrl(this.url, {
                 skipNegotiation: true,
                 transport: signalR.HttpTransportType.WebSockets
               })
