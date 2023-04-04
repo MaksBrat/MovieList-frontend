@@ -32,30 +32,21 @@ export class AnimeService{
     }
 
     getAll(filter: AnimeFilter){
-        let params = new HttpParams();
+        let params = new HttpParams()
+            .set('searchQuery', filter.searchQuery || '')
+            .set('animeType', filter.animeType || '')
+            .set('animeStatus', filter.animeStatus || '')
+            .set('OrderBy', filter.orderBy || '')
+            .set('ascOrDesc', filter.ascOrDesc || '')
+            .set('take', filter.take || 10);
 
-        if (filter.searchQuery) {
-            params = params.set('searchQuery', filter.searchQuery);
-        }
-        if(filter.genres){
-            filter.genres.forEach((genre, index) => {
-                params = params.append(`genres[${index}].id`, genre.id);
-                params = params.append(`genres[${index}].name`, genre.name);
-                params = params.append(`genres[${index}].checked`, genre.checked);
-              });
-        }
-        if(filter.animeType){
-            params = params.append(`animeType`, filter.animeType);
-        }
-        if(filter.animeStatus){
-            params = params.append(`animeStatus`, filter.animeStatus);
-        }
-        if(filter.orderBy){
-            params = params.append(`OrderBy`, filter.orderBy);
-            params = params.append(`ascOrDesc`, filter.ascOrDesc);
-        }
-
-        params = params.append('take',filter.take);
+            if(filter.genres){
+                filter.genres.forEach((genre, index) => {
+                    params = params.append(`genres[${index}].id`, genre.id);
+                    params = params.append(`genres[${index}].name`, genre.name);
+                    params = params.append(`genres[${index}].checked`, genre.checked);
+                  });
+            }
 
         return this.http.get<Anime[]>(this.animeUrl + '/getAll/?' + params);
     } 

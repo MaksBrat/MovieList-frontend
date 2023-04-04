@@ -24,14 +24,13 @@ export class NavBarComponent implements OnInit {
     private renderer: Renderer2){
     this.animeService.currentPage = "CurrentPage";
     this.filter.searchQuery = "";
-
   }  
 
   ngOnInit(){
     this.animeService.invokeEvent.subscribe(value =>{
+      
       if(this.animeService.currentPage != "AnimePage"){ 
-        this.filter.searchQuery = value;
-
+        this.filter.searchQuery = value;      
         this.animeService.getAll(this.filter).subscribe(animes => 
           {this.animes = animes, console.log(animes)}); 
           this.resultVisible = true;  

@@ -23,7 +23,7 @@ export class AnimeComponent implements OnInit{
     orderBy = this.animeOptions.orderBy;
 
     constructor(public animeService: AnimeService){
-        this.animeService.currentPage = "AnimePage"; 
+        this.animeService.currentPage = "AnimePage";
         this.load(this.filter);
     }
     
