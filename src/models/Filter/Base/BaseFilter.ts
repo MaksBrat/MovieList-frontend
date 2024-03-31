@@ -2,9 +2,10 @@ export class BaseFilter{
     constructor(
         public searchQuery?: string,
         public orderBy?: string,
-        public ascOrDesc?: string,
-        public take = "0"
+        public ascOrDesc = "asc",
+        public take = 0,
+        public pageIndex = 0
     ){
-        ascOrDesc = "asc"
+    
     }
 }

@@ -3,8 +3,8 @@ import { Component} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticatedResponse } from 'src/app/interfaces/AuthenticatedResponse';
-import { AccountService } from '../account.Service';
-import { AuthGuard } from '../authGuard.service';
+import { AccountService } from '../../../services/account.service';
+import { AuthGuard } from '../../../services/authGuard.service';
 
 @Component({
     selector: 'login',

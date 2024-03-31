@@ -2,11 +2,11 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { throws } from 'assert';
-import { NotificationService } from 'src/app/services/NotificationService';
-import { Anime } from 'src/models/Anime';
-import { AnimeOptions } from 'src/models/AnimeOptions';
-import { AccountService } from '../account/account.Service';
-import { AnimeService } from '../anime/anime.service';
+import { NotificationService } from 'src/app/services/notification.service';
+import { Movie } from 'src/models/Movie';
+import { MovieOptions } from 'src/models/MovieOptions';
+import { AccountService } from '../../services/account.service';
+import { MovieService } from '../../services/movie.service';
 
 @Component({
   selector: 'app-admin-tab',
@@ -17,23 +17,23 @@ export class AdminTabComponent {
   formData = new FormData();
   selectedAction = '';
 
-  anime = new Anime();
+  movie = new Movie();
   idToDelete: number;   
 
-  animeOptions = new AnimeOptions();
+  movieOptions = new MovieOptions();
 
-  genres = this.animeOptions.genres;  
-  animeTypes = this.animeOptions.animeTypes;
-  animeStatus = this.animeOptions.animeStatus;
+  genres = this.movieOptions.genres;  
+  movieTypes = this.movieOptions.movieTypes;
+  movieStatus = this.movieOptions.movieStatus;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<AdminTabComponent>, 
-    private animeService: AnimeService, public accountService: AccountService){
+    private movieService: MovieService, public accountService: AccountService){
       this.selectedAction = data.selectedAction;
       if(data.selectedAction === 'create'){
-        this.anime.genres = [];       
+        this.movie.genres = [];       
       }
       else if(data.selectedAction === 'update'){ 
-        this.anime = data.anime;
+        this.movie = data.movie;
       }
       else if(data.selectedAction === 'delete'){ 
         this.idToDelete = data.id
@@ -43,25 +43,25 @@ export class AdminTabComponent {
   onSubmit() {
     this.dialogRef.close();
     if (this.selectedAction === 'create' ) {
-      this.animeService.create(this.anime);
+      this.movieService.create(this.movie);
     }
     else if(this.selectedAction === 'update'){
-        this.animeService.update(this.anime);
+        this.movieService.update(this.movie);
     }
     else{    
-      this.animeService.delete(this.idToDelete);
+      this.movieService.delete(this.idToDelete);
     } 
   }
   
   isChecked(genreId: number) {
-    return this.anime.genres.filter(g => g.id === genreId).length > 0;
+    return this.movie.genres.filter(g => g.id === genreId).length > 0;
   }
 
   updateGenres(genreId: number, $event) {
     if ($event.target.checked) {
-        this.anime.genres.push(this.genres.find(g => g.id === genreId)!);
+        this.movie.genres.push(this.genres.find(g => g.id === genreId)!);
     } else {
-        this.anime.genres = this.anime.genres.filter(g => g.id !== genreId);
+        this.movie.genres = this.movie.genres.filter(g => g.id !== genreId);
     }
   }
 }

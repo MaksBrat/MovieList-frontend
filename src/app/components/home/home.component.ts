@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Anime } from 'src/models/Anime';
-import { AnimeOptions } from 'src/models/AnimeOptions';
-import { AnimeFilter } from 'src/models/Filter/AnimeFilter';
+import { Movie } from 'src/models/Movie';
+import { MovieOptions } from 'src/models/MovieOptions';
+import { MovieFilter } from 'src/models/Filter/MovieFilter';
 import { NewsFilter } from 'src/models/Filter/NewsFilter';
 import { News } from 'src/models/News';
-import { AnimeService } from '../anime/anime.service';
-import { NewsService } from '../news/news.service';
-import { ProfileService } from '../profile/profile.service';
+import { MovieService } from '../../services/movie.service';
+import { NewsService } from '../../services/news.service';
+import { MovieListService } from 'src/app/services/movie-list.service';
+import { Router } from '@angular/router';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-home',
@@ -14,12 +16,14 @@ import { ProfileService } from '../profile/profile.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  animeOptions = new AnimeOptions();
+  movieOptions = new MovieOptions();
 
-  ongoingAnime: Anime[];
-  upcomingAnime: Anime[];
-  topAnime: Anime[];
+  ongoingMovie: Movie[];
+  upcomingMovie: Movie[];
+  topMovie: Movie[];
   news: News[];
+
+  isMovieInUserList: { [movieId: string]: boolean } = {};
 
   //Just for example slides
   slides = [
@@ -42,52 +46,62 @@ export class HomeComponent implements OnInit {
     waitForAnimate: true,
   };
 
-  constructor(public animeService: AnimeService, public newsService: NewsService,
-              public profileService: ProfileService) {}
+  constructor(public movieService: MovieService, public newsService: NewsService,
+              public movieListService: MovieListService, public accountService: AccountService, public router: Router,) {}
 
   ngOnInit(): void {
-    this.getOngoingAnime();
-    this.getUpcomingAnime();
-    this.getTopAnime();
+    this.getOngoingMovie();
+    this.getUpcomingMovie();
+    this.getTopMovie();
     this.getNews();
+    this.getUserMovieList();
   }
 
-  getOngoingAnime(){
-    var filter = new AnimeFilter();
+  getOngoingMovie(){
+    var filter = new MovieFilter();
 
-    filter.animeStatus = 'Ongoing';
+    filter.movieStatus = 'Ongoing';
     filter.orderBy = "ReleaseDate";
     filter.ascOrDesc = "DESC"
-    filter.take = '6';
+    filter.take = 6;
 
-    this.animeService.getAll(filter).subscribe(result => {
-      this.ongoingAnime = result;
+    this.movieService.getAll(filter).subscribe(result => {
+      this.ongoingMovie = result;
+      this.getUserMovieList();
     });
   }
 
-  getTopAnime(){
-    var filter = new AnimeFilter();
+  getUserMovieList(){
+    this.movieListService.get().subscribe(userMovieList => {
+        this.ongoingMovie.forEach(movie => {
+          this.isMovieInUserList[movie.id] = userMovieList.some(userMovie => userMovie.movie.id === movie.id);
+      });
+    });
+  }
 
-    filter.animeStatus = 'Finished';
+  getTopMovie(){
+    var filter = new MovieFilter();
+
+    filter.movieStatus = 'Finished';
     filter.orderBy = "Rating";
     filter.ascOrDesc = "DESC"
-    filter.take = '5';
+    filter.take = 5;
 
-    this.animeService.getAll(filter).subscribe(result => {
-      this.topAnime = result;
+    this.movieService.getAll(filter).subscribe(result => {
+      this.topMovie = result;
     });
   }
 
-  getUpcomingAnime(){
-    var filter = new AnimeFilter();
+  getUpcomingMovie(){
+    var filter = new MovieFilter();
 
-    filter.animeStatus = 'Upcoming';
+    filter.movieStatus = 'Upcoming';
     filter.orderBy = "ReleaseDate";
     filter.ascOrDesc = "DESC"
-    filter.take = '5';
+    filter.take = 5;
 
-    this.animeService.getAll(filter).subscribe(result => {
-      this.upcomingAnime = result;
+    this.movieService.getAll(filter).subscribe(result => {
+      this.upcomingMovie = result;
     });
   }
 
@@ -96,10 +110,30 @@ export class HomeComponent implements OnInit {
 
     filter.orderBy = "DateCreated";
     filter.ascOrDesc = "DESC"
-    filter.take = '10';
+    filter.take = 10;
 
     this.newsService.getAll(filter).subscribe(result => {
       this.news = result;
     });
+  }
+
+  addMovieToList(movieId){
+    this.toggleMovieInList(movieId, true);
+  }
+
+  deleteMovieFromList(movieId){
+    this.toggleMovieInList(movieId, false);
+  }
+
+  toggleMovieInList(movieId: number, addToList: boolean) {
+    if (!this.accountService.isUserAuthenticated()){
+      this.router.navigate(['/login']);
+    }
+    this.isMovieInUserList[movieId] = addToList;
+    if (addToList) {
+      this.movieListService.add(movieId);
+    } else {
+      this.movieListService.delete(movieId);
+    }
   }
 }

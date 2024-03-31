@@ -1,0 +1,89 @@
+<div class="container">
+    <div class="movie__wrapper">
+        <div class="movie__container"
+        #movieBlock
+        infinite-scroll
+        [infiniteScrollThrottle]="200"
+        (scrolled)="onScroll()">
+            <div class="movie__item" *ngFor="let movie of movies" >          
+                <div class="movie__poster" [routerLink]="['/movie', movie.id]">
+                    <img class="poster" [src]="movie.posterUrl">
+                    <div class="overlay">
+                        <a  class="icon">
+                        <i class="fa fa-play"></i>
+                        </a>
+                    </div>
+                    <div class="episodes__container">
+                        <span class="episodes"> Ep {{movie.episodes}}</span>  
+                        <span class="episodes minutes"> {{movie.episodeDuration}}m</span> 
+                    </div>
+                </div>           
+                <div class="movie__description">
+                    <div class="title">             
+                        {{movie.title}}               
+                    </div>
+                    <div class="movie__type">
+                        <span>
+                            {{movie.movieType}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="loading" class="loading-indicator">
+            <div class="loading-eclipse">
+                <div class="spinner">
+                    <div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="filtres__container">
+        <div class="filter__item__container">   
+            <div class="genres__cover">
+                <span class="genre__label">Genres</span>
+                <div class="genres__container">
+                    <label class="genres" *ngFor="let genre of movieOptions.genres">
+                        <input class="genre__input" type="checkbox" [checked]="genre.checked" [value]="genre.id" (change)="updateGenres($event)"> 
+                        <span class="genre__name"> {{ genre.name }} </span>            
+                    </label> 
+                </div>       
+            </div>                  
+        </div>
+        <div class="filter__item__container">
+            <label class="filter__title">Movie type</label>
+            <div class="movie__type">
+                <select class="select__name" [(ngModel)]="filter.movieType" name="movieType" (change)="load(true)">
+                    <option *ngFor="let type of movieOptions.movieTypes" [value]="type.name">{{type.name}}</option>     
+                </select> 
+            </div>
+        </div>
+        <div class="filter__item__container">
+            <label class="filter__title">Movie Status</label>
+            <div class="movie__type">
+                <select class="select__name" [(ngModel)]="filter.movieStatus" name="movieStatus" (change)="load(true)">
+                    <option *ngFor="let status of movieOptions.movieStatus" [value]="status.name">{{status.name}}</option>     
+                </select> 
+            </div>
+        </div>
+        <div class="filter__item__container">
+            <label class="filter__title">Sorting</label>
+            <div class="sorting">         
+                <select class="select__name" [(ngModel)]="filter.ascOrDesc" (change)="load(true)">
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+                <div class="orderBy">
+                    <div *ngFor="let sort of movieOptions.orderBy">
+                        <input class="orderBy__input" type="radio" [(ngModel)]="filter.orderBy" name="orderBy" [value]="sort.name" (change)="load(true)"> 
+                        {{sort.name}} 
+                    </div>
+                </div>           
+            </div>
+        </div>   
+    </div>
+</div>
+
+
+

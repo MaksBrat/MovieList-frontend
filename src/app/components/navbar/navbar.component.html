@@ -1,37 +1,38 @@
 <nav id="navbar">
     <div class="container__nav">
         <div class="logo">
-            <a href="">AnimeList</a>
+            <a href="">MovieList</a>
         </div>      
         <div class="search" #searchContainer>
-            <input #inputValue [(ngModel)]="value" type="search" placeholder="Search anime..." 
-              (keyup)="animeService.getSearchQuery($event)"> 
+            <input #inputValue [(ngModel)]="value" type="search" placeholder="Search movie..." 
+              (keyup)="movieService.getSearchQuery($event)"> 
             <div class="results" *ngIf="resultVisible">
-              <div class="result__item" *ngFor="let anime of animes | slice:0:displayCount" (click)="closeSearch()" [routerLink]="['/anime', anime.id]">
+              <div class="result__item" *ngFor="let movie of movies | slice:0:displayCount" (click)="closeSearch()" [routerLink]="['/movie', movie.id]">
                 <div class="result__poster" >
-                  <img [src]="anime.posterUrl">
+                  <img [src]="movie.posterUrl">
                 </div>
                 <div class="description">
-                  <span class="title">{{anime.title}}</span>
+                  <span class="title">{{movie.title}}</span>
                   <div class="episodes__container">
                     <div class="genres">
-                      <div *ngFor="let genre of anime.genres">{{genre.name}}</div>
+                      <div *ngFor="let genre of movie.genres">{{genre.name}}</div>
                     </div>
-                    <span class="episodes"> Ep {{anime.episodes}}</span>  
-                    <span class="episodes minutes"> {{anime.episodeDuration}}m</span> 
+                    <span class="episodes"> Ep {{movie.episodes}}</span>  
+                    <span class="episodes minutes"> {{movie.episodeDuration}}m</span> 
                   </div>                     
                 </div>
               </div>
             </div>
           </div>
           
-        <div class="anime">
-            <a (click)="inputValue.value = ''" routerLink="/anime">Anime</a>
+        <div class="movie">
+            <a (click)="inputValue.value = ''" routerLink="/movie">Movie</a>
         </div>
         <div class="buttons">
             <div class="admin" *ngIf="accountService.isAdmin() && accountService.isUserAuthenticated()">
-                <button *ngIf="!accountService.isAdminMode" (click)="accountService.switchAdminMode()" class="admin__btn btn mode-on">Admin mode ON</button>
-                <button *ngIf="accountService.isAdminMode" (click)="accountService.switchAdminMode()" class="admin__btn btn mode-off">Admin mode OFF</button>
+              <button (click)="accountService.switchAdminMode()" class="admin__btn btn" [class.mode-on]="!accountService.isAdminMode" [class.mode-off]="accountService.isAdminMode">
+                {{ accountService.isAdminMode ? 'Admin mode OFF' : 'Admin mode ON' }}
+            </button>
             </div> 
             <div *ngIf="!accountService.isUserAuthenticated()"  class="login__profile">
                 <button class="login__profile__btn btn" routerLink="/login">Login</button> 
@@ -40,7 +41,7 @@
                 <div class="dropdown">
                 <button class="login__profile__btn btn" routerLink="/profile">Profile</button>                       
                     <div class="dropdown-content">
-                        <a href="#" routerLink="/animeList">Anime list</a>
+                        <a href="#" routerLink="/movieList">Movie list</a>
                         <a routerLink="/editProfile">Edit profile</a>
                         <a routerLink="/createNews">Create news</a>
                         <a href="#" (click)="accountService.logOut()">Logout</a>

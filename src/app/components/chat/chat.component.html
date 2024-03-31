@@ -3,6 +3,8 @@
     <div class="messages__block" 
             #messagesBlock
             infinite-scroll
+            [infiniteScrollDistance]="2"
+            [infiniteScrollUpDistance]="1"
             [infiniteScrollThrottle]="200"
             (scrolledUp)="onScrollUp()"
             [scrollWindow]="false">

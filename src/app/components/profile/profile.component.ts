@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ProfileService } from './profile.service';
+import { ProfileService } from '../../services/profile.service';
 import { Profile } from 'src/models/Profile';
+import { AvatarUtility } from 'src/app/utility/avatar.utility';
 
 @Component({
     selector: 'profile',
@@ -22,6 +23,7 @@ export class ProfileComponent{
         this.profileService.get().subscribe(profile => 
             {
                 this.profile = profile;
+                this.profile.avatarUrl = AvatarUtility.buildAvatarUrl(profile.avatarUrl);
                 this.data = new Date(this.profile.registratedAt);
             });     
     }  
@@ -29,6 +31,5 @@ export class ProfileComponent{
     getRegisteredDate(){
         return this.monthNames[this.data.getMonth()] + ' ' + this.data.getFullYear()
     }
-
 }
 

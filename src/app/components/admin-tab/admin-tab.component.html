@@ -14,42 +14,42 @@
         <div class="form__cover">                            
             <div class="form__item">
                 <label class="form__label">Title</label>
-                <input type="text" placeholder="title" [(ngModel)]="anime.title" name="title">
+                <input type="text" placeholder="title" [(ngModel)]="movie.title" name="title">
             </div>
             <div class="form__item">
                 <label class="form__label">Rating</label>
-                <input type="number" step="0.01" min="1" max="10" placeholder="rating" [(ngModel)]="anime.rating" name="rating">
+                <input type="number" step="0.01" min="1" max="10" placeholder="rating" [(ngModel)]="movie.rating" name="rating">
             </div>
             <div class="form__item">
                 <label class="form__label">Episodes</label>
-                <input type="number"  min="1"  placeholder="episodes" [(ngModel)]="anime.episodes" name="episodes">
+                <input type="number"  min="1"  placeholder="episodes" [(ngModel)]="movie.episodes" name="episodes">
             </div>
             <div class="form__item">
                 <label class="form__label">Episode duration</label>
-                <input type="number" min="1" placeholder="episode duration" [(ngModel)]="anime.episodeDuration" name="episodeDuration">
+                <input type="number" min="1" placeholder="episode duration" [(ngModel)]="movie.episodeDuration" name="episodeDuration">
             </div>
             <div class="form__item">
                 <label class="form__label">Realize date</label>
-                <input type="date" placeholder="release date date" [(ngModel)]="anime.releaseDate" name="releaseDate">
-            </div>          
+                <input type="date" placeholder="release date date" [(ngModel)]="movie.releaseDate" name="releaseDate">
+            </div> 
             <div class="form__item">
                 <label class="form__label">Poster url</label>
-                <input type="text" placeholder="poster url" [(ngModel)]="anime.posterUrl" name="posterUrl">
+                <input type="text" placeholder="poster url" [(ngModel)]="movie.posterUrl" name="posterUrl">
             </div>
             <div class="form__item">
                 <label class="form__label">Trailer url</label>
-                <input type="text" placeholder="trailer url" [(ngModel)]="anime.trailerUrl" name="trailerUrl">
+                <input type="text" placeholder="trailer url" [(ngModel)]="movie.trailerUrl" name="trailerUrl">
             </div>
             <div class="form__item">
-                <label class="form__label" >Anime type</label>
-                <select class="anime__type" [(ngModel)]="anime.animeType" name="animeType">
-                    <option *ngFor="let type of animeTypes" [value]="type.name">{{type.name}}</option>                       
+                <label class="form__label" >Movie type</label>
+                <select class="movie__type" [(ngModel)]="movie.movieType" name="movieType">
+                    <option *ngFor="let type of movieTypes" [value]="type.name">{{type.name}}</option>                       
                 </select> 
             </div>
             <div class="form__item">
-                <label class="form__label" >Anime status</label>
-                <select class="anime__type" [(ngModel)]="anime.animeStatus" name="animeStatus">
-                    <option *ngFor="let status of animeStatus" [value]="status.name">{{status.name}}</option>                       
+                <label class="form__label" >Movie status</label>
+                <select class="movie__type" [(ngModel)]="movie.movieStatus" name="movieStatus">
+                    <option *ngFor="let status of movieStatus" [value]="status.name">{{status.name}}</option>                       
                 </select> 
             </div>
         </div>

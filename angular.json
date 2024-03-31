@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "animeList": {
+    "movieList": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -14,7 +14,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             
-            "outputPath": "dist/animeList",
+            "outputPath": "dist/movieList",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -27,7 +27,7 @@
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
-              "D:/Programming/AnimeList/frontend/animelist/src/styles.css",
+              "D:/Programming/projects/MovieList/frontend/movielist/src/styles.css",
               "./node_modules/font-awesome/css/font-awesome.css",
               "node_modules/slick-carousel/slick/slick.scss",
               "node_modules/slick-carousel/slick/slick-theme.scss"
@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "animeList:build:production"
+              "browserTarget": "movieList:build:production"
             },
             "development": {
-              "browserTarget": "animeList:build:development"
+              "browserTarget": "movieList:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "animeList:build"
+            "browserTarget": "movieList:build"
           }
         },
         "test": {

@@ -1,8 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild, } from '@angular/core';
-import { SignalRService } from 'src/app/services/SignalRService';
+import { ChatService } from 'src/app/services/chat.service';
+import { SignalRService } from 'src/app/services/signaIR.Service';
+import { AvatarUtility } from 'src/app/utility/avatar.utility';
 import { MessageRequestModel } from 'src/models/DTO/RequestModels/MessageRequestModel';
 import { MessageResponseModel } from 'src/models/DTO/ResponseModels/MessageResponseModel';
-import { ChatService } from './chat.service';
 
 @Component({
   selector: 'app-chat',
@@ -55,6 +56,7 @@ export class ChatComponent implements OnInit{
     this.pageIndex++;
     this.chatService.getChatMessages(this.pageIndex, this.pageSize)
       .subscribe(newMessages => {
+        newMessages.map(x => x.avatarUrl = AvatarUtility.buildAvatarUrl(x.avatarUrl));
         this.messages = [...this.messages, ...newMessages];      
       });
   }

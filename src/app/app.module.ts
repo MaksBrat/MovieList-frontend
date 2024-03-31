@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS }   from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { AnimeComponent } from './components/anime/anime.component';
+import { MovieComponent } from './components/movie/movie.component';
 import { AppComponent } from './app.component';
 import {CommonModule } from '@angular/common';
 import {Routes, RouterModule} from '@angular/router';
@@ -17,22 +17,22 @@ import { MatProgressBarModule  } from '@angular/material/progress-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { RegisterComponent } from './components/account/register/register.component';
-import { AuthGuard } from './components/account/authGuard.service';
+import { AuthGuard } from './services/authGuard.service';
 import { JwtHelperService, JWT_OPTIONS} from '@auth0/angular-jwt';
 import { ProfileComponent } from './components/profile/profile.component';
-import { ProfileEditComponent } from './components/profile/profileEdit/profileEdit.component';
+import { ProfileEditComponent } from './components/profile/profile-edit/profile-edit.component';
 import { httpInterceptor } from './components/account/interseptor';
 import { AdminTabComponent } from './components/admin-tab/admin-tab.component';
-import { AnimeAboutComponent } from './components/anime-about/anime-about.component';
-import { AnimeService } from './components/anime/anime.service';
-import { AccountService } from './components/account/account.Service';
+import { MovieAboutComponent } from './components/movie-about/movie-about.component';
+import { MovieService } from './services/movie.service';
+import { AccountService } from './services/account.service';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { AnimeListComponent } from './components/profile/anime-list/anime-list.component';
+import { MovieListComponent } from './components/profile/movie-list/movie-list.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { HomeComponent } from './components/home/home.component';
-import { TrailerComponent } from './components/anime-about/trailer/trailer.component';
+import { TrailerComponent } from './components/movie-about/trailer/trailer.component';
 import { NotificationComponent } from './components/notification/notification.component';
-import { CreatenewsComponent } from './components/news/createNews/createNews.component';
+import { CreatenewsComponent } from './components/news/create-news/create-news.component';
 import { NewsAboutComponent } from './components/news/news-about/news-about.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { ChatComponent } from './components/chat/chat.component';
@@ -46,14 +46,14 @@ export function tokenGetter(){
 const appRoutes: Routes =[
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'anime', component: AnimeComponent },
+  { path: 'movie', component: MovieComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'editProfile', component : ProfileEditComponent, canActivate: [AuthGuard] },
   { path: "adminTab", component: AdminTabComponent, canActivate: [AuthGuard] },
-  { path: "anime/:id", component: AnimeAboutComponent },
-  { path: "animeList", component: AnimeListComponent, canActivate: [AuthGuard] },
+  { path: "movie/:id", component: MovieAboutComponent },
+  { path: "movieList", component: MovieListComponent, canActivate: [AuthGuard] },
   { path: "createNews", component: CreatenewsComponent, canActivate: [AuthGuard] },
   { path: "news/:id", component: NewsAboutComponent }
 ];
@@ -81,15 +81,15 @@ const appRoutes: Routes =[
   ],
   declarations: [ 
     AppComponent, 
-    AnimeComponent,
-    AnimeAboutComponent,
+    MovieComponent,
+    MovieAboutComponent,
     NavBarComponent,
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
     ProfileEditComponent,
     AdminTabComponent,
-    AnimeListComponent,
+    MovieListComponent,
     HomeComponent,
     TrailerComponent,
     NotificationComponent,
@@ -108,7 +108,7 @@ const appRoutes: Routes =[
       useClass: httpInterceptor, 
       multi: true 
     },
-    AnimeService
+    MovieService
   ],
   bootstrap: [AppComponent]
 })

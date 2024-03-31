@@ -6,13 +6,13 @@
     width: 800px;
     height: 500px;
 }
-.anime__type{
+.movie__type{
     color: #CAE962;  
 }
 
 
-/* Anime type */
-.anime__type{
+/* Movie type */
+.movie__type{
     width: 100px;
     height: 20px;
     margin-top: 10px;

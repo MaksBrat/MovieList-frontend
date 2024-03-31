@@ -2,7 +2,7 @@
 <ngx-slick-carousel class="carousel" 
     #slickModal="slick-carousel" 
     [config]="slideConfig">
-    <div ngxSlickItem  class="slider" *ngFor="let anime of ongoingAnime ; index as i">     
+    <div ngxSlickItem  class="slider" *ngFor="let movie of ongoingMovie; index as i">     
         <div class="slider__poster">
             <img [src]="slides[i].img">
         </div> 
@@ -11,25 +11,22 @@
                 #{{i+1}} Spotligth
             </div>
             <div class="slider__title">
-                <p>{{anime.title}}</p> 
+                <p>{{movie.title}}</p> 
             </div>
             <div class="rating">
-                Rating {{anime.rating}}
+                Rating {{movie.rating}}
             </div>
             <div class="about">
                 <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellendus ut nemo harum corrupti sit, iusto quasi. Fugit, corporis illo, modi non obcaecati maxime ad aliquam laborum ullam natus qui dolorem ex? Velit dolore magni animi porro est qui laborum? Unde adipisci pariatur autem dolore nobis mollitia tempore dolorum placeat vel quis, quasi, eligendi libero nihil possimus, praesentium voluptatem. Earum nesciunt optio voluptatem odit tenetur consequatur adipisci non qui, quaerat officiis at eius facilis eveniet excepturi velit repellat dolor aperiam modi aliquid atque! Aspernatur esse, quos veritatis quibusdam, odit deleniti incidunt beatae doloribus aut dolore illo reiciendis ratione amet dignissimos pariatur.</p>
             </div>
             <div class="buttons">
                 <div class="addToList">
-                    <div *ngIf="!profileService.isAnimeInList(anime.id)">
-                        <button class="btn"(click)="profileService.addAnimeToList(anime.id)" >Add to list</button> 
-                    </div>
-                    <div *ngIf="profileService.isAnimeInList(anime.id)">
-                        <button class="btn" (click)="profileService.deleteAnimeFromList(anime.id)" >Delete from list</button> 
-                    </div>
+                    <button (click)="isMovieInUserList[movie.id] ? deleteMovieFromList(movie.id) : addMovieToList(movie.id)" class="add__btn btn">
+                        {{ isMovieInUserList[movie.id] ? 'Delete from list' : 'Add to list' }}
+                    </button>
                 </div>
                 <div class="detail">
-                    <button class="btn" [routerLink]="['/anime', anime.id]">Detail</button>
+                    <button class="btn" [routerLink]="['/movie', movie.id]">Details</button>
                 </div>
             </div>      
         </div>           
@@ -39,30 +36,30 @@
 <div class="wrapper">
     <div class="container">
         <div class="sidebar">
-            <div class="title">Top anime</div>
-            <div class="anime__container">
-                <div class="anime__item" *ngFor="let anime of topAnime" >          
-                    <div class="anime__poster" [routerLink]="['/anime', anime.id]">
-                        <img class="poster" [src]="anime.posterUrl">
+            <div class="title">Top movie</div>
+            <div class="movie__container">
+                <div class="movie__item" *ngFor="let movie of topMovie" >          
+                    <div class="movie__poster" [routerLink]="['/movie', movie.id]">
+                        <img class="poster" [src]="movie.posterUrl">
                         <div class="overlay">
                             <a  class="icon">
                               <i class="fa fa-play"></i>
                             </a>
                         </div>
                         <div class="episodes__container">
-                            <span class="episodes"> Ep {{anime.episodes}}</span>  
-                            <span class="episodes minutes"> {{anime.episodeDuration}}m</span> 
+                            <span class="episodes"> Ep {{movie.episodes}}</span>  
+                            <span class="episodes minutes"> {{movie.episodeDuration}}m</span> 
                         </div>
                     </div>           
-                    <div class="anime__description">
-                        <div class="anime__title">
+                    <div class="movie__description">
+                        <div class="movie__title">
                             <span>
-                                {{anime.title}}
+                                {{movie.title}}
                             </span>
                         </div>
-                        <div class="anime__type">
+                        <div class="movie__type">
                             <span>
-                                {{anime.animeType}}
+                                {{movie.movieType}}
                             </span>
                         </div>
                     </div>
@@ -70,7 +67,6 @@
             </div>
         </div>
         <div class="main">
-            <img class="gif__chika" src="https://media.tenor.com/lVhFnY9tc94AAAAi/anime-dance.gif" alt="">
             <div class="title">News</div>
             <div class="news__container">
                 <div class="news__item" *ngFor="let newsItem of news">
@@ -85,29 +81,29 @@
         </div>
         <div class="sidebar">
             <div class="title">Upcoming</div>
-            <div class="anime__container">
-                <div class="anime__item" *ngFor="let anime of upcomingAnime" >          
-                    <div class="anime__poster" [routerLink]="['/anime', anime.id]">
-                        <img class="poster" [src]="anime.posterUrl" alt="">
+            <div class="movie__container">
+                <div class="movie__item" *ngFor="let movie of upcomingMovie" >          
+                    <div class="movie__poster" [routerLink]="['/movie', movie.id]">
+                        <img class="poster" [src]="movie.posterUrl" alt="">
                         <div class="overlay">
                             <a  class="icon">
                               <i class="fa fa-play"></i>
                             </a>
                         </div>
                         <div class="episodes__container">
-                            <span class="episodes"> Ep {{anime.episodes}}</span>  
-                            <span class="episodes minutes"> {{anime.episodeDuration}}m</span> 
+                            <span class="episodes"> Ep {{movie.episodes}}</span>  
+                            <span class="episodes minutes"> {{movie.episodeDuration}}m</span> 
                         </div>
                     </div>           
-                    <div class="anime__description">
-                        <div class="anime__title">
+                    <div class="movie__description">
+                        <div class="movie__title">
                             <span>
-                                {{anime.title}}
+                                {{movie.title}}
                             </span>
                         </div>
-                        <div class="anime__type">
+                        <div class="movie__type">
                             <span>
-                                {{anime.animeType}}
+                                {{movie.movieType}}
                             </span>
                         </div>
                     </div>

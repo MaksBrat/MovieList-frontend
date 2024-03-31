@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CommentService } from './comment.service';
+import { CommentService } from 'src/app/services/comment.service';
 import { Comment } from 'src/models/Comment';
 
 @Component({
@@ -11,7 +11,7 @@ export class CommentComponent implements OnInit{
   @Input() newsId: number;
 
   comments: Comment[];
-  userComment = new Comment(); //Comment to send
+  userComment = new Comment();
   currentUserId = localStorage.getItem("userId");
 
   constructor(public commentService: CommentService){

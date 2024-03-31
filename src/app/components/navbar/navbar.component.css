@@ -19,14 +19,14 @@ nav{
     color: white;
     text-decoration: none;
 }
-.anime{
+.movie{
     display: flex;
     position: relative;
     justify-content: center;
     align-items: center;
     margin-left: 50px;
 }
-.anime a{
+.movie a{
     position: absolute;
     top: 0;
     left: -15px;
@@ -71,7 +71,7 @@ nav{
 .mode-on:hover{
     background-color: rgb(1, 142, 27);
 }
-.anime a{
+.movie a{
     background-color: #00FFB7;
     border-radius: 20px;
     color:black;

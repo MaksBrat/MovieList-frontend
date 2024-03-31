@@ -1,9 +1,9 @@
 import { Component, Directive, ElementRef, HostListener, OnInit, Renderer2, ViewChild} from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
-import { Anime } from 'src/models/Anime';
-import { AnimeFilter } from 'src/models/Filter/AnimeFilter';
-import { AccountService } from '../account/account.Service';
-import { AnimeService } from '../anime/anime.service';
+import { Movie } from 'src/models/Movie';
+import { MovieFilter } from 'src/models/Filter/MovieFilter';
+import { AccountService } from '../../services/account.service';
+import { MovieService } from '../../services/movie.service';
 
 @Component({
     selector: 'navigation',
@@ -11,8 +11,8 @@ import { AnimeService } from '../anime/anime.service';
     styleUrls: ["./navbar.component.css"],
 })
 export class NavBarComponent implements OnInit {
-  animes: Anime[] = [];
-  filter = new AnimeFilter();
+  movies: Movie[] = [];
+  filter = new MovieFilter();
 
   @ViewChild('searchContainer', { static: false }) searchContainer: ElementRef;
 
@@ -20,19 +20,18 @@ export class NavBarComponent implements OnInit {
   resultVisible = false;
   value = "";
 
-  constructor(public accountService: AccountService, public animeService: AnimeService, 
+  constructor(public accountService: AccountService, public movieService: MovieService, 
     private renderer: Renderer2){
-    this.animeService.currentPage = "CurrentPage";
+    this.movieService.currentPage = "CurrentPage";
     this.filter.searchQuery = "";
   }  
 
   ngOnInit(){
-    this.animeService.invokeEvent.subscribe(value =>{
+    this.movieService.invokeEvent.subscribe(value =>{
       
-      if(this.animeService.currentPage != "AnimePage"){ 
+      if(this.movieService.currentPage != "MoviePage"){ 
         this.filter.searchQuery = value;      
-        this.animeService.getAll(this.filter).subscribe(animes => 
-          {this.animes = animes, console.log(animes)}); 
+        this.movieService.getAll(this.filter).subscribe(movies => this.movies = movies); 
           this.resultVisible = true;  
       }    
     }); 
