@@ -39,7 +39,7 @@ export class CommentService{
     }
 
     getAll(newsId: number){
-        return this.http.get<Comment[]>(this.commentUrl + '/getAllByNewsId/'+ newsId);
+        return this.http.get<Comment[]>(this.commentUrl + '/get-all-by-newsId/'+ newsId);
     }
 
     update(comment: Comment){

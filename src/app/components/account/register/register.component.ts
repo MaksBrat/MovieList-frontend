@@ -20,7 +20,7 @@ export class RegisterComponent {
             this.accountService.register(form).subscribe({
                 next: (response) => {
                     this.invalidRegister = false;           
-                    this.router.navigate(["/login"]);
+                    this.router.navigate(["/register-success"]);
                 },
                 error: (error) => {
                     this.invalidRegister = true;   

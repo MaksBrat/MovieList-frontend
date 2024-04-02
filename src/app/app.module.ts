@@ -38,6 +38,8 @@ import { CommentComponent } from './components/comment/comment.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { NgOptimizedImage } from '@angular/common'
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { EmailConfirmationComponent } from './components/account/email-confirmation/email-confirmation.component';
+import { RegisterSuccessComponent } from './components/account/register-success/register-success.component';
 
 export function tokenGetter(){
   return localStorage.getItem("jwt");
@@ -48,14 +50,16 @@ const appRoutes: Routes =[
   { path: 'home', component: HomeComponent },
   { path: 'movie', component: MovieComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'register-success', component: RegisterSuccessComponent },
   { path: 'login', component: LoginComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'editProfile', component : ProfileEditComponent, canActivate: [AuthGuard] },
-  { path: "adminTab", component: AdminTabComponent, canActivate: [AuthGuard] },
+  { path: 'edit-profile', component : ProfileEditComponent, canActivate: [AuthGuard] },
+  { path: "admin-tab", component: AdminTabComponent, canActivate: [AuthGuard] },
   { path: "movie/:id", component: MovieAboutComponent },
-  { path: "movieList", component: MovieListComponent, canActivate: [AuthGuard] },
-  { path: "createNews", component: CreatenewsComponent, canActivate: [AuthGuard] },
-  { path: "news/:id", component: NewsAboutComponent }
+  { path: "movie-list", component: MovieListComponent, canActivate: [AuthGuard] },
+  { path: "create-news", component: CreatenewsComponent, canActivate: [AuthGuard] },
+  { path: "news/:id", component: NewsAboutComponent },
+  { path: 'confirm-email', component: EmailConfirmationComponent }
 ];
 
 @NgModule({
@@ -97,6 +101,8 @@ const appRoutes: Routes =[
     NewsAboutComponent,
     CommentComponent,
     ChatComponent,
+    EmailConfirmationComponent,
+    RegisterSuccessComponent,
   ],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },

@@ -1,10 +1,11 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { JwtHelperService, JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt';
 import { AuthenticatedResponse } from "src/app/interfaces/AuthenticatedResponse";
 import { UrlOptions } from "src/models/UrlOptions";
+import { CustomEncoder } from "../shared/custom-encoder";
 
 @Injectable({
     providedIn: 'root'
@@ -81,4 +82,12 @@ export class AccountService{
         localStorage.setItem('isAdminMode', JSON.stringify(this.isAdminMode));
         return this.isAdminMode;
     }  
+
+    confirmEmail(token: string, email: string){
+        let params = new HttpParams()
+            .set('token', token)
+            .set('email', email);
+
+        return this.http.get(`${this.accountUrl}confirm-email?${params}`);
+    }
 }

@@ -19,14 +19,12 @@ export class MovieComponent implements OnInit{
 
     loading = false;
 
-    constructor(public movieService: MovieService){
-        this.movieService.currentPage = "MoviePage";
+    constructor(public movieService: MovieService){     
         this.load();
     }
     
     ngOnInit(){
         this.movieService.invokeEvent.subscribe(value =>{
-            console.log(value);
             this.filter.searchQuery = value;
             this.load(true);
         }); 
@@ -41,7 +39,7 @@ export class MovieComponent implements OnInit{
         if (isNewSearch) {
             this.filter.pageIndex = 0;
             this.movies = [];
-          }
+        }
         
         this.loading = true;
         this.movieService.getAll(this.filter).subscribe(newMovies => {

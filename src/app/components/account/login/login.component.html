@@ -12,8 +12,8 @@
                 </div>
             </div>
             <div class="password">              
-                <input  [type]="accountService.type" name="password" type="text" placeholder="Password" required ngModel>              
-                <span  class="fa {{accountService.eyeIcon}} " (click)="accountService.hideShowPass()"></span>
+                <input [type]="accountService.type" name="password" type="text" placeholder="Password" required ngModel>              
+                <span class="fa {{accountService.eyeIcon}} " (click)="accountService.hideShowPass()"></span>
                 <div class="invalid-error" *ngIf="invalidLogin">
                     Incorrect password
                 </div>

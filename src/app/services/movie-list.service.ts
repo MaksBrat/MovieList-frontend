@@ -22,7 +22,7 @@ export class MovieListService{
     }  
     
     isMovieInList(movieId: number){
-        return this.http.get<boolean>(`${this.movieListUrl}/isMovieInUserList/${movieId}`);
+        return this.http.get<boolean>(`${this.movieListUrl}/is-movie-in-user-list/${movieId}`);
     }
     
     add(movieId: number){

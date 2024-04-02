@@ -27,12 +27,12 @@ export class HomeComponent implements OnInit {
 
   //Just for example slides
   slides = [
-    { img: 'https://img.zorores.com/_r/1366x768/100/58/d0/58d0b99666b285d2c484fec5dfaa23f0/58d0b99666b285d2c484fec5dfaa23f0.jpg' },
-    { img: 'https://img.zorores.com/_r/1366x768/100/a8/f1/a8f13cd393e9f17c64d90c9fa6e79cdd/a8f13cd393e9f17c64d90c9fa6e79cdd.jpg' },
-    { img: 'https://img.zorores.com/_r/1366x768/100/a1/2b/a12b53c5fb76bad339bfb2808b607ffd/a12b53c5fb76bad339bfb2808b607ffd.jpg' },
-    { img: 'https://img.zorores.com/_r/1366x768/100/9d/72/9d728e112dc3732b0b6d56ca9fa69cc8/9d728e112dc3732b0b6d56ca9fa69cc8.jpg' },
-    { img: 'https://img.zorores.com/_r/1366x768/100/33/d9/33d9bbf870518a5e551653245218ba62/33d9bbf870518a5e551653245218ba62.jpg' },
-    { img: 'https://img.zorores.com/_r/1366x768/100/8e/18/8e18cd08d3109c8293b6bce1f15abdbb/8e18cd08d3109c8293b6bce1f15abdbb.jpg' },
+    { img: 'https://wallpapercave.com/wp/wp3849097.jpg' },
+    { img: 'https://wallpapercave.com/wp/MeaAKvn.jpg' },
+    { img: 'https://images7.alphacoders.com/112/1123161.jpg' },
+    { img: 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/093387e1-a050-402f-ad20-7f08e1f0432b/d902u5x-e635c9bd-a19b-4ba8-84e8-284177ce4dfe.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzA5MzM4N2UxLWEwNTAtNDAyZi1hZDIwLTdmMDhlMWYwNDMyYlwvZDkwMnU1eC1lNjM1YzliZC1hMTliLTRiYTgtODRlOC0yODQxNzdjZTRkZmUuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.kn0Zy2VKduSUH_8O4UcjPDGmhE-fKmbj8XymGMoJeYk' },
+    { img: 'https://images2.alphacoders.com/114/1144782.jpg' },
+    { img: 'https://images5.alphacoders.com/109/1092637.jpg' },
   ];
 
   slideConfig = { 
@@ -85,7 +85,7 @@ export class HomeComponent implements OnInit {
     filter.movieStatus = 'Finished';
     filter.orderBy = "Rating";
     filter.ascOrDesc = "DESC"
-    filter.take = 5;
+    filter.take = 8;
 
     this.movieService.getAll(filter).subscribe(result => {
       this.topMovie = result;
@@ -98,7 +98,7 @@ export class HomeComponent implements OnInit {
     filter.movieStatus = 'Upcoming';
     filter.orderBy = "ReleaseDate";
     filter.ascOrDesc = "DESC"
-    filter.take = 5;
+    filter.take = 8;
 
     this.movieService.getAll(filter).subscribe(result => {
       this.upcomingMovie = result;

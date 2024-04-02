@@ -37,7 +37,7 @@ export class LoginComponent {
                 },
                 error: (err: HttpErrorResponse) => {
                     this.invalidLogin = true;  
-                    console.log(this.invalidLogin);            
+                    console.log(err);            
                 }
             })
         }    
