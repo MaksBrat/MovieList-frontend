@@ -43,7 +43,7 @@ import { MovieAdminTabModal } from './common/modals/admin-tab/movie/movie-admin-
 import { UserBlockedComponent } from './components/account/user-blocked/user-blocked.component';
 import { MovieAboutComponent } from './components/movie-about/movie-about.component';
 import { RatingChartComponent } from './components/movie-about/rating-chart/rating-chart.component';
-
+import { NgChartsModule } from 'ng2-charts';
 
 export function tokenGetter(){
   return localStorage.getItem("jwt");
@@ -84,7 +84,8 @@ const appRoutes: Routes =[
     FontAwesomeModule,
     SlickCarouselModule,
     NgOptimizedImage,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    NgChartsModule
   ],
   declarations: [ 
     AppComponent, 

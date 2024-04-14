@@ -1,5 +1,16 @@
+.movie__container{
+    width: 100%;
+}
 .about{
+    width: 70%;
     padding: 0 30px; 
+}
+.chart__container{
+    width: 29%;
+}
+.chart__container .title{
+    font-size: 26px;
+    color: #CAE962;
 }
 .cover{
     width: 60%;
@@ -10,7 +21,7 @@
     display: flex;
 }
 .movie__poster{
-    width: 400px;
+    min-width: 350px;
     height: 500px;
 }
 .movie__poster img{
@@ -47,7 +58,7 @@
     display: flex;   
 }
 .add__btn{
-    width: 400px;
+    width: 350px;
     margin: 20px 30px;
 }
 

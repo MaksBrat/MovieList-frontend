@@ -1,46 +1,54 @@
 <div class="container">
     <app-notification></app-notification>
-    <div class="about">
-        <div class="about__item">         
-            <div class="movie__poster">
-                <img class="avatar" [src]="movie.posterUrl">
-            </div>              
-            <div class="movie__description">
-                <div class="title">
-                    <div class="name">Title:</div> 
-                    <span>{{movie.title}}</span>   
-                </div>
-                <div class="rating">
-                    <div class="name">Rating:</div> 
-                    <div class="imdb__rating__block">
-                        <div class="rating__item">
-                            <span class="imdb__rating" (click)="openIMDb()">Imdb: </span>
-                            <span>{{movie.tmdbRating}}</span>
-                        </div>
-                        <div *ngIf="movie.rating != null" class="rating__item">
-                            <span>MovieList: </span>
-                            <span>{{movie.rating}}</span>
-                        </div>                     
+    <div class="movie__container">   
+        <div class="about">
+            <div class="about__item">         
+                <div class="movie__poster">
+                    <img class="avatar" [src]="movie.posterUrl">
+                </div>              
+                <div class="movie__description">
+                    <div class="title">
+                        <div class="name">Title:</div> 
+                        <span>{{movie.title}}</span>   
                     </div>
-                </div>
-                <div class="description">
-                    <div class="name">Description:</div> 
-                    <p> {{movie.description}} </p>
-                </div>         
-                <div class="genres">
-                    <div class="name">Genres: </div>
-                    <div>
-                        <label *ngFor="let genre of movie.genres">                 
-                            <span> {{ genre.name }} </span>            
-                        </label>
+                    <div class="rating">
+                        <div class="name">Rating:</div> 
+                        <div class="imdb__rating__block">
+                            <div class="rating__item">
+                                <span class="imdb__rating" (click)="openIMDb()">Imdb: </span>
+                                <span>{{movie.tmdbRating}}</span>
+                            </div>
+                            <div *ngIf="movie.rating != null" class="rating__item">
+                                <span>MovieList: </span>
+                                <span>{{movie.rating}}</span>
+                            </div>                     
+                        </div>
+                    </div>
+                    <div class="description">
+                        <div class="name">Description:</div> 
+                        <p> {{movie.description}} </p>
                     </div>         
-                </div>  
-                <div class="trailer">
-                    <button class="btn" (click)="openTrailer()">Trailer</button>
-                </div>          
-            </div>      
+                    <div class="genres">
+                        <div class="name">Genres: </div>
+                        <div>
+                            <label *ngFor="let genre of movie.genres">                 
+                                <span> {{ genre.name }} </span>            
+                            </label>
+                        </div>         
+                    </div>  
+                    <div class="trailer">
+                        <button class="btn" (click)="openTrailer()">Trailer</button>
+                    </div>          
+                </div>      
+            </div>
         </div>
+
+        <div class="chart__container">
+            <span class="title">User ratings</span>
+            <app-rating-chart [movieId]="movie.id"></app-rating-chart>
+        </div>  
     </div>
+
     <div class="buttons">
         <button (click)="isMovieInUserList ? deleteMovieFromList(movie.id) : addMovieToList(movie.id)" class="add__btn btn">
             {{ isMovieInUserList ? 'Delete from list' : 'Add to list' }}
