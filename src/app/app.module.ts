@@ -24,7 +24,6 @@ import { ProfileEditComponent } from './components/profile/profile-edit/profile-
 import { httpInterceptor } from './components/account/interseptor';
 import { MovieService } from './services/movie.service';
 import { AccountService } from './services/account.service';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { MovieListComponent } from './components/profile/movie-list/movie-list.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { HomeComponent } from './components/home/home.component';
@@ -44,7 +43,7 @@ import { MovieAdminTabModal } from './common/modals/admin-tab/movie/movie-admin-
 import { UserBlockedComponent } from './components/account/user-blocked/user-blocked.component';
 import { MovieAboutComponent } from './components/movie-about/movie-about.component';
 import { RatingChartComponent } from './components/movie-about/rating-chart/rating-chart.component';
-import { ChartsModule } from 'ng2-charts';
+
 
 export function tokenGetter(){
   return localStorage.getItem("jwt");
@@ -83,7 +82,6 @@ const appRoutes: Routes =[
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-    Ng2SearchPipeModule,
     SlickCarouselModule,
     NgOptimizedImage,
     InfiniteScrollModule

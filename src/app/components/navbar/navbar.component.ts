@@ -1,4 +1,4 @@
-import { Component, Directive, ElementRef, HostListener, OnInit, Renderer2, ViewChild} from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Movie } from 'src/models/movie/movie';
 import { MovieFilter } from 'src/models/filter/movie-filter';
 import { AccountService } from '../../services/account.service';

@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthenticatedResponse } from 'src/models/account/authenticated-response';
 import { AccountService } from '../../../services/account.service';
