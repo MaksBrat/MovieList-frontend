@@ -1,18 +1,17 @@
-import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import * as signalR from '@microsoft/signalr';
-import { UrlOptions } from "src/models/UrlOptions";
-import { NotificationService } from "./notification.service";
+import { UrlOptions } from "src/models/options/url-options";
 
 @Injectable({
-    providedIn: 'root'
-  })
+  providedIn: 'root'
+})
 export class SignalRService{
   public hubConnection: signalR.HubConnection;
-  
-  url = UrlOptions.BaseUrl + 'chatHub';
+  public connectionId: string;
 
-  constructor(public http: HttpClient, public notificationService: NotificationService){
+  url = UrlOptions.BaseUrl + 'hub';
+
+  public createHubConnection(){
     this.hubConnection = new signalR.HubConnectionBuilder()
               .withUrl(this.url, {
                 skipNegotiation: true,
@@ -21,6 +20,16 @@ export class SignalRService{
               .withAutomaticReconnect()
               .build();
 
-    this.hubConnection.start().catch(err => console.error(err.toString()));
+    this.hubConnection
+    .start()
+    .catch((error) => console.log(error));
+  }
+
+  public addListener(eventName: string, callback: (...args: any[]) => void) {
+    this.hubConnection.on(eventName, callback);
+  }
+
+  public removeListener(eventName: string) {
+    this.hubConnection.off(eventName);
   }
 }

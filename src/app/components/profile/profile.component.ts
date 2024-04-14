@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ProfileService } from '../../services/profile.service';
-import { Profile } from 'src/models/Profile';
-import { AvatarUtility } from 'src/app/utility/avatar.utility';
+import { Profile } from 'src/models/profile/profile';
+import { AvatarUtility } from 'src/app/common/utility/avatar.utility';
 
 @Component({
     selector: 'profile',

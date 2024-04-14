@@ -48,7 +48,7 @@
                         </div>
                         <div class="episodes__container">
                             <span class="episodes"> Ep {{movie.episodes}}</span>  
-                            <span class="episodes minutes"> {{movie.episodeDuration}}m</span> 
+                            <span class="episodes minutes"> {{movie.episodeDuration  | duration}}</span> 
                         </div>
                     </div>           
                     <div class="movie__description">
@@ -92,7 +92,7 @@
                         </div>
                         <div class="episodes__container">
                             <span class="episodes"> Ep {{movie.episodes}}</span>  
-                            <span class="episodes minutes"> {{movie.episodeDuration}}m</span> 
+                            <span class="episodes minutes"> {{movie.episodeDuration | duration}}</span> 
                         </div>
                     </div>           
                     <div class="movie__description">

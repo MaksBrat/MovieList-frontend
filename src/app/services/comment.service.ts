@@ -2,9 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { catchError, of, tap } from 'rxjs';
 import { NotificationService } from 'src/app/services/notification.service';
-import { Router } from '@angular/router';
-import { Comment } from 'src/models/Comment';
-import { UrlOptions } from 'src/models/UrlOptions';
+import { Comment } from 'src/models/news/comment';
+import { UrlOptions } from 'src/models/options/url-options';
 
 @Injectable({
     providedIn: 'root'
@@ -14,8 +13,7 @@ export class CommentService{
 
     currentUserId = localStorage.getItem("userId");
 
-    constructor(private http: HttpClient, private notificationService: NotificationService,
-        private router: Router){
+    constructor(private http: HttpClient, private notificationService: NotificationService){
         
     }
         
@@ -38,8 +36,8 @@ export class CommentService{
             ).subscribe();
     }
 
-    getAll(newsId: number){
-        return this.http.get<Comment[]>(this.commentUrl + '/get-all-by-newsId/'+ newsId);
+    getAll(contentId: number){
+        return this.http.get<Comment[]>(this.commentUrl + '/get-all-by-contentId/'+ contentId);
     }
 
     update(comment: Comment){

@@ -15,7 +15,7 @@
                     </div>
                     <div class="episodes__container">
                         <span class="episodes"> Ep {{movie.episodes}}</span>  
-                        <span class="episodes minutes"> {{movie.episodeDuration}}m</span> 
+                        <span class="episodes minutes"> {{movie.episodeDuration | duration }}</span> 
                     </div>
                 </div>           
                 <div class="movie__description">
@@ -45,7 +45,7 @@
                 <span class="genre__label">Genres</span>
                 <div class="genres__container">
                     <label class="genres" *ngFor="let genre of movieOptions.genres">
-                        <input class="genre__input" type="checkbox" [checked]="genre.checked" [value]="genre.id" (change)="updateGenres($event)"> 
+                        <input class="genre__input" type="checkbox" [checked]="genre.checked" [value]="genre.id" (change)="updateGenres(genre.id, $event)"> 
                         <span class="genre__name"> {{ genre.name }} </span>            
                     </label> 
                 </div>       

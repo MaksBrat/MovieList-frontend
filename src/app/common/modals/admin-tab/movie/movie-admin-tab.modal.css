@@ -1,0 +1,28 @@
+.dialog{
+    background-color: #2A2C31;
+    padding: 20px;
+    color: #CAE962;
+    width: 800px;
+    height: 500px;
+}
+.movie__type{
+    color: #CAE962;  
+}
+.movie__type{
+    width: 100px;
+    height: 20px;
+    margin-top: 10px;
+}
+input{
+    padding: 10px;
+}
+input[type="file"]{
+    display: none;   
+}
+.btn{
+    width: 250px;
+    height: 40px;
+    text-align: center;
+    margin: 0 0 10px 140px;
+    padding: 0;
+}

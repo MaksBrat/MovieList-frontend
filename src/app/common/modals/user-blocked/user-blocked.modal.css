@@ -1,0 +1,24 @@
+.dialog{
+    background-color: #2A2C31;
+    padding: 20px;
+    color: #CAE962;
+    width: 800px;
+    height: 500px;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.text {
+    color:#CAE962;
+    font-size: 36px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.sub-text {
+    color: #82848c;
+    font-size: 20px;
+    margin-top: 5px;
+}

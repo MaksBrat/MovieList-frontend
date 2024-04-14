@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Movie } from 'src/models/Movie';
-import { MovieOptions } from 'src/models/MovieOptions';
-import { MovieFilter } from 'src/models/Filter/MovieFilter';
-import { NewsFilter } from 'src/models/Filter/NewsFilter';
-import { News } from 'src/models/News';
+import { Movie } from 'src/models/movie/movie';
+import { MovieOptions } from 'src/models/options/movie-options';
+import { MovieFilter } from 'src/models/filter/movie-filter';
+import { News } from 'src/models/news/news';
 import { MovieService } from '../../services/movie.service';
 import { NewsService } from '../../services/news.service';
 import { MovieListService } from 'src/app/services/movie-list.service';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
+import { NewsFilter } from 'src/models/filter/news-filter';
 
 @Component({
   selector: 'app-home',

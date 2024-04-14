@@ -2,7 +2,7 @@
     <app-notification></app-notification>
     <div class="add__comment">
         <div class="text__input" *ngIf="currentUserId != null">
-            <textarea placeholder="Write comment" maxlength="3000" [(ngModel)]="userComment.content"></textarea>
+            <textarea placeholder="Write comment" maxlength="3000" [(ngModel)]="newComment.text"></textarea>
             <div class="send">
                 <button class="btn" (click)="addComment()">Send</button>
             </div>
@@ -26,7 +26,7 @@
             </div>    
         </div>
         <div class="comment__content">
-            <div>{{comment.content}}</div>
+            <div>{{comment.text}}</div>
         </div>
         <div class="comment_date">
             <div class="date">{{comment.dateCreated}}</div>

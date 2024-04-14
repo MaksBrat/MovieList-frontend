@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { MovieListService } from 'src/app/services/movie-list.service';
 import { NotificationService } from 'src/app/services/notification.service';
-import { MovieListItem } from 'src/models/MovieListItem';
+import { MovieListItem } from 'src/models/movie-list-item/movie-list-item';
+import { MovieOptions } from 'src/models/options/movie-options';
 import { ProfileService } from '../../../services/profile.service';
 
 @Component({
@@ -16,13 +17,9 @@ export class MovieListComponent {
 
   isEmpty = false;
 
-  movieStatus = [
-    {name: 'Watched'},
-    {name: 'Watching'},
-    {name: 'WantToWatch'},
-    {name: 'Stalled'},
-    {name: 'Dropped'},
-  ]
+  movieOptions = new MovieOptions();
+
+  movieStatus = this.movieOptions.moieStatusInUserList;
 
   constructor(public movieListService: MovieListService, private notificationService: NotificationService){
     movieListService.get().subscribe(result =>{
@@ -40,7 +37,7 @@ export class MovieListComponent {
   }
 
   updateMovieItem(movieUpdated: MovieListItem, episodesInMovie?: number){
-    if(movieUpdated.userRating <= 1 && movieUpdated.userRating >= 10){
+    if((movieUpdated.userRating < 1 || movieUpdated.userRating > 10) && movieUpdated.userRating != null){
       this.notificationService.riseNotification({
         message: 'Rating must be between 1 and 10',
         type: 'error'
@@ -48,17 +45,15 @@ export class MovieListComponent {
       return;
     }
 
-    console.log(movieUpdated.watchedEpisodes);
-
     if(movieUpdated.watchedEpisodes > episodesInMovie){
       this.notificationService.riseNotification({
-        message: 'Episodes must be between 1 and the total number of episodes in the movie series',
+        message: 'Episodes must be between 1 and the total number of episodes in the movie',
         type: 'error'
       });
       return;
     }
 
-      this.movieListService.update(movieUpdated);
+    this.movieListService.update(movieUpdated);
   }
 
   deleteMovieFromList(movieId: number){

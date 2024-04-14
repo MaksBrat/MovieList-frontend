@@ -1,16 +1,14 @@
 import {HttpClient} from '@angular/common/http';
 import { NotificationService } from 'src/app/services/notification.service';
-import { UrlOptions } from 'src/models/UrlOptions';
-import { MovieListItem } from 'src/models/MovieListItem';
+import { MovieListItem } from 'src/models/movie-list-item/movie-list-item';
 import { catchError, of, tap } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { UrlOptions } from 'src/models/options/url-options';
 
 @Injectable({
     providedIn: 'root'
 })
 export class MovieListService{
-    private readonly Movie_MAP_KEY = 'movieMap';
-
     constructor(private http: HttpClient, private notificationService: NotificationService){
 
     }

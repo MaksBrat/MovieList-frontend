@@ -1,0 +1,71 @@
+<div class="dialog">
+    <div class="admin">
+        <div class="admin__item">          
+            <form (ngSubmit)="onSubmit()"> 
+                <div class="form_container" *ngIf="selectedAction !== 'delete'; then createUpdate; else delete"></div>   
+                <button type="submit" class="btn">Submit</button>
+            </form>
+        </div>
+    </div> 
+</div>
+
+<ng-template #createUpdate>
+    <div class="form__container">
+        <div class="form__cover">                            
+            <div class="form__item">
+                <label class="form__label">Title</label>
+                <input type="text" placeholder="title" [(ngModel)]="movie.title" name="title">
+            </div>
+            <div class="form__item">
+                <label class="form__label">Episodes</label>
+                <input type="number"  min="1"  placeholder="episodes" [(ngModel)]="movie.episodes" name="episodes">
+            </div>
+            <div class="form__item">
+                <label class="form__label">Episode duration</label>
+                <input type="number" min="1" placeholder="episode duration" [(ngModel)]="movie.episodeDuration" name="episodeDuration">
+            </div>
+            <div class="form__item">
+                <label class="form__label">Realize date</label>
+                <input type="date" placeholder="release date date" [(ngModel)]="movie.releaseDate" name="releaseDate">
+            </div> 
+            <div class="form__item">
+                <label class="form__label">Poster url</label>
+                <input type="text" placeholder="poster url" [(ngModel)]="movie.posterUrl" name="posterUrl">
+            </div>
+            <div class="form__item">
+                <label class="form__label">Trailer url</label>
+                <input type="text" placeholder="trailer url" [(ngModel)]="movie.trailerUrl" name="trailerUrl">
+            </div>
+            <div class="form__item">
+                <label class="form__label" >Movie type</label>
+                <select class="movie__type" [(ngModel)]="movie.movieType" name="movieType">
+                    <option *ngFor="let type of movieTypes" [value]="type.name">{{type.name}}</option>                       
+                </select> 
+            </div>
+            <div class="form__item">
+                <label class="form__label" >Movie status</label>
+                <select class="movie__type" [(ngModel)]="movie.movieStatus" name="movieStatus">
+                    <option *ngFor="let status of movieStatus" [value]="status.name">{{status.name}}</option>                       
+                </select> 
+            </div>
+        </div>
+        <div class="genres__cover">
+            <span class="genre__label">Genres</span>
+            <div class="genres__container">         
+                <label class="genres" *ngFor="let genre of genres">
+                    <input class="genre__input"type="checkbox" [checked]="isChecked(genre.id)" (change)="updateGenres(genre.id, $event)" [value]="genre.id"> 
+                    <span class="genre__name"> {{genre.name}} </span>            
+                </label> 
+            </div>   
+        </div>   
+    </div>                                      
+</ng-template>
+
+<ng-template #delete>
+    <div class="form__container">
+        <div class="form__item">
+            <label class="form__label">Id</label>
+            <input type="text" placeholder="title" [(ngModel)]="idToDelete" name="id">
+        </div>   
+    </div>            
+</ng-template>

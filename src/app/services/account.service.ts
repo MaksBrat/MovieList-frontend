@@ -1,11 +1,10 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
-import { JwtHelperService, JWT_OPTIONS, JwtModule} from '@auth0/angular-jwt';
-import { AuthenticatedResponse } from "src/app/interfaces/AuthenticatedResponse";
-import { UrlOptions } from "src/models/UrlOptions";
-import { CustomEncoder } from "../shared/custom-encoder";
+import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { AuthenticatedResponse } from "src/models/account/authenticated-response";
+import { UrlOptions } from "src/models/options/url-options";
 
 @Injectable({
     providedIn: 'root'
@@ -45,12 +44,16 @@ export class AccountService{
         })      
     }
 
-    logOut = () => {
+    logout = () => {
         this.http.post(this.accountUrl + "revoke",null);
         localStorage.clear();
         this.router.navigate(["/"]);
-        window.location.reload();
-      }
+    }
+
+    getCurrentUserId(): number{
+        let currentUserId = localStorage.getItem("userId");
+        return currentUserId ? parseInt(currentUserId, 10) : null;
+    }
 
     isUserAuthenticated() : boolean {
         const token = localStorage.getItem("jwt");
@@ -62,7 +65,7 @@ export class AccountService{
           return false;
         }
       }
-      
+
     isAdmin(): boolean{
         let token = localStorage.getItem('jwt');
         if(!token){
@@ -89,5 +92,13 @@ export class AccountService{
             .set('email', email);
 
         return this.http.get(`${this.accountUrl}confirm-email?${params}`);
+    }
+
+    blockUser(userId: string){
+        return this.http.post(`${this.accountUrl}block-user?userId=${userId}`, null);
+    }
+
+    unBlockUser(userId: string){
+        return this.http.post(`${this.accountUrl}unblock-user?userId=${userId}`, null);
     }
 }

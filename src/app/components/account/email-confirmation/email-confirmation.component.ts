@@ -2,7 +2,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit  } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
-import { UrlOptions } from 'src/models/UrlOptions';
 
 @Component({
   selector: 'app-email-confirmation',
@@ -24,9 +23,6 @@ export class EmailConfirmationComponent implements OnInit  {
     this.showError = this.showSuccess = false;
     const token = this.route.snapshot.queryParams['token'];
     const email = this.route.snapshot.queryParams['email'];
-    
-    console.log(token);
-    console.log(email);
 
     this.accountService.confirmEmail(token, email)
       .subscribe({

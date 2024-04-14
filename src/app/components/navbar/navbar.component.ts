@@ -1,6 +1,6 @@
 import { Component, Directive, ElementRef, HostListener, OnInit, Renderer2, ViewChild} from '@angular/core';
-import { Movie } from 'src/models/Movie';
-import { MovieFilter } from 'src/models/Filter/MovieFilter';
+import { Movie } from 'src/models/movie/movie';
+import { MovieFilter } from 'src/models/filter/movie-filter';
 import { AccountService } from '../../services/account.service';
 import { MovieService } from '../../services/movie.service';
 import { Location } from '@angular/common';
@@ -56,6 +56,11 @@ export class NavBarComponent implements OnInit {
     } else {
         this.renderer.setStyle(navbar, 'background-color', 'transparent');
     }
+  }
+
+  logout(){
+    this.accountService.logout();
+    window.location.reload();
   }
 }
 

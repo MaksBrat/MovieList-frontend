@@ -24,7 +24,6 @@
               </div>
             </div>
           </div>
-          
         <div class="movie">
             <a (click)="inputValue.value = ''" routerLink="/movie">Movie</a>
         </div>
@@ -41,10 +40,10 @@
                 <div class="dropdown">
                 <button class="login__profile__btn btn" routerLink="/profile">Profile</button>                       
                     <div class="dropdown-content">
-                        <a href="#" routerLink="/movieList">Movie list</a>
-                        <a routerLink="/editProfile">Edit profile</a>
-                        <a routerLink="/createNews">Create news</a>
-                        <a href="#" (click)="accountService.logOut()">Logout</a>
+                        <a href="#" routerLink="/movie-list">Movie list</a>
+                        <a routerLink="/edit-profile">Edit profile</a>
+                        <a routerLink="/create-news">Create news</a>
+                        <a href="#" (click)="logout()">Logout</a>
                     </div>             
                 </div>   
             </div>          

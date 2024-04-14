@@ -1,9 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild, } from '@angular/core';
+import { AccountService } from 'src/app/services/account.service';
 import { ChatService } from 'src/app/services/chat.service';
 import { SignalRService } from 'src/app/services/signaIR.Service';
-import { AvatarUtility } from 'src/app/utility/avatar.utility';
-import { MessageRequestModel } from 'src/models/DTO/RequestModels/MessageRequestModel';
-import { MessageResponseModel } from 'src/models/DTO/ResponseModels/MessageResponseModel';
+import { AvatarUtility } from 'src/app/common/utility/avatar.utility';
+import { MessageResponse } from 'src/models/message/message-response';
+import { MessageRequest } from 'src/models/message/message-request';
 
 @Component({
   selector: 'app-chat',
@@ -11,23 +12,26 @@ import { MessageResponseModel } from 'src/models/DTO/ResponseModels/MessageRespo
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit{
-  message = new MessageRequestModel();
-  messages: MessageResponseModel[] = [];
+  message = new MessageRequest();
+  messages: MessageResponse[] = [];
 
-  currentUserId = localStorage.getItem("userId");
+  currentUserId: number;
+  isAdmin: boolean;
 
   pageIndex = -1;
   pageSize = 10;
 
   @ViewChild('messagesBlock') messagesBlock: ElementRef;
 
-  constructor(public signalRService: SignalRService, public chatService: ChatService){
-      this.signalRService.hubConnection.on('ReceiveMessage', (message: MessageResponseModel) => {
+  constructor(public signalRService: SignalRService, public chatService: ChatService, public accountService: AccountService){
+      this.signalRService.addListener('ReceiveMessage', (message: MessageResponse) => {
+        message.avatarUrl = AvatarUtility.buildAvatarUrl(message.avatarUrl);
+        console.log(message);
         this.messages.unshift(message);
         this.scrollToBottom();
       });
       
-      this.signalRService.hubConnection.on('MessageDeleted', (id:string) => {
+      this.signalRService.addListener('MessageDeleted', (id:string) => {
         const index = this.messages.findIndex(m => m.id == id);
         if (index !== -1) {
             this.messages.splice(index, 1);
@@ -36,6 +40,8 @@ export class ChatComponent implements OnInit{
   }
   
   ngOnInit(): void {
+    this.currentUserId = this.accountService.getCurrentUserId();
+    this.isAdmin = this.accountService.isAdmin();
     this.loadMessages(); 
     setTimeout(() =>{
       this.scrollToBottom();   
@@ -70,5 +76,13 @@ export class ChatComponent implements OnInit{
 
   deleteMessage(id: string){
     this.chatService.deleteMessage(id);
+  }
+
+  getMessageClass(messageAuthorId: number): any {
+    return messageAuthorId == this.currentUserId ? 'self' : 'other';
+  }
+
+  blockUser(messageAuthorId){
+    this.accountService.blockUser(messageAuthorId).subscribe();
   }
 }

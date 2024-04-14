@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommentService } from 'src/app/services/comment.service';
-import { Comment } from 'src/models/Comment';
+import { AvatarUtility } from 'src/app/common/utility/avatar.utility';
+import { Comment } from 'src/models/news/comment';
 
 @Component({
   selector: 'app-comment',
@@ -8,24 +9,25 @@ import { Comment } from 'src/models/Comment';
   styleUrls: ['./comment.component.css']
 })
 export class CommentComponent implements OnInit{
-  @Input() newsId: number;
+  @Input() contentId: number;
 
   comments: Comment[];
-  userComment = new Comment();
+  newComment = new Comment();
   currentUserId = localStorage.getItem("userId");
 
   constructor(public commentService: CommentService){
   }
 
   ngOnInit(): void {
-    this.commentService.getAll(this.newsId).subscribe(response =>{
+    this.commentService.getAll(this.contentId).subscribe(response => {
+      response.map(x => x.avatarUrl = AvatarUtility.buildAvatarUrl(x.avatarUrl));
       this.comments = response;
     });
-    this.userComment.newsId = this.newsId;
+    this.newComment.contentId = this.contentId;
   }
 
   addComment(){
-    this.commentService.create(this.userComment);
+    this.commentService.create(this.newComment);
   }
 
   deleteComment(id: number){

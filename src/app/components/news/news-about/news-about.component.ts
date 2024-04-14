@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { News } from 'src/models/News';
+import { AvatarUtility } from 'src/app/common/utility/avatar.utility';
+import { News } from 'src/models/news/news';
 import { NewsService } from '../../../services/news.service';
 
 @Component({
@@ -21,6 +22,7 @@ export class NewsAboutComponent implements OnInit{
       const id = params['id'];
       this.newsService.get(id).subscribe(response =>{
         this.news = response;
+        this.news.avatarUrl = AvatarUtility.buildAvatarUrl(this.news.avatarUrl);
       });
     });
   }

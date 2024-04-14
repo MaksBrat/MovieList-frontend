@@ -1,11 +1,8 @@
 import { Component} from '@angular/core';
 import { ProfileService } from '../../../services/profile.service';
-import { HttpClient } from '@angular/common/http';
-import { ProfileResponseModel } from 'src/models/DTO/ResponseModels/ProfileResponseModel';
 import { NotificationService } from 'src/app/services/notification.service';
-import { Profile } from 'src/models/Profile';
-import { UrlOptions } from 'src/models/UrlOptions';
-import { AvatarUtility } from 'src/app/utility/avatar.utility';
+import { AvatarUtility } from 'src/app/common/utility/avatar.utility';
+import { ProfileResponse } from 'src/models/profile/profile-response';
 
 @Component({
     selector: 'profileEdit',
@@ -14,7 +11,7 @@ import { AvatarUtility } from 'src/app/utility/avatar.utility';
     providers: [ProfileService]
 })
 export class ProfileEditComponent{
-    public profile: ProfileResponseModel;
+    public profile: ProfileResponse;
     
     constructor(private profileService: ProfileService, 
                 public notificationService: NotificationService){

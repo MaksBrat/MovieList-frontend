@@ -2,18 +2,15 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { JwtHelperService} from '@auth0/angular-jwt';
-import { map } from "jquery";
 import { catchError, of, tap } from "rxjs";
-import { AuthenticatedResponse } from "src/app/interfaces/AuthenticatedResponse";
-import { UrlOptions } from "src/models/UrlOptions";
+import { AuthenticatedResponse } from "src/models/account/authenticated-response";
+import { UrlOptions } from "src/models/options/url-options";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthGuard implements CanActivate{
-
   private _isRefreshSuccess = false;
-  
 
   constructor(private router:Router, 
               private jwtHelper: JwtHelperService, 

@@ -2,22 +2,21 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, of, tap } from 'rxjs';
 import { NotificationService } from 'src/app/services/notification.service';
-import { MessageRequestModel } from 'src/models/DTO/RequestModels/MessageRequestModel';
-import { MessageResponseModel } from 'src/models/DTO/ResponseModels/MessageResponseModel';
-import { UrlOptions } from 'src/models/UrlOptions';
+import { MessageRequest } from 'src/models/message/message-request';
+import { MessageResponse } from 'src/models/message/message-response';
+import { UrlOptions } from 'src/models/options/url-options';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ChatService {
-    
     private readonly chatUrl = UrlOptions.BaseUrl + 'api/Chat';
 
     constructor(private http: HttpClient, public notificationService: NotificationService) { 
 
     }
 
-    public sendMessage(message: MessageRequestModel): void {
+    public sendMessage(message: MessageRequest): void {
         this.http.post(this.chatUrl, message).subscribe();
     }
     
@@ -45,6 +44,6 @@ export class ChatService {
             .set('pageIndex', pageIndex.toString())
             .set('pageSize', pageSize.toString());
 
-        return this.http.get<MessageResponseModel[]>(`${this.chatUrl}/?${params}`);
+        return this.http.get<MessageResponse[]>(`${this.chatUrl}/?${params}`);
     }
 }

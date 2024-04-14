@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Movie } from 'src/models/Movie';
+import { Movie } from 'src/models/movie/movie';
 import { AccountService } from '../../services/account.service';
-import { AdminTabComponent } from '../admin-tab/admin-tab.component';
 import { MovieService } from '../../services/movie.service';
-import { TrailerComponent } from './trailer/trailer.component';
+import { TrailerComponent } from '../../common/modals/trailer/trailer.component';
 import { MovieListService } from 'src/app/services/movie-list.service';
+import { MovieAdminTabModal } from 'src/app/common/modals/admin-tab/movie/movie-admin-tab.modal';
+import { UrlOptions } from 'src/models/options/url-options';
 
 @Component({
   selector: 'app-movie-about',
@@ -43,6 +44,10 @@ export class MovieAboutComponent implements OnInit {
     }});
   }
 
+  openIMDb() {
+    window.open(`${UrlOptions.TmdbUrl}${this.movie.tmdbId}`, '_blank');
+  }
+
   openCreateDialog() {
     this.openDialog({ selectedAction: this.selectedAction });
   }
@@ -56,7 +61,7 @@ export class MovieAboutComponent implements OnInit {
   }
 
   openDialog(data: any) {
-    const dialogRef = this.dialog.open(AdminTabComponent, {
+    const dialogRef = this.dialog.open(MovieAdminTabModal, {
       data: data
     });
   }

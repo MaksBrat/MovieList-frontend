@@ -1,4 +1,3 @@
-import { DomSanitizer } from "@angular/platform-browser";
 import {Injectable} from '@angular/core';
 import { Subject } from "rxjs";
 

@@ -1,17 +1,15 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Profile} from '../../models/Profile';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Profile } from '../../models/profile/profile';
 import { NotificationService } from 'src/app/services/notification.service';
-import { UrlOptions } from 'src/models/UrlOptions';
-import { ProfileResponseModel } from 'src/models/DTO/ResponseModels/ProfileResponseModel';
 import { catchError, of, tap } from 'rxjs';
+import { ProfileResponse } from 'src/models/profile/profile-response';
+import { UrlOptions } from 'src/models/options/url-options';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ProfileService{
-    private readonly Movie_MAP_KEY = 'movieMap';
-
     constructor(private http: HttpClient, private notificationService: NotificationService){
 
     }
@@ -22,7 +20,7 @@ export class ProfileService{
         return this.http.get<Profile>(this.profileUrl);
     }
 
-    update(profile: ProfileResponseModel){
+    update(profile: ProfileResponse){
         this.http.put<Profile>(this.profileUrl, profile)
         .pipe(
             tap(response => {

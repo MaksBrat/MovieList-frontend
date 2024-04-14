@@ -1,8 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component} from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthenticatedResponse } from 'src/app/interfaces/AuthenticatedResponse';
+import { AuthenticatedResponse } from 'src/models/account/authenticated-response';
 import { AccountService } from '../../../services/account.service';
 import { AuthGuard } from '../../../services/authGuard.service';
 
@@ -15,8 +14,7 @@ export class LoginComponent {
     invalidLogin = false;
 
     constructor(public accountService : AccountService, 
-                public authGuardService: AuthGuard,
-                private router: Router){
+                public authGuardService: AuthGuard){
 
     }
 
@@ -33,7 +31,7 @@ export class LoginComponent {
                     localStorage.setItem("userId", userId.toString());
     
                     this.invalidLogin = false; 
-                    this.router.navigate(["/"]);
+                    window.location.href="/";
                 },
                 error: (err: HttpErrorResponse) => {
                     this.invalidLogin = true;  

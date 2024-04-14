@@ -1,12 +1,12 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {Movie} from '../../models/Movie';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Movie } from '../../models/movie/movie';
 import { catchError, of, tap } from 'rxjs';
 import { NotificationService } from 'src/app/services/notification.service';
 import { Router } from '@angular/router';
-import { News } from 'src/models/News';
-import { NewsFilter } from 'src/models/Filter/NewsFilter';
-import { UrlOptions } from 'src/models/UrlOptions';
+import { News } from 'src/models/news/news';
+import { UrlOptions } from 'src/models/options/url-options';
+import { NewsFilter } from 'src/models/filter/news-filter';
 
 @Injectable({
     providedIn: 'root'
@@ -14,8 +14,7 @@ import { UrlOptions } from 'src/models/UrlOptions';
 export class NewsService{
     private newsUrl =  UrlOptions.BaseUrl + 'api/News';
 
-    constructor(private http: HttpClient, private notificationService: NotificationService,
-        private router: Router){
+    constructor(private http: HttpClient, private notificationService: NotificationService){
         
     }
     

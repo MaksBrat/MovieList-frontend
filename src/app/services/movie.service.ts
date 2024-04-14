@@ -1,11 +1,10 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {Movie} from '../../models/Movie';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Movie} from '../../models/movie/movie';
 import { catchError, of, Subject, tap } from 'rxjs';
 import { NotificationService } from 'src/app/services/notification.service';
-import { Router } from '@angular/router';
-import { MovieFilter } from 'src/models/Filter/MovieFilter';
-import { UrlOptions } from 'src/models/UrlOptions';
+import { UrlOptions } from 'src/models/options/url-options';
+import { MovieFilter } from 'src/models/filter/movie-filter';
 
 @Injectable({
     providedIn: 'root'

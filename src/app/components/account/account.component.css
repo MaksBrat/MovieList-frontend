@@ -1,11 +1,9 @@
-
 .container{
     display: flex;
     justify-content: center;
     align-items: center;
     color: rgb(213, 212, 212);
 }
-
 .container-form{
     display: flex;
     flex-direction: column;
