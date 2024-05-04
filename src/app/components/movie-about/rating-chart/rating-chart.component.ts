@@ -13,22 +13,7 @@ export class RatingChartComponent implements OnInit{
 
   public chart: any;
 
-  constructor(public ratingService: RatingService){
-
-  }
-
-  chartLabels = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '10'
-  ];
+  constructor(public ratingService: RatingService){}
 
   createChart(data){
     Chart.register(ChartDataLabels)
@@ -36,7 +21,7 @@ export class RatingChartComponent implements OnInit{
     this.chart = new Chart("MyChart", {
       type: 'bar',
       data: {
-        labels: this.chartLabels, 
+        labels: ['1','2','3','4','5','6','7','8','9','10'], 
 	      datasets: [
           {
             data,
@@ -44,7 +29,7 @@ export class RatingChartComponent implements OnInit{
             hoverBackgroundColor: "#27A874",
             borderRadius: 10 
           },
-        ];
+        ],
       },
       options: {
         responsive: true,
@@ -96,9 +81,7 @@ export class RatingChartComponent implements OnInit{
 
   ngOnInit(): void {
     this.ratingService.get(this.movieId).subscribe(response =>{
-      console.log(response);
-      var data = Object.keys(response).map(key => response[key])
-      console.log(data);
+      var data = Object.keys(response).map(key => response[key]);
       this.createChart(data);
     });;   
   }

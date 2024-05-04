@@ -49,7 +49,7 @@ export class MovieAdminTabModal {
       this.movieService.delete(this.idToDelete);
     } 
   }
-  
+
   isChecked(genreId: number) {
     return this.movie.genres.filter(g => g.id === genreId).length > 0;
   }

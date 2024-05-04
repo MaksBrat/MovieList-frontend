@@ -12,7 +12,6 @@ import { MovieFilter } from 'src/models/filter/movie-filter';
 
 export class MovieComponent implements OnInit{ 
     movies: Movie[] = [];
-    showInfo = false;
     
     filter = new MovieFilter();
     movieOptions = new MovieOptions();
@@ -43,7 +42,6 @@ export class MovieComponent implements OnInit{
         }
         
         this.loading = true;
-        console.log(this.filter);
         this.movieService.getAll(this.filter).subscribe(newMovies => {        
             this.movies = [...this.movies, ...newMovies];
             this.loading = false;
@@ -60,14 +58,6 @@ export class MovieComponent implements OnInit{
 
         this.load(true);
     } 
-
-    displayInfo() {
-      this.showInfo = true;
-    }
-    
-    hideInfo() {
-      this.showInfo = false;
-    }
 }
 
 

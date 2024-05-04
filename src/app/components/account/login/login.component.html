@@ -1,4 +1,5 @@
 <div class="container">
+    <app-notification></app-notification>
     <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
         <div class="container-form">
             <div class="title">
@@ -13,10 +14,7 @@
             </div>
             <div class="password">              
                 <input [type]="accountService.type" name="password" type="text" placeholder="Password" required ngModel>              
-                <span class="fa {{accountService.eyeIcon}} " (click)="accountService.hideShowPass()"></span>
-                <div class="invalid-error" *ngIf="invalidLogin">
-                    Incorrect password
-                </div>
+                <span class="fa {{accountService.eyeIcon}}" (click)="accountService.hideShowPass()"></span>
             </div>
             <div class="action">
                 <button type="submit">Sign in</button>  
