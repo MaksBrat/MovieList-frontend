@@ -80,8 +80,11 @@ export class RatingChartComponent implements OnInit{
   }
 
   ngOnInit(): void {
+
+    let test = {1: 20, 2: 10, 3: 200, 4: 400, 5: 600, 6: 1000, 7: 1500, 8: 2000, 9: 2200, 10: 3000}
+
     this.ratingService.get(this.movieId).subscribe(response =>{
-      var data = Object.keys(response).map(key => response[key]);
+      var data = Object.keys(test).map(key => test[key]);
       this.createChart(data);
     });;   
   }
