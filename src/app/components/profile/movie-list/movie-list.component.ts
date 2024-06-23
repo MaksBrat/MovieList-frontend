@@ -36,7 +36,7 @@ export class MovieListComponent {
     }
   }
 
-  updateMovieItem(movieUpdated: MovieListItem, episodesInMovie?: number){
+  updateMovieItem(movieUpdated: MovieListItem){
     if((movieUpdated.userRating < 1 || movieUpdated.userRating > 10) && movieUpdated.userRating != null){
       this.notificationService.riseNotification({
         message: 'Rating must be between 1 and 10',
@@ -44,8 +44,7 @@ export class MovieListComponent {
       });
       return;
     }
-
-    if(movieUpdated.watchedEpisodes > episodesInMovie){
+    else if(movieUpdated.watchedEpisodes > movieUpdated.movie.episodes){
       this.notificationService.riseNotification({
         message: 'Episodes must be between 1 and the total number of episodes in the movie',
         type: 'error'

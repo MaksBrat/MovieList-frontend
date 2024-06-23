@@ -12,19 +12,17 @@
             <div class="item__container"> 
                 <span class="item__title"> Rating:</span> 
                 <div class="item">
-                    <span *ngIf="item.userRating != 0 && item.userRating != null"> {{item.userRating}} </span>
-                    <span *ngIf="item.userRating == 0 || item.userRating == null"> - </span>
+                    <span> {{ item.userRating != 0 && item.userRating != null ? item.userRating : '-' }} </span>
                     <input class="item__input" type="number" name="rating" [(ngModel)]="item.userRating" 
                     (focusout)="updateMovieItem(item)" min="1" max="10">
-                </div>                          
+                </div>
             </div>
             <div class="item__container"> 
                 <span class="item__title"> Watched episodes:</span> 
                 <div class="item">
-                    <span *ngIf="item.watchedEpisodes != 0 && item.watchedEpisodes != null"> {{item.watchedEpisodes}} </span>
-                    <span *ngIf="item.watchedEpisodes == 0 || item.watchedEpisodes == null"> - </span>     
+                    <span> {{ item.watchedEpisodes != 0 && item.watchedEpisodes != null ? item.watchedEpisodes : '-' }} </span>
                     <input class="item__input episodes__input" type="number" name="episodes" [(ngModel)]="item.watchedEpisodes"
-                    (focusout)="updateMovieItem(item, item.movie.episodes)" min="1" max="{{item.movie.episodes}}"> 
+                    (focusout)="updateMovieItem(item)" min="1" max="{{item.movie.episodes}}"> 
                     <span>/ {{item.movie.episodes}}</span>  
                 </div>                             
             </div>
